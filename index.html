@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!-- ==========================================================================
+       01. METADATA & SEO CONFIGURATION
+       Educational Note: Proper meta tags ensure search engine optimization (SEO),
+       responsive mobile viewport scaling, and rich social media previews (OpenGraph).
+       ========================================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Bibek Bandhu Nayek | Cyber Security, Data Analytics & AI Enthusiast</title>
+  <meta name="title" content="Bibek Bandhu Nayek | Cyber Security, Data Analytics & AI Enthusiast">
+  <meta name="description" content="Official portfolio of Bibek Bandhu Nayek - 1st Year B.Tech CSE at Future Institute of Engineering and Management (2026 Batch), academic top ranker, cyber security enthusiast, and AI/Data Analytics innovator.">
+  <meta name="keywords" content="Bibek Bandhu Nayek, Future Institute of Engineering and Management, FIEM, Computer Science, Cyber Security, Data Analytics, AI Innovation, B.Tech, Portfolio, Web Developer">
+  <meta name="author" content="Bibek Bandhu Nayek">
+  
+  <!-- OpenGraph / Facebook / LinkedIn Social Previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bibekbandhunayek.dev/">
+  <meta property="og:title" content="Bibek Bandhu Nayek | Cyber Security, Data Analytics & AI Enthusiast">
+  <meta property="og:description" content="Explore the projects, certifications, academic laurels, and technical achievements of Bibek Bandhu Nayek (Future Institute of Engineering and Management).">
+  <meta property="og:image" content="assets/profile.jpg">
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bibek Bandhu Nayek | Portfolio">
+  <meta name="twitter:description" content="1st Year B.Tech CSE at Future Institute of Engineering and Management • Cyber Security • Data Analytics • AI Enthusiast">
+  <meta name="twitter:image" content="assets/profile.jpg">
+
+  <!-- Favicon / Icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+
+  <!-- ==========================================================================
+       02. GOOGLE FONTS PRECONNECT & STYLESHEETS
+       ========================================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS Design System -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       03. ANALOG FILM GRAIN OVERLAY & SCROLL PROGRESS LASER
+       ========================================================================== -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="scroll-progress-laser" id="scroll-progress-laser" aria-hidden="true">
+    <div class="laser-fill" id="laser-fill"></div>
+    <div class="laser-head" id="laser-head"></div>
+  </div>
+
+  <!-- ==========================================================================
+       04. INTERACTIVE CANVAS BACKGROUND & AMBIENT PARALLAX BEAMS
+       ========================================================================== -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="ambient-glow glow-top parallax-glow" id="glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom parallax-glow" id="glow-bottom" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       05. NAVIGATION BAR (STICKY GLASSMORPHISM)
+       ========================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand" aria-label="Bibek Bandhu Nayek Home">
+        <div class="brand-monogram brand-monogram-cse">
+          <img src="assets/cse-department-logo.png" alt="CSE Department Logo" class="nav-cse-logo" width="36" height="36">
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">Bibek B. Nayek</span>
+          <span class="brand-tag">FIEM CSE • Cyber • AI</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="nav-menu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#overview" class="nav-link"><span class="nav-hash">#</span>Overview</a></li>
+          <li><a href="#journey" class="nav-link"><span class="nav-hash">#</span>Academics</a></li>
+          <li><a href="#skills" class="nav-link"><span class="nav-hash">#</span>Skills</a></li>
+          <li><a href="#projects" class="nav-link"><span class="nav-hash">#</span>Projects</a></li>
+          <li><a href="#certifications" class="nav-link"><span class="nav-hash">#</span>Certificates</a></li>
+          <li><a href="#multimedia-reel" class="nav-link"><span class="nav-hash">#</span>Reel</a></li>
+          <li><a href="#terminal" class="nav-link"><span class="nav-hash">#</span>CLI</a></li>
+          <li><a href="#contact" class="nav-link"><span class="nav-hash">#</span>Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Quick Action CTAs & Command Palette Trigger -->
+      <div class="nav-actions">
+        <!-- Quick Command Palette Shortcut Button -->
+        <button id="cmd-palette-trigger" class="cmd-trigger-btn" title="Open Command Palette (Ctrl+K)" aria-label="Command Palette">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span class="cmd-shortcut font-mono">⌘K</span>
+        </button>
+
+        <!-- Audio Haptic Feedback Toggle -->
+        <button id="audio-toggle-btn" class="btn-icon" title="Toggle Mechanical Audio Feedback" aria-label="Toggle Sound">
+          <span id="audio-icon">🔊</span>
+        </button>
+
+        <button id="quick-terminal-btn" class="btn-icon" title="Toggle Terminal Focus" aria-label="Jump to Interactive Terminal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+        </button>
+        <a href="#contact" class="btn btn-primary btn-sm">
+          <span>Get in Touch</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Dropdown Menu -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <ul class="mobile-nav-list">
+      <li><a href="#hero" class="mobile-link">Home</a></li>
+      <li><a href="#overview" class="mobile-link">Overview & Distinctions</a></li>
+      <li><a href="#journey" class="mobile-link">Academic Journey (2024-2026)</a></li>
+      <li><a href="#skills" class="mobile-link">Skills Matrix</a></li>
+      <li><a href="#projects" class="mobile-link">Featured Projects</a></li>
+      <li><a href="#certifications" class="mobile-link">Certifications & Accreditations</a></li>
+      <li><a href="#multimedia-reel" class="mobile-link">Animatic Video Showcase</a></li>
+      <li><a href="#terminal" class="mobile-link">Interactive Terminal</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <a href="#contact" class="btn btn-primary w-full text-center">Start Collaboration</a>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       06. MAIN CONTENT WRAPPER WITH 3D PERSPECTIVE WRAPPERS
+       ========================================================================== -->
+  <main>
+
+    <!-- ========================================================================
+         HERO SECTION: IMMERSIVE 3D SCROLL PERSPECTIVE & CYBER HUD
+         ======================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-container immersive-hero-parallax" id="hero-parallax-container">
+        
+        <!-- Left Content: Introduction & Interactive Typing -->
+        <div class="hero-content">
+          
+          <!-- High-Impact CSE Department Institutional Banner Badge (First on Page) -->
+          <div class="hero-cse-dept-banner">
+            <div class="dept-logo-emblem">
+              <img src="assets/cse-department-logo.png" alt="Computer Science & Engineering Department Logo" class="dept-logo-img" width="48" height="48">
+            </div>
+            <div class="dept-banner-text">
+              <div class="dept-main-title">Department of Computer Science & Engineering</div>
+              <div class="dept-sub-title">Future Institute of Engineering and Management (FIEM) • 2026 Batch</div>
+            </div>
+            <div class="dept-live-status">
+              <span class="status-ping"></span>
+              <span class="status-dot"></span>
+            </div>
+          </div>
+
+          <h1 class="hero-title">
+            Engineering Secure, Intelligent Systems. <br>
+            <span class="hero-gradient-text">Bibek Bandhu Nayek</span>
+          </h1>
+
+          <!-- High-Tech Text Scrambler / Role Switcher -->
+          <div class="role-scrambler-wrapper">
+            <span class="terminal-prefix">&gt; specializing_in:</span>
+            <span id="role-text" class="scramble-text" data-roles='["Cyber Security & Threat Defense", "Data Analytics & Predictive Modeling", "AI Innovation & Neural Systems", "Full-Stack Software Architecture"]'>Cyber Security Enthusiast</span>
+            <span class="cursor-blink">_</span>
+          </div>
+
+          <p class="hero-bio">
+            Academic top ranker and passionate computer science enthusiast at <strong>Future Institute of Engineering and Management</strong>. Dedicated to developing resilient cyber defense mechanisms, robust data pipelines, and next-generation AI architectures with mathematical precision.
+          </p>
+
+          <!-- Dual Hero Action Buttons -->
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              <span>Explore Projects</span>
+            </a>
+            
+            <a href="#multimedia-reel" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Watch Video Reel (200 FPS)</span>
+            </a>
+          </div>
+
+          <!-- Social Quick Links -->
+          <div class="hero-socials">
+            <span class="socials-label">Connect:</span>
+            <div class="social-links-row">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="GitHub Profile">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                <span>GitHub</span>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="LinkedIn Profile">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="social-pill" title="WhatsApp Chat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>WhatsApp</span>
+              </a>
+              <a href="mailto:bibekbandhu.nayek@gmail.com" class="social-pill" title="Direct Email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                <span>Email</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content: Aceternity-Style Cyber HUD Profile Frame -->
+        <div class="hero-visual">
+          <div class="hud-profile-wrapper" id="hud-profile-wrapper">
+            <!-- Concentric HUD Radar Rings -->
+            <div class="hud-ring ring-outer"></div>
+            <div class="hud-ring ring-dashed"></div>
+            <div class="hud-ring ring-inner"></div>
+            <div class="hud-scanner-beam"></div>
+
+            <!-- Profile Portrait Card -->
+            <div class="profile-card-3d" id="profile-card">
+              <div class="profile-img-container">
+                <img src="assets/profile.jpg" alt="Bibek Bandhu Nayek Portrait" class="profile-img" loading="eager">
+                <div class="profile-overlay-grid"></div>
+              </div>
+              
+              <!-- Floating Corner Cyber Brackets -->
+              <div class="cyber-bracket bracket-tl"></div>
+              <div class="cyber-bracket bracket-tr"></div>
+              <div class="cyber-bracket bracket-bl"></div>
+              <div class="cyber-bracket bracket-br"></div>
+            </div>
+
+            <!-- Floating Accolade Badges -->
+            <div class="floating-badge badge-top-right">
+              <div class="badge-icon">🏆</div>
+              <div class="badge-text">
+                <strong>Rank #1 Distinction</strong>
+                <span>Roll-1 Academic Star</span>
+              </div>
+            </div>
+
+            <div class="floating-badge badge-bottom-left">
+              <div class="badge-icon badge-logo-box">
+                <img src="assets/fiem-logo.png" alt="FIEM Logo" class="fiem-badge-logo" width="52" height="22">
+              </div>
+              <div class="badge-text">
+                <strong>FIEM CSE '26</strong>
+                <span>Future Institute of Eng. & Mgmt</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         REAL-TIME PRESENCE & ENGINEERING STATUS HUD
+         ======================================================================== -->
+    <section class="presence-hud-container">
+      <div class="presence-hud-card glass-panel reveal-on-scroll">
+        <div class="presence-item">
+          <div class="presence-icon-pulse">
+            <span class="pulse-ring"></span>
+            <span class="pulse-core"></span>
+          </div>
+          <div class="presence-text-group">
+            <span class="presence-label font-mono">LIVE STATUS</span>
+            <span class="presence-value">Active in FIEM CSE Lab • Building Systems</span>
+          </div>
+        </div>
+
+        <div class="presence-divider"></div>
+
+        <div class="presence-item">
+          <span class="presence-icon">📍</span>
+          <div class="presence-text-group">
+            <span class="presence-label font-mono">LOCATION & TIME</span>
+            <span class="presence-value" id="live-ist-clock">Kolkata, WB (IST) — --:--:--</span>
+          </div>
+        </div>
+
+        <div class="presence-divider"></div>
+
+        <div class="presence-item">
+          <span class="presence-icon">⚡</span>
+          <div class="presence-text-group">
+            <span class="presence-label font-mono">CURRENT FOCUS</span>
+            <span class="presence-value">Packet Inspection (C) & Neural Anomaly Models</span>
+          </div>
+        </div>
+
+        <div class="presence-divider"></div>
+
+        <div class="presence-item">
+          <span class="presence-icon">🎧</span>
+          <div class="presence-text-group">
+            <span class="presence-label font-mono">ENVIRONMENT</span>
+            <span class="presence-value font-mono">Arch / Ubuntu Linux • Neovim • VS Code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         HACKSPIRE-INSPIRED BENTO GRID: OVERVIEW & DISTINCTIONS
+         ======================================================================== -->
+    <section class="section-container" id="overview">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> WHERE INNOVATION MEETS SHAKTI // FIEM CSE 2026
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 01. EXCELLENCE MATRIX
+        </div>
+        <h2 class="section-title">Academic Triumphs & Focus Areas</h2>
+        <p class="section-subtitle">A synthesis of academic top honors, foundational science mastery, and modern technical pursuits.</p>
+      </div>
+
+      <div class="bento-grid">
+        
+        <!-- Bento Card 1: Academic Distinction (Spans 2 columns on desktop) -->
+        <article class="bento-card bento-card-large spotlight-card immersive-scroll-card">
+          <div class="bento-glow-layer"></div>
+          <div class="bento-content">
+            <div class="card-badge badge-orange">SHAKTI // ACADEMIC DISTINCTION</div>
+            <h3 class="bento-title">Top Academic Honors & Proven Rigor</h3>
+            <p class="bento-desc">
+              Demonstrated consistent academic excellence and leadership from foundational schooling to higher secondary science (PCMB) and undergraduate engineering at Future Institute of Engineering & Management.
+            </p>
+
+            <div class="academic-highlights-list">
+              <!-- College with Official FIEM Logo -->
+              <div class="academic-item academic-item-fiem">
+                <div class="academic-icon academic-icon-logo">
+                  <img src="assets/fiem-logo.png" alt="Future Institute of Engineering and Management Logo" class="academic-logo-img" width="90" height="34">
+                </div>
+                <div class="academic-info">
+                  <div class="academic-school-header">
+                    <div class="academic-school">Future Institute of Engineering and Management (FIEM)</div>
+                    <span class="institute-badge-pill">2026 Batch</span>
+                  </div>
+                  <div class="academic-meta">1st Year B.Tech Computer Science & Engineering • Systems & Cyber Security</div>
+                  <div class="academic-tag">Undergraduate Distinction Track • AI & Security Research</div>
+                </div>
+              </div>
+
+              <!-- H.S. 2026: Radhamohanpur Vivekananda High School with Official Institution Image -->
+              <div class="academic-item academic-item-rvhs">
+                <div class="academic-icon academic-icon-logo academic-icon-school">
+                  <img src="assets/radhamohanpur-vhs-logo.jpg" alt="Radhamohanpur Vivekananda High School" class="school-logo-img" width="50" height="38">
+                </div>
+                <div class="academic-info">
+                  <div class="academic-school-header">
+                    <div class="academic-school">Radhamohanpur Vivekananda High School (H.S. 2026)</div>
+                    <span class="institute-badge-pill badge-pill-gold">Rank #1 • Block Top 5</span>
+                  </div>
+                  <div class="academic-meta">Higher Secondary (PCMB) • <strong>School Rank 1</strong> • <strong>Top 5 in Block</strong></div>
+                  <div class="academic-tag">Physics • Chemistry • Mathematics • Biology (Pure Science)</div>
+                </div>
+              </div>
+
+              <!-- Secondary 2024: Bishnupur Sri Ramkrishna Vidyayatan with Official Institution Image -->
+              <div class="academic-item academic-item-bskv">
+                <div class="academic-icon academic-icon-logo academic-icon-school academic-icon-school-bskv">
+                  <img src="assets/bishnupur-skv-logo.jpg" alt="Bishnupur Sri Ramkrishna Vidyayatan" class="school-logo-img" width="50" height="38">
+                </div>
+                <div class="academic-info">
+                  <div class="academic-school-header">
+                    <div class="academic-school">Bishnupur Sri Ramkrishna Vidyayatan (Secondary 2024)</div>
+                    <span class="institute-badge-pill badge-pill-emerald">Roll 1 Ranker</span>
+                  </div>
+                  <div class="academic-meta">Secondary Board Distinction • <strong>Roll 1 Ranker</strong> • West Midnapore</div>
+                  <div class="academic-tag">Class Topper • Science & Mathematics Excellence</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bento Card 2: Cyber Security Defense Arsenal -->
+        <article class="bento-card spotlight-card immersive-scroll-card">
+          <div class="bento-glow-layer"></div>
+          <div class="bento-content">
+            <div class="card-badge badge-emerald">SURAKSHA // CYBER DEFENSE</div>
+            <h3 class="bento-title">Cyber Security & Systems</h3>
+            <p class="bento-desc">Focused on packet inspection, vulnerability mitigation, Linux security architectures, and zero-trust protocols.</p>
+            
+            <div class="tech-mini-chips">
+              <span class="tech-chip">Wireshark</span>
+              <span class="tech-chip">Nmap</span>
+              <span class="tech-chip">Linux Hardening</span>
+              <span class="tech-chip">OWASP Top 10</span>
+              <span class="tech-chip">Cryptography</span>
+            </div>
+
+            <div class="telemetry-bar-box">
+              <div class="telemetry-label font-mono">
+                <span>Threat Defense Drills Completed</span>
+                <span class="text-emerald">20+ Drills</span>
+              </div>
+              <div class="telemetry-progress">
+                <div class="telemetry-fill" style="width: 88%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bento Card 3: Data Analytics & AI Pipeline -->
+        <article class="bento-card spotlight-card immersive-scroll-card">
+          <div class="bento-glow-layer"></div>
+          <div class="bento-content">
+            <div class="card-badge badge-orange">DIVYA DRISHTI // DATA & AI</div>
+            <h3 class="bento-title">Data Analytics & AI Innovation</h3>
+            <p class="bento-desc">Transforming raw unstructured data into actionable intelligence through statistical models and neural architectures.</p>
+            
+            <div class="tech-mini-chips">
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">NumPy / Pandas</span>
+              <span class="tech-chip">Data Visualization</span>
+              <span class="tech-chip">Machine Learning</span>
+              <span class="tech-chip">SQL Pipelines</span>
+            </div>
+
+            <div class="code-preview-snippet font-mono">
+              <span class="code-comment"># Anomaly Prediction Pipeline</span><br>
+              model = AnomalyDetector(thresh=0.99)<br>
+              insights = model.fit_predict(stream)
+            </div>
+          </div>
+        </article>
+
+        <!-- Bento Card 4: Quantitative Metrics -->
+        <article class="bento-card bento-card-wide spotlight-card immersive-scroll-card">
+          <div class="bento-glow-layer"></div>
+          <div class="bento-content">
+            <div class="card-badge badge-white">METRICS // QUANTITATIVE TELEMETRY</div>
+            <div class="metrics-row">
+              <div class="metric-box">
+                <div class="metric-number" data-target="1">0</div>
+                <div class="metric-title">Rank Consistency</div>
+                <div class="metric-sub">School #1 & Roll #1 Record</div>
+              </div>
+              <div class="metric-divider"></div>
+              <div class="metric-box">
+                <div class="metric-number" data-target="5">0</div>
+                <div class="metric-title">Projects Built</div>
+                <div class="metric-sub">Cyber, AI & Web Labs</div>
+              </div>
+              <div class="metric-divider"></div>
+              <div class="metric-box">
+                <div class="metric-number" data-target="100">0</div>
+                <div class="metric-title">Code Commits</div>
+                <div class="metric-sub">Continuous Learning</div>
+              </div>
+              <div class="metric-divider"></div>
+              <div class="metric-box">
+                <div class="metric-number" data-target="20">0</div>
+                <div class="metric-title">Security Drills</div>
+                <div class="metric-sub">Ethical Problem Solving</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Real-world GitHub Activity Matrix / Commit Heatmap -->
+      <div class="github-activity-container spotlight-card reveal-on-scroll">
+        <div class="activity-header">
+          <div class="activity-title-group">
+            <div class="activity-icon-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </div>
+            <div>
+              <h3 class="activity-main-title">Engineering Commit & Lab Activity Matrix</h3>
+              <p class="activity-sub-title">100+ verified git commits across cybersecurity drills, socket programming, and AI research repositories.</p>
+            </div>
+          </div>
+          <div class="activity-legend font-mono">
+            <span>Less</span>
+            <div class="legend-cell lvl-0"></div>
+            <div class="legend-cell lvl-1"></div>
+            <div class="legend-cell lvl-2"></div>
+            <div class="legend-cell lvl-3"></div>
+            <div class="legend-cell lvl-4"></div>
+            <span>More</span>
+          </div>
+        </div>
+
+        <!-- Interactive Heatmap Grid -->
+        <div class="heatmap-scroll-wrapper">
+          <div class="heatmap-grid" id="github-heatmap-grid">
+            <!-- Dynamically generated 52-week activity cells with tooltips -->
+          </div>
+        </div>
+
+        <div class="heatmap-footer font-mono">
+          <span>🔥 Current Streak: <strong>18 Days</strong></span>
+          <span>⚡ Most Active: <strong>Python, C, JavaScript</strong></span>
+          <span>🛡️ Verified Repos: <strong>5 Open Source Labs</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(5, 7, 12, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         SPIRAL CHART FLOW: ACADEMIC & GEOGRAPHIC TRAJECTORY
+         ======================================================================== -->
+    <section class="section-container" id="journey">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> ORBITAL TRAJECTORY // SHAKTI IN EDUCATION
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 02. SPIRAL ACADEMIC & GEOGRAPHIC TRAJECTORY
+        </div>
+        <h2 class="section-title">Orbital Journey & Institutional Locations</h2>
+        <p class="section-subtitle">A dynamic spiral chart flow mapping academic triumphs, geographical migrations, and engineering milestones.</p>
+      </div>
+
+      <!-- Spiral Flow Master Container -->
+      <div class="spiral-chart-wrapper" id="spiral-chart-wrapper">
+        
+        <!-- Interactive Spiral Trajectory SVG Background -->
+        <div class="spiral-svg-container" aria-hidden="true">
+          <svg class="spiral-svg-canvas" viewBox="0 0 900 800" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <!-- Glowing Tri-Color Trajectory Gradient -->
+              <linearGradient id="spiralPathGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10b981" stop-opacity="0.9" />
+                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#ff6b00" stop-opacity="1" />
+              </linearGradient>
+
+              <!-- Radial Glow Filters -->
+              <filter id="spiralGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            <!-- Concentric Orbital Radar Grid -->
+            <circle cx="450" cy="400" r="120" class="spiral-orbit-ring ring-1" />
+            <circle cx="450" cy="400" r="230" class="spiral-orbit-ring ring-2" />
+            <circle cx="450" cy="400" r="340" class="spiral-orbit-ring ring-3" />
+
+            <!-- Archimedean Spiral Trajectory Spline -->
+            <path id="spiral-trajectory-path" class="spiral-trajectory-spline" d="M 450,400 C 450,330 380,280 320,280 C 240,280 180,360 180,450 C 180,570 290,660 420,660 C 580,660 700,530 700,380 C 700,200 540,80 360,80 C 220,80 100,180 80,320" fill="none" stroke="url(#spiralPathGrad)" stroke-width="3.5" filter="url(#spiralGlow)" />
+
+            <!-- Animated Photon Energy Pulsers -->
+            <circle class="spiral-photon photon-1" r="5" fill="#10b981">
+              <animateMotion dur="6s" repeatCount="indefinite" path="M 450,400 C 450,330 380,280 320,280 C 240,280 180,360 180,450 C 180,570 290,660 420,660 C 580,660 700,530 700,380 C 700,200 540,80 360,80 C 220,80 100,180 80,320" />
+            </circle>
+            <circle class="spiral-photon photon-2" r="5" fill="#ff6b00">
+              <animateMotion dur="6s" begin="3s" repeatCount="indefinite" path="M 450,400 C 450,330 380,280 320,280 C 240,280 180,360 180,450 C 180,570 290,660 420,660 C 580,660 700,530 700,380 C 700,200 540,80 360,80 C 220,80 100,180 80,320" />
+            </circle>
+          </svg>
+        </div>
+
+        <!-- Spiral Milestones Cards Stack (Arranged along the expanding orbital trajectory) -->
+        <div class="spiral-nodes-container">
+          
+          <!-- Node 01: Core Origin (Secondary 2024 - Bishnupur, West Midnapore) -->
+          <article class="spiral-node-card node-origin spotlight-card reveal-on-scroll immersive-scroll-card" data-orbit="1">
+            <div class="spiral-node-badge">
+              <span class="orbit-level font-mono">ORBIT #01 • ORIGIN</span>
+              <span class="orbit-year font-mono">2024</span>
+            </div>
+            
+            <div class="node-header">
+              <div class="node-logo-wrapper logo-emerald">
+                <img src="assets/bishnupur-skv-logo.jpg" alt="Bishnupur Sri Ramkrishna Vidyayatan" class="node-school-img" width="58" height="42">
+              </div>
+              <div class="node-title-group">
+                <h3 class="node-institution">Bishnupur Sri Ramkrishna Vidyayatan</h3>
+                <div class="node-milestone-title">Secondary Education Distinction (Roll 1 Topper)</div>
+              </div>
+            </div>
+
+            <!-- Geographic Location & Coordinate Telemetry -->
+            <div class="geo-location-box box-emerald">
+              <div class="geo-pin-row">
+                <span class="geo-icon">📍</span>
+                <span class="geo-address">Bishnupur, West Midnapore (Paschim Medinipur), West Bengal, India</span>
+              </div>
+              <div class="geo-meta-row font-mono">
+                <span>COORD: 22.4280° N, 87.3200° E • WEST MIDNAPORE</span>
+                <a href="https://maps.google.com/?q=Bishnupur+Sri+Ramkrishna+Vidyayatan" target="_blank" rel="noopener noreferrer" class="geo-map-btn" title="Open in Google Maps">
+                  <span>View Map</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+
+            <p class="node-description">
+              Maintained the prestigious <strong>Roll Number 1</strong> standing throughout secondary education with top scores across mathematics, physical science, and life sciences.
+            </p>
+
+            <div class="node-tags-row">
+              <span class="tag-emerald">Secondary 2024</span>
+              <span>Roll-1 Distinction</span>
+              <span>West Midnapore</span>
+              <span>Class Topper</span>
+            </div>
+          </article>
+
+          <!-- Node 02: Mid Orbit (Higher Secondary 2026 - Radhamohanpur, Paschim Medinipur) -->
+          <article class="spiral-node-card node-mid spotlight-card reveal-on-scroll immersive-scroll-card" data-orbit="2">
+            <div class="spiral-node-badge">
+              <span class="orbit-level font-mono">ORBIT #02 • MID HELIX</span>
+              <span class="orbit-year font-mono">2026</span>
+            </div>
+            
+            <div class="node-header">
+              <div class="node-logo-wrapper logo-gold">
+                <img src="assets/radhamohanpur-vhs-logo.jpg" alt="Radhamohanpur Vivekananda High School" class="node-school-img" width="58" height="42">
+              </div>
+              <div class="node-title-group">
+                <h3 class="node-institution">Radhamohanpur Vivekananda High School</h3>
+                <div class="node-milestone-title">Higher Secondary (H.S. 2026) — School Rank 1 & Block Top 5</div>
+              </div>
+            </div>
+
+            <!-- Geographic Location & Coordinate Telemetry -->
+            <div class="geo-location-box box-gold">
+              <div class="geo-pin-row">
+                <span class="geo-icon">📍</span>
+                <span class="geo-address">Radhamohanpur, Debra / Midnapore, Paschim Medinipur, West Bengal, India</span>
+              </div>
+              <div class="geo-meta-row font-mono">
+                <span>COORD: 22.4286° N, 87.6582° E</span>
+                <a href="https://maps.google.com/?q=Radhamohanpur+Vivekananda+High+School" target="_blank" rel="noopener noreferrer" class="geo-map-btn" title="Open in Google Maps">
+                  <span>View Map</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+
+            <p class="node-description">
+              Graduated as the <strong>Top 1 student in the school</strong> and ranked among the <strong>Top 5 in the entire educational block</strong> in the rigorous Pure Science stream (PCMB: Physics, Chemistry, Mathematics, Biology).
+            </p>
+
+            <div class="node-tags-row">
+              <span class="tag-gold">H.S. 2026</span>
+              <span>School Rank 1</span>
+              <span>Block Top 5</span>
+              <span>Paschim Medinipur</span>
+              <span>PCMB Stream</span>
+            </div>
+          </article>
+
+          <!-- Node 03: Outer Zenith (Undergraduate 2024–2026 - Sonarpur, Kolkata Metro) -->
+          <article class="spiral-node-card node-zenith spotlight-card reveal-on-scroll immersive-scroll-card" data-orbit="3">
+            <div class="spiral-node-badge">
+              <span class="orbit-level font-mono">ORBIT #03 • ZENITH</span>
+              <span class="orbit-year font-mono">2024 — 2026 (1st Year)</span>
+            </div>
+            
+            <div class="node-header">
+              <div class="node-logo-wrapper logo-cyan">
+                <img src="assets/fiem-logo.png" alt="Future Institute of Engineering and Management" class="node-school-img fiem-fit" width="90" height="34">
+              </div>
+              <div class="node-title-group">
+                <h3 class="node-institution">Future Institute of Engineering and Management (FIEM)</h3>
+                <div class="node-milestone-title">B.Tech in Computer Science & Engineering (2026 Batch)</div>
+              </div>
+            </div>
+
+            <!-- Geographic Location & Coordinate Telemetry -->
+            <div class="geo-location-box box-cyan">
+              <div class="geo-pin-row">
+                <span class="geo-icon">📍</span>
+                <span class="geo-address">Sonarpur Station Road, Kolkata Metro Region, West Bengal, India (PIN 700150)</span>
+              </div>
+              <div class="geo-meta-row font-mono">
+                <span>COORD: 22.4419° N, 88.4237° E</span>
+                <a href="https://maps.google.com/?q=Future+Institute+of+Engineering+and+Management+Kolkata" target="_blank" rel="noopener noreferrer" class="geo-map-btn" title="Open in Google Maps">
+                  <span>View Map</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+
+            <p class="node-description">
+              Actively mastering computer architecture, data structures, algorithms, network protocols, operating systems, and exploratory research in cyber security & AI modeling.
+            </p>
+
+            <div class="node-tags-row">
+              <span class="tag-cyan">FIEM CSE '26</span>
+              <span>Kolkata Metro</span>
+              <span>Systems & Cyber</span>
+              <span>Data Structures</span>
+              <span>AI Research</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         TECHNICAL SKILLS & DOMAIN ARSENAL
+         ======================================================================== -->
+    <section class="section-container" id="skills">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> TECHNICAL ARSENAL // CORE COMPETENCIES
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 03. DOMAIN PROFICIENCIES
+        </div>
+        <h2 class="section-title">Technical Matrix & Tooling</h2>
+        <p class="section-subtitle">Disciplined mastery across security auditing, mathematical data analysis, artificial intelligence, and modern web systems.</p>
+      </div>
+
+      <div class="skills-category-grid">
+        
+        <!-- Category 1: Cyber Security & Defense -->
+        <div class="skill-category-card spotlight-card reveal-on-scroll">
+          <div class="category-header">
+            <div class="category-icon-box icon-cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="category-title">Cyber Security & Systems</h3>
+          </div>
+          <p class="category-desc">Defensive hardening, threat vector analysis, and cryptographic protocol implementations.</p>
+          <div class="skills-pill-group">
+            <span class="skill-badge">Network Security</span>
+            <span class="skill-badge">Wireshark & Packet Capture</span>
+            <span class="skill-badge">Nmap Network Mapping</span>
+            <span class="skill-badge">Linux Kernel & Shell</span>
+            <span class="skill-badge">OWASP Web Vulnerabilities</span>
+            <span class="skill-badge">Cryptographic Primitives</span>
+            <span class="skill-badge">Penetration Testing Drills</span>
+          </div>
+        </div>
+
+        <!-- Category 2: Data Analytics & Mathematics -->
+        <div class="skill-category-card spotlight-card reveal-on-scroll">
+          <div class="category-header">
+            <div class="category-icon-box icon-emerald">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            <h3 class="category-title">Data Analytics & Math</h3>
+          </div>
+          <p class="category-desc">Extracting empirical truths through exploratory analysis, statistical testing, and visualization.</p>
+          <div class="skills-pill-group">
+            <span class="skill-badge">Python for Data Science</span>
+            <span class="skill-badge">NumPy & Pandas</span>
+            <span class="skill-badge">Matplotlib & Seaborn</span>
+            <span class="skill-badge">SQL Database Queries</span>
+            <span class="skill-badge">Statistical Hypothesis Testing</span>
+            <span class="skill-badge">Data Cleaning & Pipelines</span>
+            <span class="skill-badge">PCMB Math & Statistics</span>
+          </div>
+        </div>
+
+        <!-- Category 3: AI Innovation & Modeling -->
+        <div class="skill-category-card spotlight-card reveal-on-scroll">
+          <div class="category-header">
+            <div class="category-icon-box icon-indigo">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y1="9"></line><line x1="1" y1="14" x2="4" y1="14"></line></svg>
+            </div>
+            <h3 class="category-title">AI & Intelligent Systems</h3>
+          </div>
+          <p class="category-desc">Developing predictive workflows, generative AI pipelines, and anomaly detection algorithms.</p>
+          <div class="skills-pill-group">
+            <span class="skill-badge">Machine Learning Foundations</span>
+            <span class="skill-badge">Supervised / Unsupervised ML</span>
+            <span class="skill-badge">Gemini API & LLM Tooling</span>
+            <span class="skill-badge">Autonomous Agent Logic</span>
+            <span class="skill-badge">Predictive Modeling</span>
+            <span class="skill-badge">AI Safety & Ethics</span>
+          </div>
+        </div>
+
+        <!-- Category 4: Full-Stack Web & Software Engineering -->
+        <div class="skill-category-card spotlight-card reveal-on-scroll">
+          <div class="category-header">
+            <div class="category-icon-box icon-blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3 class="category-title">Software & Web Systems</h3>
+          </div>
+          <p class="category-desc">Building resilient, accessible, high-performance web applications and algorithmic tools.</p>
+          <div class="skills-pill-group">
+            <span class="skill-badge">Semantic HTML5</span>
+            <span class="skill-badge">Modern CSS3 & Animations</span>
+            <span class="skill-badge">Vanilla JavaScript (ES6+)</span>
+            <span class="skill-badge">C Programming Language</span>
+            <span class="skill-badge">Data Structures & OOP</span>
+            <span class="skill-badge">Git & GitHub Version Control</span>
+            <span class="skill-badge">REST APIs & Async I/O</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         FEATURED PROJECTS WITH DYNAMIC 3D TILT & FILTER
+         ======================================================================== -->
+    <section class="section-container" id="projects">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> CODE & INNOVATION // FLAGSHIP ARCHITECTURES
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 04. FLAGSHIP BUILDS
+        </div>
+        <h2 class="section-title">Featured Projects & Labs</h2>
+        <p class="section-subtitle">Real-world applications in cybersecurity vulnerability detection, automated analytics, and web systems.</p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="project-filter-bar">
+        <button class="filter-btn active" data-filter="all">All Projects (5+)</button>
+        <button class="filter-btn" data-filter="cyber">Cyber Security</button>
+        <button class="filter-btn" data-filter="data">Data Analytics</button>
+        <button class="filter-btn" data-filter="ai">AI Innovation</button>
+        <button class="filter-btn" data-filter="web">Web Systems</button>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="projects-grid" id="projects-grid">
+        
+        <!-- Project 1: SentinelShield -->
+        <article class="project-card tilt-card" data-category="cyber" data-project-id="sentinel">
+          <div class="project-card-inner">
+            <div class="project-thumb thumb-cyber">
+              <div class="thumb-badge">🛡️ Cyber Security</div>
+              <div class="thumb-visual-graphic">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-name">SentinelShield: Automated Vulnerability & Port Scanner</h3>
+              <p class="project-summary">
+                A lightweight network reconnaissance tool engineered in Python that scans target subnets, identifies open ports, fingerprint services, and cross-references common CVE databases.
+              </p>
+
+              <div class="project-tech-tags">
+                <span>Python</span>
+                <span>Socket Programming</span>
+                <span>Nmap Lib</span>
+                <span>CVE DB</span>
+              </div>
+
+              <div class="project-footer">
+                <button class="btn-text open-modal-btn" data-project="sentinel">
+                  <span>View Details</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: NeuralInsight -->
+        <article class="project-card tilt-card" data-category="data ai" data-project-id="neuralinsight">
+          <div class="project-card-inner">
+            <div class="project-thumb thumb-data">
+              <div class="thumb-badge">📊 Data Analytics & AI</div>
+              <div class="thumb-visual-graphic">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-name">NeuralInsight: Intelligent Data Analytics Dashboard</h3>
+              <p class="project-summary">
+                End-to-end data pipeline parsing large CSV datasets to automate statistical hypothesis testing, compute correlation matrices, and generate predictive regression models.
+              </p>
+
+              <div class="project-tech-tags">
+                <span>Python</span>
+                <span>Pandas</span>
+                <span>Scikit-Learn</span>
+                <span>Seaborn</span>
+              </div>
+
+              <div class="project-footer">
+                <button class="btn-text open-modal-btn" data-project="neuralinsight">
+                  <span>View Details</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: AegisAuth -->
+        <article class="project-card tilt-card" data-category="cyber web" data-project-id="aegis">
+          <div class="project-card-inner">
+            <div class="project-thumb thumb-indigo">
+              <div class="thumb-badge">🔒 Cryptography & Auth</div>
+              <div class="thumb-visual-graphic">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-name">AegisAuth: Zero-Trust Cryptographic Token Authenticator</h3>
+              <p class="project-summary">
+                A hardened cryptographic token management system implementing SHA-256 HMAC signatures, rate limiting, and brute-force mitigation for microservices.
+              </p>
+
+              <div class="project-tech-tags">
+                <span>Cryptography</span>
+                <span>SHA-256</span>
+                <span>Node.js / C</span>
+                <span>Zero-Trust</span>
+              </div>
+
+              <div class="project-footer">
+                <button class="btn-text open-modal-btn" data-project="aegis">
+                  <span>View Details</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: ApexVision Anomaly AI -->
+        <article class="project-card tilt-card" data-category="ai" data-project-id="apexvision">
+          <div class="project-card-inner">
+            <div class="project-thumb thumb-ai">
+              <div class="thumb-badge">🤖 AI Innovation</div>
+              <div class="thumb-visual-graphic">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-name">ApexVision: Neural Anomaly Detector</h3>
+              <p class="project-summary">
+                Machine learning model analyzing streaming server log metrics in real-time to isolate distributed denial-of-service (DDoS) spikes and brute-force anomalies.
+              </p>
+
+              <div class="project-tech-tags">
+                <span>PyTorch / ML</span>
+                <span>Time-Series</span>
+                <span>Log Parsing</span>
+                <span>FastAPI</span>
+              </div>
+
+              <div class="project-footer">
+                <button class="btn-text open-modal-btn" data-project="apexvision">
+                  <span>View Details</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: QuantumPacket Analyzer -->
+        <article class="project-card tilt-card" data-category="cyber data" data-project-id="quantumpacket">
+          <div class="project-card-inner">
+            <div class="project-thumb thumb-emerald">
+              <div class="thumb-badge">🌐 Network Analytics</div>
+              <div class="thumb-visual-graphic">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <h3 class="project-name">QuantumPacket: Real-time Traffic Dissector</h3>
+              <p class="project-summary">
+                High-throughput network analyzer inspecting TCP/UDP frame payloads, decrypting TLS handshake headers, and streaming packet metrics to a visual telemetry feed.
+              </p>
+
+              <div class="project-tech-tags">
+                <span>C / C++</span>
+                <span>PCAP API</span>
+                <span>Network Protocols</span>
+                <span>Wireshark Lib</span>
+              </div>
+
+              <div class="project-footer">
+                <button class="btn-text open-modal-btn" data-project="quantumpacket">
+                  <span>View Details</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-icon-link" aria-label="GitHub Repository">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         05. OFFICIAL ACADEMIC CERTIFICATES & TECHNICAL ACCREDITATIONS
+         ======================================================================== -->
+    <section class="section-container" id="certifications">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> OFFICIAL ACCREDITATIONS // STATE BOARD HONORS
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 05. CREDENTIALS & ACCREDITATIONS
+        </div>
+        <h2 class="section-title">Academic Certificates & Fellowships</h2>
+        <p class="section-subtitle">Official state board examination certificates, school honors, and verified technical accreditations across systems & cybersecurity.</p>
+      </div>
+
+      <!-- Part A: Featured Official State Board Examination Certificates -->
+      <div class="official-certificates-container">
+        <div class="certificates-section-subtitle">
+          <span class="pulse-indicator"></span>
+          <span class="font-mono text-orange font-bold">OFFICIAL STATE BOARD CREDENTIALS (WBBSE & WBCHSE)</span>
+        </div>
+
+        <div class="academic-certificates-grid">
+          
+          <!-- Academic Certificate 1: WBCHSE Higher Secondary 2026 -->
+          <article class="academic-cert-card spotlight-card reveal-on-scroll immersive-scroll-card" data-cert-type="hs">
+            <div class="academic-cert-preview">
+              <div class="cert-img-wrapper" data-lightbox-src="assets/higher-secondary-certificate.jpg" data-lightbox-title="Higher Secondary Examination 2026 Certificate (WBCHSE)" data-lightbox-grade="Overall Grade: A++ (Highest Distinction)" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Reg: 3241140595 | Inst: 205134 | No: 391612">
+                <img src="assets/higher-secondary-certificate.jpg" alt="Higher Secondary Examination 2026 Certificate - Bibek Bandhu Nayek (WBCHSE)" class="cert-document-img" loading="lazy">
+                <div class="cert-hover-overlay">
+                  <div class="inspect-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    <span>Inspect High-Res</span>
+                  </div>
+                </div>
+                <div class="cert-seal-badge seal-wbchse">
+                  <span>WBCHSE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="academic-cert-info">
+              <div class="academic-cert-top">
+                <div class="school-affiliation-row">
+                  <img src="assets/radhamohanpur-vhs-logo.jpg" alt="Radhamohanpur Vivekananda High School Logo" class="school-logo-tiny" width="28" height="28">
+                  <span class="school-name-text">Radhamohanpur Vivekananda High School (H.S.)</span>
+                </div>
+                <div class="grade-pill grade-app">
+                  <span class="grade-icon">🏆</span>
+                  <span>GRADE A++</span>
+                </div>
+              </div>
+
+              <h3 class="academic-cert-title">Higher Secondary Examination (H.S. 2026)</h3>
+              <p class="academic-cert-board">West Bengal Council of Higher Secondary Education (WBCHSE)</p>
+
+              <div class="cert-meta-grid font-mono">
+                <div class="meta-item">
+                  <span class="meta-label">CANDIDATE:</span>
+                  <span class="meta-val">Bibek Bandhu Nayek</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">REGISTRATION:</span>
+                  <span class="meta-val">3241140595 (2024-25)</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">INSTITUTION CODE:</span>
+                  <span class="meta-val">205134 | No. 391612</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">DATE OF ISSUE:</span>
+                  <span class="meta-val">14th May, 2026</span>
+                </div>
+              </div>
+
+              <div class="academic-cert-footer">
+                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-src="assets/higher-secondary-certificate.jpg" data-lightbox-title="Higher Secondary Examination 2026 Certificate (WBCHSE)" data-lightbox-grade="Overall Grade: A++ (Highest Distinction)" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Reg: 3241140595 | Inst: 205134 | No: 391612">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <span>Inspect High-Res</span>
+                </button>
+                <a href="assets/higher-secondary-certificate.jpg" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" download="Bibek_Bandhu_Nayek_HS_2026_Certificate.jpg">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>Download Document</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Academic Certificate 2: WBBSE Secondary Examination 2024 -->
+          <article class="academic-cert-card spotlight-card reveal-on-scroll immersive-scroll-card" data-cert-type="secondary">
+            <div class="academic-cert-preview">
+              <div class="cert-img-wrapper" data-lightbox-src="assets/secondary-certificate.jpg" data-lightbox-title="Madhyamik Pariksha (Secondary Examination), 2024 Certificate (WBBSE)" data-lightbox-grade="Overall Grade: AA (Outstanding Honor)" data-lightbox-inst="Bishnupur Sri Ramkrishna Vidyayatan, West Midnapore" data-lightbox-id="Cert No: 057313 | LL-042 | Roll: 501951N-0034" data-pdf-url="assets/secondary-certificate.pdf">
+                <img src="assets/secondary-certificate.jpg" alt="Secondary Examination 2024 Certificate - Bibek Bandhu Nayek (WBBSE)" class="cert-document-img" loading="lazy">
+                <div class="cert-hover-overlay">
+                  <div class="inspect-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    <span>Inspect High-Res</span>
+                  </div>
+                </div>
+                <div class="cert-seal-badge seal-wbbse">
+                  <span>WBBSE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="academic-cert-info">
+              <div class="academic-cert-top">
+                <div class="school-affiliation-row">
+                  <img src="assets/bishnupur-skv-logo.jpg" alt="Bishnupur Sri Ramkrishna Vidyayatan Logo" class="school-logo-tiny" width="28" height="28">
+                  <span class="school-name-text">Bishnupur Sri Ramkrishna Vidyayatan</span>
+                </div>
+                <div class="grade-pill grade-aa">
+                  <span class="grade-icon">🌟</span>
+                  <span>GRADE AA</span>
+                </div>
+              </div>
+
+              <h3 class="academic-cert-title">Madhyamik Pariksha (Secondary 2024)</h3>
+              <p class="academic-cert-board">West Bengal Board of Secondary Education (WBBSE)</p>
+
+              <div class="cert-meta-grid font-mono">
+                <div class="meta-item">
+                  <span class="meta-label">CANDIDATE:</span>
+                  <span class="meta-val">Bibek Bandhu Nayek</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">ROLL & NO:</span>
+                  <span class="meta-val">501951N-0034 | LL-042</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">CERTIFICATE NO:</span>
+                  <span class="meta-val">057313 (ESTD. 1951)</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">DATE OF ISSUE:</span>
+                  <span class="meta-val">2nd May, 2024</span>
+                </div>
+              </div>
+
+              <div class="academic-cert-footer">
+                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-src="assets/secondary-certificate.jpg" data-lightbox-title="Madhyamik Pariksha (Secondary Examination), 2024 Certificate (WBBSE)" data-lightbox-grade="Overall Grade: AA (Outstanding Honor)" data-lightbox-inst="Bishnupur Sri Ramkrishna Vidyayatan, West Midnapore" data-lightbox-id="Cert No: 057313 | LL-042 | Roll: 501951N-0034" data-pdf-url="assets/secondary-certificate.pdf">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <span>Inspect High-Res</span>
+                </button>
+                <a href="assets/secondary-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" download="Bibek_Bandhu_Nayek_Secondary_2024_Certificate.pdf">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                  <span>Official PDF Document</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Academic Certificate 3: Bonafide Project Work Certificate -->
+          <article class="academic-cert-card spotlight-card reveal-on-scroll immersive-scroll-card" data-cert-type="bonafide">
+            <div class="academic-cert-preview">
+              <div class="cert-img-wrapper" data-lightbox-src="assets/bonafide-project-certificate.jpg" data-lightbox-title="Bonafide Project Certificate: 'Health & Fitness - Path to Better Life'" data-lightbox-grade="Status: Official Bonafide Record • Roll 1 Distinction" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Class XII | Roll 1 | Reg: 3241140595 | Date: 05/10/2025">
+                <img src="assets/bonafide-project-certificate.jpg" alt="Bonafide Project Certificate - Bibek Bandhu Nayek (Class XII Roll 1)" class="cert-document-img" loading="lazy">
+                <div class="cert-hover-overlay">
+                  <div class="inspect-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    <span>Inspect High-Res</span>
+                  </div>
+                </div>
+                <div class="cert-seal-badge seal-bonafide">
+                  <span>BONAFIDE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="academic-cert-info">
+              <div class="academic-cert-top">
+                <div class="school-affiliation-row">
+                  <img src="assets/radhamohanpur-vhs-logo.jpg" alt="Radhamohanpur Vivekananda High School Logo" class="school-logo-tiny" width="28" height="28">
+                  <span class="school-name-text">Radhamohanpur Vivekananda High School</span>
+                </div>
+                <div class="grade-pill grade-bonafide">
+                  <span class="grade-icon">🥇</span>
+                  <span>ROLL 1</span>
+                </div>
+              </div>
+
+              <h3 class="academic-cert-title">Bonafide Project Work Certificate</h3>
+              <p class="academic-cert-board">"Health & Fitness - A Path to Better Life" • Academic Year 2025-26</p>
+
+              <div class="cert-meta-grid font-mono">
+                <div class="meta-item">
+                  <span class="meta-label">CANDIDATE:</span>
+                  <span class="meta-val">Bibek Bandhu Nayek</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">CLASS & ROLL:</span>
+                  <span class="meta-val">Class XII • Roll 1</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">REGISTRATION:</span>
+                  <span class="meta-val">3241140595</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">SUBMISSION DATE:</span>
+                  <span class="meta-val">05/10/2025 (Guide Verified)</span>
+                </div>
+              </div>
+
+              <div class="academic-cert-footer">
+                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-src="assets/bonafide-project-certificate.jpg" data-lightbox-title="Bonafide Project Certificate: 'Health & Fitness - Path to Better Life'" data-lightbox-grade="Status: Official Bonafide Record • Roll 1 Distinction" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Class XII | Roll 1 | Reg: 3241140595 | Date: 05/10/2025">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <span>Inspect High-Res</span>
+                </button>
+                <a href="assets/bonafide-project-certificate.jpg" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" download="Bibek_Bandhu_Nayek_Bonafide_Project_Certificate.jpg">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>Download Certificate</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Part B: Technical & Professional Accreditations -->
+      <div class="technical-credentials-header">
+        <span class="font-mono text-muted text-xs">// PROFESSIONAL & TECHNICAL ACCREDITATIONS</span>
+      </div>
+
+      <div class="certifications-grid">
+        
+        <!-- Cert 1: Google Cybersecurity -->
+        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+          <div class="cert-header">
+            <div class="cert-institute-badge badge-google">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+            </div>
+            <div class="cert-status-tag">VERIFIED CREDENTIAL</div>
+          </div>
+          <h3 class="cert-title">Google Cybersecurity Professional Certificate</h3>
+          <p class="cert-issuer">Google Career Certificates • Foundations of Cybersecurity & SIEM Tools</p>
+          <div class="cert-skills-row">
+            <span>Network Security</span>
+            <span>Linux & SQL</span>
+            <span>Python Automation</span>
+            <span>Incident Response</span>
+          </div>
+          <div class="cert-footer">
+            <span class="cert-id font-mono">ID: GOOG-SEC-2024-8842</span>
+            <a href="#contact" class="cert-verify-link">
+              <span>Verified</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Cert 2: Stanford & DeepLearning.AI ML Specialization -->
+        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+          <div class="cert-header">
+            <div class="cert-institute-badge badge-deeplearning">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+            </div>
+            <div class="cert-status-tag">HONORS GRADE</div>
+          </div>
+          <h3 class="cert-title">Machine Learning & Neural Architectures</h3>
+          <p class="cert-issuer">DeepLearning.AI & Stanford Online • Supervised & Unsupervised Learning</p>
+          <div class="cert-skills-row">
+            <span>Neural Networks</span>
+            <span>Decision Trees</span>
+            <span>Gradient Descent</span>
+            <span>PyTorch</span>
+          </div>
+          <div class="cert-footer">
+            <span class="cert-id font-mono">ID: DLAI-ML-7729-STAN</span>
+            <a href="#contact" class="cert-verify-link">
+              <span>Verified</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Cert 3: Cisco CyberOps & Defense -->
+        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+          <div class="cert-header">
+            <div class="cert-institute-badge badge-cisco">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="cert-status-tag">SECURITY SPECIALIST</div>
+          </div>
+          <h3 class="cert-title">Cisco CyberOps & Network Defense</h3>
+          <p class="cert-issuer">Cisco Networking Academy • Threat Analysis & SOC Operations</p>
+          <div class="cert-skills-row">
+            <span>SOC Telemetry</span>
+            <span>Wireshark Analysis</span>
+            <span>Cryptography Primitives</span>
+            <span>Firewall Rules</span>
+          </div>
+          <div class="cert-footer">
+            <span class="cert-id font-mono">ID: CSCO-NET-89104</span>
+            <a href="#contact" class="cert-verify-link">
+              <span>Verified</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Cert 4: NPTEL / IIT Academic Distinction -->
+        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+          <div class="cert-header">
+            <div class="cert-institute-badge badge-nptel">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </div>
+            <div class="cert-status-tag">ELITE DISTINCTION</div>
+          </div>
+          <h3 class="cert-title">Data Structures & Algorithms with Python</h3>
+          <p class="cert-issuer">NPTEL / IIT • Advanced Computational Theory & Complexity</p>
+          <div class="cert-skills-row">
+            <span>Asymptotic Complexity</span>
+            <span>Graph Algorithms</span>
+            <span>Dynamic Programming</span>
+            <span>OOP Design</span>
+          </div>
+          <div class="cert-footer">
+            <span class="cert-id font-mono">ID: NPTEL-IIT-ELITE-991</span>
+            <a href="#contact" class="cert-verify-link">
+              <span>Verified</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         ANIMATIC VIDEO SHOWCASE & MULTIMEDIA REEL (ACETERNTITY-INSPIRED 200 FPS)
+         ======================================================================== -->
+    <section class="section-container" id="multimedia-reel">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> MOTION LAB // 200 FPS ANIMATIC SHOWCASE
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 06. PICTURESQUE REEL
+        </div>
+        <h2 class="section-title">Animatic Showcase & Motion Reel</h2>
+        <p class="section-subtitle">Visual dynamic highlights, 200 FPS cyber telemetry, technical animations, and interactive video playback.</p>
+      </div>
+
+      <div class="video-reel-wrapper spotlight-card immersive-scroll-card">
+        <!-- Moving Neon Border -->
+        <div class="moving-border-layer"></div>
+
+        <div class="video-player-container">
+          <!-- Cyber Video HUD Bar with Creator Face Avatar matching Hero -->
+          <div class="video-hud-header">
+            <div class="hud-left">
+              <div class="video-creator-face-badge">
+                <img src="assets/profile.jpg" alt="Bibek Bandhu Nayek Face Avatar" class="creator-face-img" width="32" height="32">
+                <span class="creator-beacon-dot"></span>
+              </div>
+              <div class="creator-text-meta">
+                <span class="creator-name font-heading">Bibek Bandhu Nayek</span>
+                <span class="creator-sub font-mono">FIEM CSE • 2026 Batch</span>
+              </div>
+            </div>
+            <div class="hud-center">
+              <span class="rec-dot"></span>
+              <span class="rec-text font-mono">PORTFOLIO MOTION LAB</span>
+            </div>
+            <div class="hud-right font-mono">
+              <span class="hud-fps-badge">200 FPS</span>
+              <span id="video-timestamp" class="hud-time-display">00:00 / 00:00</span>
+            </div>
+          </div>
+
+          <!-- Video Element & Face-Matched Cyber Overlays -->
+          <div class="video-viewport">
+            <video id="profile-animatic-video" class="reel-video-element" preload="auto" playsinline loop muted poster="assets/profile.jpg">
+              <source src="assets/portfolio-video.mp4" type="video/mp4">
+              <source src="assets/profile-video.mp4" type="video/mp4">
+              Your browser does not support HTML5 video playback.
+            </video>
+
+            <!-- Video Player Cyber Corner Brackets (Harmonized with Hero Section) -->
+            <div class="cyber-bracket bracket-tl"></div>
+            <div class="cyber-bracket bracket-tr"></div>
+            <div class="cyber-bracket bracket-bl"></div>
+            <div class="cyber-bracket bracket-br"></div>
+
+            <!-- Face Avatar Overlay Box (Top-Left Biometric Reticle matching Hero Profile) -->
+            <div class="overlay-face-avatar-box">
+              <div class="face-avatar-ring"></div>
+              <img src="assets/profile.jpg" alt="Biometric Face Avatar" class="avatar-round-img" width="44" height="44">
+              <div class="biometric-tag font-mono">
+                <span class="tag-live-dot"></span>
+                <span>ID: BIBEK_NAYEK // FIEM_CSE_2026</span>
+              </div>
+            </div>
+
+            <!-- Central Big Play/Pause Action Overlay -->
+            <div class="video-action-overlay" id="video-action-overlay">
+              <button id="video-center-toggle-btn" class="video-big-action-btn" aria-label="Play or Pause Video">
+                <svg id="big-play-icon" width="42" height="42" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                </svg>
+                <svg id="big-pause-icon" class="hidden-icon" width="42" height="42" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="5" y="3" width="5" height="18" rx="1"></rect>
+                  <rect x="14" y="3" width="5" height="18" rx="1"></rect>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Floating Quick Distinction Overlay Badge -->
+            <div class="video-floating-badge">
+              <div class="badge-icon">🎬</div>
+              <div class="badge-content font-mono">
+                <span class="badge-title">CREATOR REEL</span>
+                <span class="badge-desc">Cinematic Motion Preview</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Control Bar -->
+          <div class="video-controls-bar">
+            <!-- Play / Pause Button -->
+            <button id="video-play-btn" class="video-ctrl-btn" aria-label="Play Video" title="Play / Pause (Space)">
+              <svg id="ctrl-play-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <svg id="ctrl-pause-icon" class="hidden-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+            </button>
+
+            <!-- Video Progress Scrubber Bar -->
+            <div class="video-scrubber-container" id="video-scrubber-container" title="Seek (Click or Drag)">
+              <div class="video-scrubber-bg">
+                <div class="video-scrubber-buffered" id="video-scrubber-buffered"></div>
+                <div class="video-scrubber-fill" id="video-scrubber-fill"></div>
+                <div class="video-scrubber-handle" id="video-scrubber-handle"></div>
+              </div>
+            </div>
+
+            <!-- Time Display -->
+            <span class="video-time-counter font-mono" id="video-time-counter">00:00 / 00:00</span>
+
+            <!-- Mute / Unmute Toggle -->
+            <button id="video-mute-btn" class="video-ctrl-btn" aria-label="Toggle Sound" title="Mute / Unmute (M)">
+              <svg id="ctrl-sound-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+              <svg id="ctrl-mute-icon" class="hidden-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+              </svg>
+            </button>
+
+            <!-- Audio Waveform Live Visualizer Canvas -->
+            <canvas id="video-audio-waveform" class="waveform-canvas" width="100" height="24" title="Audio Telemetry Waveform"></canvas>
+
+            <!-- Fullscreen Trigger -->
+            <button id="video-fs-toggle" class="video-ctrl-btn" aria-label="Toggle Fullscreen" title="Fullscreen (F)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Video File Metadata & Upload Alternative -->
+          <div class="video-uploader-footer">
+            <div class="video-status-text">
+              <span class="text-orange font-mono">⚡ Video Stream:</span>
+              <span id="video-status-msg" class="font-mono text-secondary">assets/portfolio-video.mp4 (Loaded & Ready)</span>
+            </div>
+            
+            <div class="video-action-buttons">
+              <!-- Upload / Select Video Input -->
+              <label for="video-file-input" class="btn btn-secondary btn-sm file-upload-label" title="Select custom MP4 video from your PC">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <span>Upload / Change Video</span>
+              </label>
+              <input type="file" id="video-file-input" accept="video/mp4,video/webm" class="hidden-file-input">
+
+              <button id="video-fullscreen-btn" class="btn btn-secondary btn-sm" title="Toggle Fullscreen">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                <span>Fullscreen</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(5, 7, 12, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         INTERACTIVE CYBER SECURITY TERMINAL SANDBOX
+         ======================================================================== -->
+    <section class="section-container" id="terminal">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> CYBER TERMINAL // SANDBOX SHELL
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 07. INTERACTIVE SANDBOX
+        </div>
+        <h2 class="section-title">Security Lab Terminal</h2>
+        <p class="section-subtitle">Type standard Linux/custom security commands to inspect my credentials, run simulated diagnostics, or probe portfolio data.</p>
+      </div>
+
+      <div class="terminal-container spotlight-card immersive-scroll-card">
+        <!-- Terminal Window Titlebar -->
+        <div class="terminal-titlebar">
+          <div class="window-controls">
+            <span class="ctrl-dot dot-red" title="Close"></span>
+            <span class="ctrl-dot dot-yellow" title="Minimize"></span>
+            <span class="ctrl-dot dot-green" title="Maximize"></span>
+          </div>
+          <div class="terminal-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            <span>bibek@fiem-node: ~/portfolio (zsh)</span>
+          </div>
+          <div class="terminal-status-badge">ONLINE • 200 FPS</div>
+        </div>
+
+        <!-- Quick Command Chips for Mobile / Fast Interaction -->
+        <div class="terminal-quick-chips">
+          <span class="chip-label">Quick Commands:</span>
+          <button class="cmd-chip" data-cmd="help">help</button>
+          <button class="cmd-chip" data-cmd="whoami">whoami</button>
+          <button class="cmd-chip" data-cmd="education">education</button>
+          <button class="cmd-chip" data-cmd="certificates">certificates</button>
+          <button class="cmd-chip" data-cmd="skills">skills</button>
+          <button class="cmd-chip" data-cmd="scan">scan</button>
+          <button class="cmd-chip" data-cmd="projects">projects</button>
+          <button class="cmd-chip" data-cmd="clear">clear</button>
+        </div>
+
+        <!-- Terminal Output Screen -->
+        <div class="terminal-body" id="terminal-body">
+          <div class="terminal-output" id="terminal-output">
+            <div class="output-line text-muted">Bibek Bandhu Nayek Interactive Security Terminal [Version 2.4.0-release]</div>
+            <div class="output-line text-muted">Affiliation: <span class="text-orange">Future Institute of Engineering and Management (2026)</span></div>
+            <div class="output-line text-muted">Type <span class="text-orange font-bold">'help'</span> to see all available commands or click the chips above.</div>
+            <div class="output-line text-emerald">System initialized with 0 warnings. 200 FPS rendering pipeline active.</div>
+            <div class="terminal-divider"></div>
+          </div>
+
+          <!-- Active Prompt Line -->
+          <div class="terminal-prompt-line">
+            <span class="prompt-user">bibek@fiem-lab</span><span class="prompt-colon">:</span><span class="prompt-path">~</span><span class="prompt-symbol">$</span>
+            <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g. 'help', 'scan', 'whoami')..." aria-label="Terminal Command Input">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         CONTACT SECTION & INTERACTIVE FORM
+         ======================================================================== -->
+    <section class="section-container" id="contact">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> INITIATE PROTOCOL // FIEM COLLABORATION
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 08. INITIALIZE PROTOCOL
+        </div>
+        <h2 class="section-title">Start a Conversation</h2>
+        <p class="section-subtitle">Have a project, research inquiry, internship opportunity, or competition collaboration in mind? Reach out!</p>
+      </div>
+
+      <div class="contact-layout">
+        
+        <!-- Left: Quick Direct Channels & Copy Email -->
+        <div class="contact-info-cards">
+          
+          <!-- One-Click Email Copier Card -->
+          <div class="contact-card spotlight-card immersive-scroll-card">
+            <div class="contact-card-header">
+              <div class="contact-icon">📧</div>
+              <div>
+                <h3 class="contact-card-title">Direct Email</h3>
+                <p class="contact-card-desc">Click below to copy email address instantly</p>
+              </div>
+            </div>
+            
+            <div class="email-copy-box">
+              <span class="email-text" id="email-address">bibekbandhu.nayek@gmail.com</span>
+              <button id="copy-email-btn" class="btn btn-secondary btn-sm" title="Copy Email Address">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span id="copy-btn-text">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Academic Status & Location -->
+          <div class="contact-card spotlight-card immersive-scroll-card">
+            <div class="contact-card-header">
+              <div class="contact-icon">📍</div>
+              <div>
+                <h3 class="contact-card-title">Location & Availability</h3>
+                <p class="contact-card-desc">West Bengal, India • Remote Global Friendly</p>
+              </div>
+            </div>
+            <div class="availability-status">
+              <span class="status-indicator-green"></span>
+              <span>Available for Technical Projects, AI/ML Research & Hackathons</span>
+            </div>
+          </div>
+
+          <!-- Social Matrix Grid -->
+          <div class="social-channels-card spotlight-card immersive-scroll-card">
+            <h3 class="socials-heading">Direct Social Matrix</h3>
+            <div class="social-grid">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-box" title="GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                <span>GitHub</span>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-box" title="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="social-box" title="WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>WhatsApp</span>
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-box" title="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                <span>Facebook</span>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-box" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <span>Instagram</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Glassmorphism Interactive Contact Form -->
+        <div class="contact-form-card spotlight-card immersive-scroll-card">
+          <h3 class="form-title">Send Encrypted Message</h3>
+          <p class="form-subtitle">Messages are validated client-side with real-time feedback.</p>
+
+          <form id="contact-form" class="contact-form" novalidate>
+            <!-- Name Input Group -->
+            <div class="form-group">
+              <label for="form-name" class="form-label">Your Name</label>
+              <div class="input-wrapper">
+                <input type="text" id="form-name" class="form-input" placeholder="e.g. Alex Turing" required minlength="2">
+                <div class="input-status-icon" aria-hidden="true"></div>
+              </div>
+              <span class="error-msg" id="name-error">Please enter your name (min 2 characters).</span>
+            </div>
+
+            <!-- Email Input Group -->
+            <div class="form-group">
+              <label for="form-email" class="form-label">Your Email</label>
+              <div class="input-wrapper">
+                <input type="email" id="form-email" class="form-input" placeholder="alex@company.com" required>
+                <div class="input-status-icon" aria-hidden="true"></div>
+              </div>
+              <span class="error-msg" id="email-error">Please enter a valid email address.</span>
+            </div>
+
+            <!-- Subject Selection -->
+            <div class="form-group">
+              <label for="form-subject" class="form-label">Subject Domain</label>
+              <div class="input-wrapper select-wrapper">
+                <select id="form-subject" class="form-input" required>
+                  <option value="" disabled selected>Select an area of discussion...</option>
+                  <option value="cyber">Cyber Security Research / Vulnerability Audit</option>
+                  <option value="data">Data Analytics & Predictive Modeling</option>
+                  <option value="ai">AI Innovation & Machine Learning Project</option>
+                  <option value="internship">Internship / Academic Collaboration</option>
+                  <option value="other">General Inquiries / Coffee Chat</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Message Textarea -->
+            <div class="form-group">
+              <label for="form-message" class="form-label">Message Payload</label>
+              <div class="input-wrapper">
+                <textarea id="form-message" class="form-input form-textarea" rows="4" placeholder="Briefly describe your objectives or inquiry..." required minlength="10"></textarea>
+              </div>
+              <span class="error-msg" id="message-error">Please provide at least 10 characters.</span>
+            </div>
+
+            <!-- Submit Button with Spinner -->
+            <button type="submit" id="form-submit-btn" class="btn btn-primary w-full">
+              <span class="btn-text-content">Dispatch Message</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+              <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       07. ACETERNTITY-STYLE FLOATING DOCK (BOTTOM DOCK)
+       ========================================================================== -->
+  <aside class="floating-dock-wrapper" aria-label="Quick Access Floating Dock">
+    <nav class="floating-dock">
+      <a href="#hero" class="dock-item" data-tooltip="Home Top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      </a>
+      <a href="#overview" class="dock-item" data-tooltip="Excellence Overview">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      </a>
+      <a href="#journey" class="dock-item" data-tooltip="Academic Journey">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+      </a>
+      <a href="#skills" class="dock-item" data-tooltip="Skills Matrix">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+      </a>
+      <a href="#projects" class="dock-item" data-tooltip="Projects">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      </a>
+      <a href="#certifications" class="dock-item" data-tooltip="Certificates">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      </a>
+      <a href="#multimedia-reel" class="dock-item" data-tooltip="Motion Reel (200 FPS)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+      </a>
+      <a href="#terminal" class="dock-item" data-tooltip="CLI Terminal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+      </a>
+      <a href="#contact" class="dock-item" data-tooltip="Contact Direct">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ==========================================================================
+       08. FOOTER SECTION
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="brand-monogram">
+          <span class="mono-text">BN</span>
+        </div>
+        <div>
+          <div class="footer-name">Bibek Bandhu Nayek</div>
+          <div class="footer-sub">Future Institute of Engineering and Management (2026 Batch)</div>
+        </div>
+      </div>
+
+      <div class="footer-center">
+        <p class="footer-copyright">
+          © <span id="current-year">2026</span> Bibek Bandhu Nayek. Engineered with Vanilla HTML5, CSS3, & JavaScript.
+        </p>
+      </div>
+
+      <div class="footer-back-to-top">
+        <button id="back-to-top-btn" class="back-to-top" title="Return to Top" aria-label="Scroll back to top">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          <svg class="progress-ring" width="44" height="44" viewBox="0 0 44 44">
+            <circle class="progress-ring-circle" stroke="currentColor" stroke-width="2.5" fill="transparent" r="18" cx="22" cy="22"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       09. MODAL DIALOG FOR PROJECT & CERTIFICATE INSPECTOR
+       ========================================================================== -->
+  <dialog id="project-modal" class="project-modal" aria-labelledby="modal-title">
+    <div class="modal-dialog-box">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-header">
+        <span class="modal-badge" id="modal-badge">Cyber Security</span>
+        <h3 class="modal-title" id="modal-title">Project Title</h3>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-description" id="modal-description">Detailed description will load here.</p>
+        
+        <div class="modal-section-block">
+          <h4 class="modal-subheading">Key Technical Highlights</h4>
+          <ul class="modal-feature-list" id="modal-features">
+            <!-- Dynamically populated via JS -->
+          </ul>
+        </div>
+
+        <div class="modal-section-block">
+          <h4 class="modal-subheading">Technology Stack</h4>
+          <div class="modal-tech-chips" id="modal-tech">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="modal-github-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <span>Source Code</span>
+        </a>
+        <button class="btn btn-primary btn-sm" id="modal-dismiss-btn">
+          <span>Close Inspector</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ==========================================================================
+       09B. CERTIFICATE HIGH-RESOLUTION LIGHTBOX MODAL
+       ========================================================================== -->
+  <dialog id="cert-lightbox-modal" class="cert-lightbox-modal" aria-labelledby="lightbox-cert-title">
+    <div class="cert-lightbox-box glass-panel">
+      <div class="cert-lightbox-header">
+        <div class="lightbox-header-left">
+          <span class="cert-verified-pill font-mono">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span>VERIFIED ACADEMIC DOCUMENT</span>
+          </span>
+          <h3 class="lightbox-cert-title" id="lightbox-cert-title">Certificate Title</h3>
+          <p class="lightbox-cert-subtitle font-mono text-cyan" id="lightbox-cert-subtitle">Radhamohanpur Vivekananda High School (H.S.)</p>
+        </div>
+        <button class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close certificate lightbox">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="cert-lightbox-body">
+        <div class="cert-lightbox-viewport" id="cert-lightbox-viewport">
+          <img src="" alt="High-Resolution Certificate Document" id="lightbox-img" class="lightbox-document-img">
+        </div>
+
+        <div class="cert-lightbox-sidebar">
+          <div class="sidebar-box">
+            <h4 class="sidebar-heading font-mono">// CREDENTIAL DETAILS</h4>
+            <div class="sidebar-meta-list font-mono">
+              <div class="sidebar-meta-item">
+                <span class="lbl">CANDIDATE:</span>
+                <span class="val">Bibek Bandhu Nayek</span>
+              </div>
+              <div class="sidebar-meta-item">
+                <span class="lbl">GRADE / RANK:</span>
+                <span class="val text-emerald font-bold" id="lightbox-grade-text">Overall Grade A++</span>
+              </div>
+              <div class="sidebar-meta-item">
+                <span class="lbl">IDENTIFIERS:</span>
+                <span class="val" id="lightbox-id-text">Reg: 3241140595</span>
+              </div>
+              <div class="sidebar-meta-item">
+                <span class="lbl">AUTHENTICITY:</span>
+                <span class="val text-cyan">State Board Sealed & Cryptographically Grounded</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-actions">
+            <a href="#" download class="btn btn-primary btn-block" id="lightbox-download-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download Original File</span>
+            </a>
+            <button class="btn btn-secondary btn-block" id="lightbox-zoom-toggle">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              <span>Toggle Full Zoom</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ==========================================================================
+       10. COMMAND PALETTE MODAL (CTRL+K / CMD+K)
+       ========================================================================== -->
+  <dialog id="cmd-palette-modal" class="cmd-palette-dialog" aria-label="Command Palette">
+    <div class="cmd-palette-box glass-panel">
+      <div class="cmd-input-wrapper">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="cmd-search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="cmd-palette-input" class="cmd-input font-mono" placeholder="Type a command or jump to section (e.g., 'projects', 'email', 'audio', 'drill')..." autocomplete="off" spellcheck="false">
+        <kbd class="cmd-kbd font-mono">ESC</kbd>
+      </div>
+
+      <div class="cmd-results-list" id="cmd-results-list">
+        <!-- Navigation Section -->
+        <div class="cmd-group-label font-mono">NAVIGATION & SECTIONS</div>
+        <div class="cmd-item" data-action="navigate" data-target="#hero">
+          <span class="cmd-item-icon">🏠</span>
+          <span class="cmd-item-label">Home & Introduction</span>
+          <span class="cmd-item-hint font-mono">#hero</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#overview">
+          <span class="cmd-item-icon">🏆</span>
+          <span class="cmd-item-label">Academic Distinctions & Bento Matrix</span>
+          <span class="cmd-item-hint font-mono">#overview</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#journey">
+          <span class="cmd-item-icon">🌀</span>
+          <span class="cmd-item-label">Spiral Academic & Geographic Flow</span>
+          <span class="cmd-item-hint font-mono">#journey</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#skills">
+          <span class="cmd-item-icon">⚡</span>
+          <span class="cmd-item-label">Engineered Capabilities & Skills</span>
+          <span class="cmd-item-hint font-mono">#skills</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#projects">
+          <span class="cmd-item-icon">🛡️</span>
+          <span class="cmd-item-label">Featured Projects & Architecture Labs</span>
+          <span class="cmd-item-hint font-mono">#projects</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#certifications">
+          <span class="cmd-item-icon">📜</span>
+          <span class="cmd-item-label">Academic Certificates & Accreditations</span>
+          <span class="cmd-item-hint font-mono">#certifications</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#multimedia-reel">
+          <span class="cmd-item-icon">🎬</span>
+          <span class="cmd-item-label">Animatic Video Showcase (200 FPS)</span>
+          <span class="cmd-item-hint font-mono">#multimedia-reel</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#terminal">
+          <span class="cmd-item-icon">💻</span>
+          <span class="cmd-item-label">Interactive Security CLI Terminal</span>
+          <span class="cmd-item-hint font-mono">#terminal</span>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="cmd-group-label font-mono">DIRECT ACTIONS</div>
+        <div class="cmd-item" data-action="copy-email">
+          <span class="cmd-item-icon">✉️</span>
+          <span class="cmd-item-label">Copy Email Address</span>
+          <span class="cmd-item-hint font-mono">bibekbandhu.nayek@gmail.com</span>
+        </div>
+        <div class="cmd-item" data-action="toggle-sound">
+          <span class="cmd-item-icon">🔊</span>
+          <span class="cmd-item-label">Toggle Mechanical Audio Feedback</span>
+          <span class="cmd-item-hint font-mono">Sound FX</span>
+        </div>
+        <div class="cmd-item" data-action="run-terminal-scan">
+          <span class="cmd-item-icon">🔍</span>
+          <span class="cmd-item-label">Run Sentinel Port Scan in Terminal</span>
+          <span class="cmd-item-hint font-mono">scan</span>
+        </div>
+      </div>
+
+      <div class="cmd-footer font-mono">
+        <span>Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate</span>
+        <span><kbd>↵</kbd> to select</span>
+        <span><kbd>ESC</kbd> to close</span>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ==========================================================================
+       11. TOAST NOTIFICATION CONTAINER
+       ========================================================================== -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Custom Vanilla JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

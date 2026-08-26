@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120" width="100%" height="100%">
+  <defs>
+    <filter id="fiemDropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.15)" />
+    </filter>
+  </defs>
+
+  <!-- Clean Container Background for universal contrast in dark and light modes -->
+  <rect width="450" height="120" rx="14" fill="#ffffff" />
+
+  <g transform="translate(15, 12)" filter="url(#fiemDropShadow)">
+    <!-- ==================== LETTER 'F' ==================== -->
+    <path d="M 10,12 L 54,12 L 54,30 L 29,30 L 29,48 L 50,48 L 50,65 L 29,65 L 29,96 L 10,96 Z" fill="#034ea2" />
+
+    <!-- ==================== LETTER 'I' (Drafting Ruler) ==================== -->
+    <g transform="translate(59, 12)">
+      <!-- Orange Ruler Bar -->
+      <rect x="0" y="0" width="19" height="84" fill="#e65a28" />
+      
+      <!-- Ruler Measurement Ticks -->
+      <line x1="0" y1="8" x2="6" y2="8" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="16" x2="10" y2="16" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="0" y1="24" x2="6" y2="24" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="32" x2="10" y2="32" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="0" y1="40" x2="6" y2="40" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="48" x2="10" y2="48" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="0" y1="56" x2="6" y2="56" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="64" x2="10" y2="64" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="0" y1="72" x2="6" y2="72" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="80" x2="10" y2="80" stroke="#ffffff" stroke-width="1.5" />
+    </g>
+
+    <!-- ==================== LETTER 'E' ==================== -->
+    <path d="M 84,12 L 126,12 L 126,30 L 103,30 L 103,46 L 122,46 L 122,62 L 103,62 L 103,78 L 126,78 L 126,96 L 84,96 Z" fill="#034ea2" />
+
+    <!-- ==================== LETTER 'M' (Drafting Set-Squares) ==================== -->
+    <!-- Left Orange Triangle Set Square -->
+    <g transform="translate(131, 12)">
+      <polygon points="0,0 44,84 0,84" fill="#e65a28" />
+      <!-- Hollow Inner Triangle -->
+      <polygon points="10,32 30,72 10,72" fill="#ffffff" />
+      <!-- Scale Ticks along vertical edge -->
+      <line x1="0" y1="12" x2="6" y2="12" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="24" x2="8" y2="24" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="0" y1="36" x2="6" y2="36" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="48" x2="8" y2="48" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="0" y1="60" x2="6" y2="60" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="0" y1="72" x2="8" y2="72" stroke="#ffffff" stroke-width="1.5" />
+    </g>
+
+    <!-- Right Blue Triangle Set Square -->
+    <g transform="translate(131, 12)">
+      <polygon points="44,84 72,0 72,84" fill="#034ea2" />
+      <!-- Hollow Inner Triangle -->
+      <polygon points="49,72 63,30 63,72" fill="#ffffff" />
+      <!-- Scale Ticks along right edge -->
+      <line x1="72" y1="12" x2="66" y2="12" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="72" y1="24" x2="64" y2="24" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="72" y1="36" x2="66" y2="36" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="72" y1="48" x2="64" y2="48" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="72" y1="60" x2="66" y2="60" stroke="#ffffff" stroke-width="1.2" />
+      <line x1="72" y1="72" x2="64" y2="72" stroke="#ffffff" stroke-width="1.5" />
+    </g>
+
+    <!-- ==================== INSTITUTION TYPOGRAPHY ==================== -->
+    <g transform="translate(216, 26)">
+      <text x="0" y="0" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="600" fill="#034ea2" letter-spacing="-0.2">
+        Future Institute
+      </text>
+      <text x="0" y="27" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="600" fill="#034ea2" letter-spacing="-0.2">
+        of Engineering
+      </text>
+      <text x="0" y="54" font-family="'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="600" fill="#034ea2" letter-spacing="-0.2">
+        and Management
+      </text>
+    </g>
+  </g>
+</svg>
