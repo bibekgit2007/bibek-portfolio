@@ -108,7 +108,6 @@
           <li><a href="#about" class="nav-link"><span class="nav-hash">#</span>About</a></li>
           <li><a href="#overview" class="nav-link"><span class="nav-hash">#</span>Overview</a></li>
           <li><a href="#journey" class="nav-link"><span class="nav-hash">#</span>Academics</a></li>
-          <li><a href="#motion-lab" class="nav-link"><span class="nav-hash">#</span>Motion Lab</a></li>
           <li><a href="#creativity" class="nav-link"><span class="nav-hash">#</span>Creativity</a></li>
           <li><a href="#skills" class="nav-link"><span class="nav-hash">#</span>Skills</a></li>
           <li><a href="#projects" class="nav-link"><span class="nav-hash">#</span>Projects</a></li>
@@ -162,7 +161,6 @@
       <li><a href="#about" class="mobile-link">About & Philosophy</a></li>
       <li><a href="#overview" class="mobile-link">Overview & Distinctions</a></li>
       <li><a href="#journey" class="mobile-link">Academic Journey (2024-2026)</a></li>
-      <li><a href="#motion-lab" class="mobile-link">200 FPS Motion Lab</a></li>
       <li><a href="#creativity" class="mobile-link">Creative Lab (AVAI)</a></li>
       <li><a href="#skills" class="mobile-link">Skills Matrix</a></li>
       <li><a href="#projects" class="mobile-link">Featured Projects</a></li>
@@ -1352,140 +1350,7 @@
       </div>
     </section>
 
-    <!-- HackSpire Signature Curved Wave Transition -->
-    <div class="hackspire-wave-divider" aria-hidden="true">
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
-      </svg>
-    </div>
 
-    <!-- ========================================================================
-         04. 200 FPS MOTION LAB & BIOMETRIC CYBER VIDEO TELEMETRY ENGINE
-         ======================================================================== -->
-    <section class="section-container" id="motion-lab">
-      <div class="section-header">
-        <div class="hackspire-theme-pill">
-          <span class="pill-dot"></span> 200 FPS TELEMETRY // MOTION &amp; LAB SIMULATION
-        </div>
-        <div class="section-tag">
-          <span class="tag-hash">//</span> 04. HIGH-SPEED MOTION LAB
-        </div>
-        <h2 class="section-title">200 FPS Motion Lab &amp; Video Engine</h2>
-        <p class="section-subtitle">Real-time synchronized audio telemetry waveforms, live biometric reticle targeting, and hardware-accelerated video streaming.</p>
-      </div>
-
-      <div class="motion-lab-wrapper spotlight-card reveal-on-scroll immersive-scroll-card">
-        <div class="motion-lab-shimmer-border"></div>
-        <div class="motion-lab-inner">
-          
-          <!-- Top Telemetry Status Bar -->
-          <div class="motion-telemetry-header font-mono">
-            <div class="telemetry-left">
-              <span class="telemetry-live-dot"></span>
-              <span class="telemetry-label">STREAM: SECURE_H264_FEED</span>
-              <span class="telemetry-pipe">|</span>
-              <span class="telemetry-metric">FPS: <strong id="motion-fps-counter" class="text-emerald">200.0</strong></span>
-              <span class="telemetry-pipe">|</span>
-              <span class="telemetry-metric">LATENCY: <strong class="text-cyan">0.4ms</strong></span>
-            </div>
-            <div class="telemetry-right">
-              <span class="telemetry-badge badge-orange font-mono">FIEM CSE RESEARCH LAB</span>
-            </div>
-          </div>
-
-          <!-- Video Stage with HUD Overlays -->
-          <div class="motion-video-stage" id="motion-video-stage">
-            <video id="motion-video" class="motion-video-player" loop playsinline preload="metadata" poster="assets/profile.jpg">
-              <source src="assets/profile-video.mp4" type="video/mp4">
-              <source src="assets/portfolio-video.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-
-            <!-- Interactive Biometric HUD Reticle & Corner Brackets -->
-            <div class="motion-hud-overlay" id="motion-hud-overlay">
-              <div class="hud-target-reticle" id="hud-target-reticle">
-                <div class="reticle-circle-outer"></div>
-                <div class="reticle-circle-inner"></div>
-                <div class="reticle-crosshair ch-h"></div>
-                <div class="reticle-crosshair ch-v"></div>
-                <div class="reticle-coords font-mono" id="reticle-coords">LOCK: 22.4419°N 88.4237°E • TARGET: BIBEK</div>
-              </div>
-
-              <div class="cyber-bracket bracket-tl"></div>
-              <div class="cyber-bracket bracket-tr"></div>
-              <div class="cyber-bracket bracket-bl"></div>
-              <div class="cyber-bracket bracket-br"></div>
-              
-              <!-- Video Center Click-to-Play Overlay -->
-              <div class="video-center-indicator" id="video-center-indicator" title="Click to Toggle Video Playback">
-                <div class="indicator-play-icon" id="indicator-play-icon">▶</div>
-              </div>
-            </div>
-
-            <!-- Audio Telemetry Waveform Visualizer Canvas -->
-            <canvas id="motion-waveform-canvas" class="motion-waveform-canvas" aria-hidden="true"></canvas>
-          </div>
-
-          <!-- Interactive Video Controls & Track Switcher -->
-          <div class="motion-controls-bar">
-            <!-- Left Controls: Play/Pause, Mute, Time -->
-            <div class="controls-left">
-              <button id="video-play-btn" class="btn-video-ctrl" title="Play/Pause Video (Space)" aria-label="Play or Pause Video">
-                <span id="video-play-icon">▶</span>
-              </button>
-              <button id="video-mute-btn" class="btn-video-ctrl" title="Toggle Audio" aria-label="Toggle Video Audio">
-                <span id="video-mute-icon">🔇</span>
-              </button>
-              <div class="video-time-display font-mono">
-                <span id="video-current-time">00:00</span> / <span id="video-duration">00:00</span>
-              </div>
-            </div>
-
-            <!-- Center: Interactive Progress Scrubber -->
-            <div class="video-scrubber-wrapper">
-              <input type="range" id="video-scrubber" class="video-scrubber" min="0" max="100" value="0" step="0.1" aria-label="Video scrubber">
-              <div class="scrubber-progress-fill" id="scrubber-progress-fill"></div>
-            </div>
-
-            <!-- Right Controls: Speed, Track Switcher, Fullscreen -->
-            <div class="controls-right font-mono">
-              <div class="speed-selector">
-                <button class="speed-btn active" data-speed="1">1x</button>
-                <button class="speed-btn" data-speed="1.5">1.5x</button>
-                <button class="speed-btn" data-speed="2">2x</button>
-              </div>
-              <button id="video-switch-track-btn" class="btn-video-ctrl text-btn" title="Switch Video Feed">
-                <span>🔄 Track Switch</span>
-              </button>
-              <button id="video-fullscreen-btn" class="btn-video-ctrl" title="Toggle Fullscreen" aria-label="Fullscreen">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- Motion Telemetry Sensor Readouts -->
-          <div class="motion-sensors-grid font-mono">
-            <div class="sensor-chip">
-              <span class="sensor-lbl">RENDER ENGINE:</span>
-              <span class="sensor-val text-gold">HARDWARE_ACCELERATED_WEBGL</span>
-            </div>
-            <div class="sensor-chip">
-              <span class="sensor-lbl">AUDIO TELEMETRY:</span>
-              <span class="sensor-val text-emerald">SYNCHRONIZED_64_BAND_FFT</span>
-            </div>
-            <div class="sensor-chip">
-              <span class="sensor-lbl">SPATIAL TRACKING:</span>
-              <span class="sensor-val text-cyan">ACTIVE_HUD_RETICLE_LOCKED</span>
-            </div>
-            <div class="sensor-chip">
-              <span class="sensor-lbl">INSTITUTION:</span>
-              <span class="sensor-val text-orange">FIEM KOLKATA (2026)</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
 
     <!-- Infinite Velocity Marquee Ticker 02: Tech Arsenal & Tools -->
     <div class="velocity-marquee-wrap marquee-reverse" aria-hidden="true">
@@ -2865,9 +2730,6 @@
       <a href="#journey" class="dock-item" data-tooltip="Academic Journey">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
       </a>
-      <a href="#motion-lab" class="dock-item" data-tooltip="200 FPS Motion Lab">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-      </a>
       <a href="#creativity" class="dock-item" data-tooltip="Creative Lab (AVAI)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
       </a>
@@ -3063,11 +2925,6 @@
           <span class="cmd-item-icon">🌀</span>
           <span class="cmd-item-label">Spiral Academic &amp; Geographic Flow</span>
           <span class="cmd-item-hint font-mono">#journey</span>
-        </div>
-        <div class="cmd-item" data-action="navigate" data-target="#motion-lab">
-          <span class="cmd-item-icon">🎬</span>
-          <span class="cmd-item-label">200 FPS Motion Lab &amp; Video Engine</span>
-          <span class="cmd-item-hint font-mono">#motion-lab</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#creativity">
           <span class="cmd-item-icon">🧠</span>
