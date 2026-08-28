@@ -1,6 +1,9 @@
 .DS_Store
 Thumbs.db
+desktop.ini
+Desktop.ini
 *.tmp
 *.log
 .vscode/
 .idea/
+

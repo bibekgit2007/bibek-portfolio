@@ -37,7 +37,7 @@
        ========================================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Bangers&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Gurajada&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Karantina:wght@400;700&family=Kaushan+Script&family=Pacifico&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Rozha+One&family=Space+Grotesk:wght@500;600;700&family=Yatra+One&family=Yellowtail&display=swap" rel="stylesheet">
 
   <!-- Custom CSS Design System -->
   <link rel="stylesheet" href="style.css">
@@ -54,11 +54,38 @@
   </div>
 
   <!-- ==========================================================================
+       03B. ACETERNITY TRACING BEAM SPINE
+       ========================================================================== -->
+  <aside class="aceternity-tracing-beam-container" id="tracing-beam-container" aria-hidden="true">
+    <div class="tracing-beam-laser-dot" id="tracing-beam-laser-dot">
+      <div class="laser-core"></div>
+      <div class="laser-halo"></div>
+    </div>
+    <svg class="tracing-beam-svg" viewBox="0 0 20 1000" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="tracingBeamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#ff6b00" stop-opacity="0.9" />
+          <stop offset="30%" stop-color="#ffffff" stop-opacity="1" />
+          <stop offset="65%" stop-color="#10b981" stop-opacity="0.95" />
+          <stop offset="100%" stop-color="#06b6d4" stop-opacity="1" />
+        </linearGradient>
+        <filter id="beamGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <line x1="10" y1="0" x2="10" y2="1000" class="tracing-beam-line-bg" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+      <line x1="10" y1="0" x2="10" y2="1000" id="tracing-beam-line-active" class="tracing-beam-line-active" stroke="url(#tracingBeamGrad)" stroke-width="3.5" filter="url(#beamGlow)" />
+    </svg>
+  </aside>
+
+  <!-- ==========================================================================
        04. INTERACTIVE CANVAS BACKGROUND & AMBIENT PARALLAX BEAMS
        ========================================================================== -->
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <div class="ambient-glow glow-top parallax-glow" id="glow-top" aria-hidden="true"></div>
   <div class="ambient-glow glow-bottom parallax-glow" id="glow-bottom" aria-hidden="true"></div>
+  <div class="spotlight-pointer" id="spotlight-pointer" aria-hidden="true"></div>
 
   <!-- ==========================================================================
        05. NAVIGATION BAR (STICKY GLASSMORPHISM)
@@ -78,12 +105,14 @@
       <!-- Desktop Nav Links -->
       <nav class="nav-menu" id="nav-menu" aria-label="Main Navigation">
         <ul class="nav-list">
+          <li><a href="#about" class="nav-link"><span class="nav-hash">#</span>About</a></li>
           <li><a href="#overview" class="nav-link"><span class="nav-hash">#</span>Overview</a></li>
           <li><a href="#journey" class="nav-link"><span class="nav-hash">#</span>Academics</a></li>
+          <li><a href="#motion-lab" class="nav-link"><span class="nav-hash">#</span>Motion Lab</a></li>
+          <li><a href="#creativity" class="nav-link"><span class="nav-hash">#</span>Creativity</a></li>
           <li><a href="#skills" class="nav-link"><span class="nav-hash">#</span>Skills</a></li>
           <li><a href="#projects" class="nav-link"><span class="nav-hash">#</span>Projects</a></li>
           <li><a href="#certifications" class="nav-link"><span class="nav-hash">#</span>Certificates</a></li>
-          <li><a href="#multimedia-reel" class="nav-link"><span class="nav-hash">#</span>Reel</a></li>
           <li><a href="#terminal" class="nav-link"><span class="nav-hash">#</span>CLI</a></li>
           <li><a href="#contact" class="nav-link"><span class="nav-hash">#</span>Contact</a></li>
         </ul>
@@ -130,12 +159,14 @@
   <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
     <ul class="mobile-nav-list">
       <li><a href="#hero" class="mobile-link">Home</a></li>
+      <li><a href="#about" class="mobile-link">About & Philosophy</a></li>
       <li><a href="#overview" class="mobile-link">Overview & Distinctions</a></li>
       <li><a href="#journey" class="mobile-link">Academic Journey (2024-2026)</a></li>
+      <li><a href="#motion-lab" class="mobile-link">200 FPS Motion Lab</a></li>
+      <li><a href="#creativity" class="mobile-link">Creative Lab (AVAI)</a></li>
       <li><a href="#skills" class="mobile-link">Skills Matrix</a></li>
       <li><a href="#projects" class="mobile-link">Featured Projects</a></li>
       <li><a href="#certifications" class="mobile-link">Certifications & Accreditations</a></li>
-      <li><a href="#multimedia-reel" class="mobile-link">Animatic Video Showcase</a></li>
       <li><a href="#terminal" class="mobile-link">Interactive Terminal</a></li>
       <li><a href="#contact" class="mobile-link">Contact</a></li>
     </ul>
@@ -173,6 +204,13 @@
             </div>
           </div>
 
+          <!-- Grand Signature Entrance Greeting with Custom Multi-Font Typography -->
+          <div class="hero-calligraphic-entrance" aria-label="Entrance Signature Greeting">
+            <span class="greeting-hi-bangers">HI</span>
+            <span class="greeting-myself-guarantia">MYSELF</span>
+            <span class="greeting-name-bukhari">BIBEK BANDHU NAYEK</span>
+          </div>
+
           <h1 class="hero-title">
             Engineering Secure, Intelligent Systems. <br>
             <span class="hero-gradient-text">Bibek Bandhu Nayek</span>
@@ -200,11 +238,13 @@
               <span>Explore Projects</span>
             </a>
             
-            <a href="#multimedia-reel" class="btn btn-secondary">
+            <a href="#about" class="btn btn-secondary">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
               </svg>
-              <span>Watch Video Reel (200 FPS)</span>
+              <span>About &amp; Philosophy</span>
             </a>
           </div>
 
@@ -216,6 +256,10 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 <span>GitHub</span>
               </a>
+              <a href="https://x.com/bibekbandhunyk" target="_blank" rel="noopener noreferrer" class="social-pill social-pill-twitter" title="Twitter / X (@bibekbandhunyk)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span>Twitter/X</span>
+              </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-pill" title="LinkedIn Profile">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 <span>LinkedIn</span>
@@ -224,7 +268,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 <span>WhatsApp</span>
               </a>
-              <a href="mailto:bibekbandhu.nayek@gmail.com" class="social-pill" title="Direct Email">
+              <a href="mailto:bibekbandhu2007@gmail.com" class="social-pill" title="Direct Email">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
                 <span>Email</span>
               </a>
@@ -334,6 +378,577 @@
       </div>
     </section>
 
+    <!-- Infinite Velocity Marquee Ticker 01: Core Domains & Accolades -->
+    <div class="velocity-marquee-wrap" aria-hidden="true">
+      <div class="velocity-marquee-track">
+        <div class="marquee-item"><span class="mq-symbol text-orange">✦</span> CYBER SECURITY DEFENSE</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">✦</span> DATA ANALYTICS &amp; PREDICTIVE MODELS</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">✦</span> NEURAL AI ARCHITECTURES</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">✦</span> FIEM CSE '26 TOP SCHOLAR</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">✦</span> WBCHSE GRADE A++ (DISTINCTION)</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">✦</span> WBBSE GRADE AA (ROLL-1)</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">✦</span> ZERO-TRUST SYSTEMS RIGOR</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">✦</span> SANSKRIT FIRST-PRINCIPLES ETHOS</div>
+        <!-- Duplicate for infinite loop -->
+        <div class="marquee-item"><span class="mq-symbol text-orange">✦</span> CYBER SECURITY DEFENSE</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">✦</span> DATA ANALYTICS &amp; PREDICTIVE MODELS</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">✦</span> NEURAL AI ARCHITECTURES</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">✦</span> FIEM CSE '26 TOP SCHOLAR</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">✦</span> WBCHSE GRADE A++ (DISTINCTION)</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">✦</span> WBBSE GRADE AA (ROLL-1)</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">✦</span> ZERO-TRUST SYSTEMS RIGOR</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">✦</span> SANSKRIT FIRST-PRINCIPLES ETHOS</div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         01. ABOUT & PHILOSOPHICAL ETHOS: SACRED SANSKRIT MAXIM & VISIONARY QUOTES
+         ======================================================================== -->
+    <section class="section-container" id="about">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> PHILOSOPHY & VISION // IN PURSUIT OF TRUTH & EXCELLENCE
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 01. PHILOSOPHICAL FOUNDATION
+        </div>
+        <h2 class="section-title">About &amp; Guiding Philosophies</h2>
+        <p class="section-subtitle">Grounded in timeless Bharatiya wisdom, elevated by first-principles reasoning, and inspired by the greatest luminaries in science, computation, and moral leadership.</p>
+      </div>
+
+      <!-- ======================================================================
+           GRAND SACRED SANSKRIT INSCRIPTION CENTERPIECE (SHRADDHAVAN LABHATE JNANAM)
+           ====================================================================== -->
+      <div class="sanskrit-sacred-wrapper spotlight-card reveal-on-scroll">
+        <div class="sanskrit-gold-shimmer-border"></div>
+        <div class="sanskrit-glow-backdrop"></div>
+        
+        <div class="sanskrit-card-inner">
+          <!-- Cyber Corner Ornaments -->
+          <div class="cyber-bracket bracket-gold bracket-tl"></div>
+          <div class="cyber-bracket bracket-gold bracket-tr"></div>
+          <div class="cyber-bracket bracket-gold bracket-bl"></div>
+          <div class="cyber-bracket bracket-gold bracket-br"></div>
+
+          <!-- Top Sanskrit Badge Header -->
+          <div class="sanskrit-top-meta">
+            <div class="vedic-source-pill font-mono">
+              <span class="sacred-om-symbol">ॐ</span>
+              <span>Śrīmad Bhagavad Gītā • Chapter 4, Verse 39</span>
+            </div>
+            <div class="sanskrit-gold-chip font-mono">
+              <span class="gold-pulse-dot"></span>
+              <span>CORE ENGINEERING CREED</span>
+            </div>
+          </div>
+
+          <!-- Grand Sanskrit Headline with Animatic Metallic Gold Typography -->
+          <div class="sanskrit-hero-mantra-box">
+            <div class="sanskrit-mantra-glow-layer"></div>
+            <h3 class="sanskrit-mantra-title font-sanskrit" id="sanskrit-mantra-text">
+              श्रद्धावान् लभते ज्ञानम्
+            </h3>
+            <div class="sanskrit-mantra-subline font-serif-sub">
+              śraddhāvāṉ labhate jñānam, tat-paraḥ saṁyatendriyaḥ
+            </div>
+          </div>
+
+          <!-- Sanskrit Verse Inscription & English Translation -->
+          <div class="sanskrit-verse-body">
+            <blockquote class="sanskrit-english-translation font-luxury-serif">
+              “The seeker endowed with earnest faith, unwavering devotion, and disciplined mastery of the senses attains supreme wisdom; and having attained such transcendent knowledge, swiftly achieves ultimate peace and purpose.”
+            </blockquote>
+            <p class="sanskrit-synthesis-text">
+              In an era defined by rapid advances in Artificial Intelligence, distributed computing, and cyber warfare, true mastery does not arise from superficial consumption. It is forged through <strong>Śraddhā (श्रद्धा)</strong>—reverent dedication to foundational first principles, humble persistence before deep mathematical truths, and unyielding discipline in building secure, resilient software architectures.
+            </p>
+          </div>
+
+          <!-- Quick Philosophy Pillars Trio -->
+          <div class="philosophy-pillars-row">
+            <div class="pillar-box">
+              <div class="pillar-icon">🎯</div>
+              <div class="pillar-info">
+                <span class="pillar-title font-mono">ŚRADDHĀ (REVERENCE)</span>
+                <span class="pillar-desc">Deep devotion to foundational sciences, mathematical purity, and learning.</span>
+              </div>
+            </div>
+            <div class="pillar-box">
+              <div class="pillar-icon">⚡</div>
+              <div class="pillar-info">
+                <span class="pillar-title font-mono">FIRST PRINCIPLES</span>
+                <span class="pillar-desc">Boiling problems down to elemental truths rather than reasoning by analogy.</span>
+              </div>
+            </div>
+            <div class="pillar-box">
+              <div class="pillar-icon">🛡️</div>
+              <div class="pillar-info">
+                <span class="pillar-title font-mono">ZERO TRUST RIGOR</span>
+                <span class="pillar-desc">Engineering resilient, self-verifying systems with uncompromising integrity.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           DYNAMIC WISDOM SPOTLIGHT & QUOTE OF THE MOMENT (ANIMATIC ROTATOR)
+           ====================================================================== -->
+      <div class="wisdom-spotlight-card spotlight-card reveal-on-scroll">
+        <div class="spotlight-gold-beam"></div>
+        <div class="wisdom-spotlight-content">
+          <div class="spotlight-header-bar">
+            <div class="spotlight-label font-mono">
+              <span class="spotlight-sparkle">✨</span>
+              <span>WISDOM OF THE MOMENT // GUIDING INTELLECT</span>
+            </div>
+            <div class="spotlight-actions">
+              <button id="quote-shuffle-btn" class="btn-quote-action" title="Shuffle / Next Luminary Quote" aria-label="Shuffle Quote">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                <span>Inspire Me</span>
+              </button>
+              <button id="quote-copy-btn" class="btn-quote-action" title="Copy Current Quote" aria-label="Copy Quote">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span id="quote-copy-text">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="spotlight-quote-display" id="spotlight-quote-display">
+            <div class="floating-quote-glyph" aria-hidden="true">“</div>
+            <p class="active-spotlight-quote font-luxury-serif" id="active-quote-text">
+              “Software is a magnificent combination between artistry and engineering. Patience, continuous learning, and curiosity are the keys to revolutionizing the world.”
+            </p>
+            <div class="active-spotlight-author-meta">
+              <div class="author-avatar-ring">
+                <span class="author-avatar-initials" id="active-author-initials">BG</span>
+              </div>
+              <div class="author-details">
+                <div class="author-name font-luxury-heading" id="active-author-name">Bill Gates</div>
+                <div class="author-title font-mono" id="active-author-title">Co-Founder of Microsoft &amp; Global Technologist</div>
+              </div>
+              <div class="author-tag-pill font-mono" id="active-author-tag">TECH INNOVATION</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           VISIONARY LUMINARIES MATRIX: 3D DEPTH DECK (CARDS FROM BACKWARD) & BENTO
+           ====================================================================== -->
+      <div class="quotes-section-wrapper" id="quotes-deck-wrapper">
+        
+        <!-- Top Toolbar: Category Filters + 3D View Switcher -->
+        <div class="quotes-toolbar-header">
+          <!-- Category Filter Pills -->
+          <div class="quotes-filter-nav" role="tablist" aria-label="Quote Categories">
+            <button class="quote-filter-btn active" data-filter="all" role="tab" aria-selected="true">
+              <span>All Luminaries</span>
+              <span class="quote-count-chip" id="filter-count-chip">10</span>
+            </button>
+            <button class="quote-filter-btn" data-filter="tech" role="tab" aria-selected="false">
+              <span>Tech &amp; Computing</span>
+              <span class="quote-count-chip">4</span>
+            </button>
+            <button class="quote-filter-btn" data-filter="science" role="tab" aria-selected="false">
+              <span>Science &amp; Physics</span>
+              <span class="quote-count-chip">4</span>
+            </button>
+            <button class="quote-filter-btn" data-filter="philosophy" role="tab" aria-selected="false">
+              <span>Philosophy &amp; Leadership</span>
+              <span class="quote-count-chip">4</span>
+            </button>
+          </div>
+
+          <!-- View Mode Toggle: 3D Depth Deck vs Expanded Grid -->
+          <div class="deck-view-toggle-box">
+            <button id="view-mode-stack-btn" class="deck-mode-btn active" title="3D Depth Stack (Coming from backward)" aria-label="3D Depth Stack Mode">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M7 4h10"></path><path d="M9 1h6"></path></svg>
+              <span>3D Depth Deck</span>
+            </button>
+            <button id="view-mode-grid-btn" class="deck-mode-btn" title="Expanded Bento Grid" aria-label="Expanded Bento Grid Mode">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>Expanded Grid</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3D Depth Deck Stage Viewport (Cards emerging from backward in 3D perspective) -->
+        <div class="quotes-3d-stage-viewport" id="quotes-3d-stage-viewport">
+          
+          <!-- Perspective Stage containing stacked cards -->
+          <div class="quotes-3d-stage mode-deck" id="quotes-3d-stage">
+
+            <!-- 1. BILL GATES -->
+            <article class="quote-card-luxury spotlight-card" data-category="tech" data-index="0" data-author="Bill Gates" data-role="Microsoft Co-Founder">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-cyan">BG</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Bill Gates</h4>
+                    <span class="luminary-role font-mono">Founder of Microsoft • Technologist</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-cyan">SOFTWARE</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “Software is a magnificent combination between artistry and engineering. Patience, continuous learning, and curiosity are the keys to revolutionizing the world.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">💡</span> “If you are born poor it's not your mistake, but if you die poor it's your mistake.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">First-Principles Computing</span>
+                <button class="btn-copy-mini" data-copy="“Software is a magnificent combination between artistry and engineering. Patience, continuous learning, and curiosity are the keys to revolutionizing the world.” — Bill Gates" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 2. SIR ISAAC NEWTON -->
+            <article class="quote-card-luxury spotlight-card" data-category="science" data-index="1" data-author="Sir Isaac Newton" data-role="Calculus & Physics Pioneer">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-gold">IN</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Sir Isaac Newton</h4>
+                    <span class="luminary-role font-mono">Polymath • Pioneer of Calculus &amp; Mechanics</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-gold">PHYSICS &amp; MATH</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “If I have seen further than others, it is by standing upon the shoulders of Giants. What we know is a drop; what we do not know is an ocean.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">🌌</span> “Truth is ever to be found in simplicity, and not in the multiplicity and confusion of things.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Mathematical Naturalis</span>
+                <button class="btn-copy-mini" data-copy="“If I have seen further than others, it is by standing upon the shoulders of Giants. What we know is a drop; what we do not know is an ocean.” — Sir Isaac Newton" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 3. STEPHEN HAWKING -->
+            <article class="quote-card-luxury spotlight-card" data-category="science" data-index="2" data-author="Stephen Hawking" data-role="Cosmologist & Theoretical Physicist">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-emerald">SH</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Stephen Hawking</h4>
+                    <span class="luminary-role font-mono">Theoretical Physicist &amp; Cosmologist</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-emerald">COSMOLOGY</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “Remember to look up at the stars and not down at your feet. Try to make sense of what you see and wonder about what makes the universe exist. Be curious. Intelligence is the ability to adapt to change.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">✨</span> “However difficult life may seem, there is always something you can do and succeed at.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Theoretical Frontiers</span>
+                <button class="btn-copy-mini" data-copy="“Remember to look up at the stars and not down at your feet. Try to make sense of what you see and wonder about what makes the universe exist. Be curious. Intelligence is the ability to adapt to change.” — Stephen Hawking" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 4. MAHATMA GANDHI -->
+            <article class="quote-card-luxury spotlight-card" data-category="philosophy" data-index="3" data-author="Mahatma Gandhi" data-role="Pioneer of Truth & Non-Violence">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-orange">MG</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Mahatma Gandhi</h4>
+                    <span class="luminary-role font-mono">Father of the Nation • Champion of Truth (Satya)</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-orange">ETHICS &amp; TRUTH</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “Live as if you were to die tomorrow. Learn as if you were to live forever. The future depends entirely on what you do today.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">🕊️</span> “An ounce of practice is worth more than tons of preaching.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Unwavering Integrity</span>
+                <button class="btn-copy-mini" data-copy="“Live as if you were to die tomorrow. Learn as if you were to live forever. The future depends entirely on what you do today.” — Mahatma Gandhi" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 5. ELON MUSK -->
+            <article class="quote-card-luxury spotlight-card" data-category="tech science" data-index="4" data-author="Elon Musk" data-role="SpaceX & Tesla Chief Engineer">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-purple">EM</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Elon Musk</h4>
+                    <span class="luminary-role font-mono">Chief Engineer @ SpaceX, Tesla &amp; Neuralink</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-purple">FIRST PRINCIPLES</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “When something is important enough, you do it even if the odds are not in your favor. Physics is the ultimate framework for first-principles thinking—boil things down to their fundamental truths and reason up from there.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">🚀</span> “Constantly question yourself and think about how you could be doing things better.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Multi-Planetary Engineering</span>
+                <button class="btn-copy-mini" data-copy="“When something is important enough, you do it even if the odds are not in your favor. Physics is the ultimate framework for first-principles thinking.” — Elon Musk" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 6. SWAMI VIVEKANANDA -->
+            <article class="quote-card-luxury spotlight-card" data-category="philosophy" data-index="5" data-author="Swami Vivekananda" data-role="Vedantic Philosopher">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-orange">SV</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Swami Vivekananda</h4>
+                    <span class="luminary-role font-mono">Spiritual Titan • Vedantic Visionary</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-orange">VEDANTA &amp; MIND</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “Arise, awake, and stop not till the goal is reached. All the powers in the universe are already ours. It is we who have put our hands before our eyes and cry that it is dark.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">🔥</span> “Take up one idea. Make that one idea your life; dream of it; think of it; live on that idea.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Universal Consciousness</span>
+                <button class="btn-copy-mini" data-copy="“Arise, awake, and stop not till the goal is reached. All the powers in the universe are already ours.” — Swami Vivekananda" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 7. ALBERT EINSTEIN -->
+            <article class="quote-card-luxury spotlight-card" data-category="science" data-index="6" data-author="Albert Einstein" data-role="Nobel Physicist (Relativity)">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-cyan">AE</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Albert Einstein</h4>
+                    <span class="luminary-role font-mono">Theoretical Physicist • Nobel Laureate</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-cyan">RELATIVITY</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “Imagination is more important than knowledge. For knowledge is limited, whereas imagination embraces the entire world, stimulating progress, giving birth to evolution.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">⚛️</span> “I have no special talents. I am only passionately curious.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Spacetime &amp; Quantum</span>
+                <button class="btn-copy-mini" data-copy="“Imagination is more important than knowledge. For knowledge is limited, whereas imagination embraces the entire world.” — Albert Einstein" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 8. DR. A.P.J. ABDUL KALAM -->
+            <article class="quote-card-luxury spotlight-card" data-category="science philosophy" data-index="7" data-author="Dr. A.P.J. Abdul Kalam" data-role="Aerospace Scientist & 11th President">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-gold">AK</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Dr. A.P.J. Abdul Kalam</h4>
+                    <span class="luminary-role font-mono">Aerospace Scientist • 11th President of India</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-gold">AEROSPACE &amp; VISION</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “Dream is not that which you see while sleeping; it is something that does not let you sleep. Excellence happens not by accident—it is a continuous process of dedication and learning.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">🇮🇳</span> “If you want to shine like a sun, first burn like a sun.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Wings of Fire Creed</span>
+                <button class="btn-copy-mini" data-copy="“Dream is not that which you see while sleeping; it is something that does not let you sleep. Excellence happens not by accident.” — Dr. A.P.J. Abdul Kalam" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 9. ALAN TURING -->
+            <article class="quote-card-luxury spotlight-card" data-category="tech" data-index="8" data-author="Alan Turing" data-role="Father of Computation & AI">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-emerald">AT</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Alan Turing</h4>
+                    <span class="luminary-role font-mono">Father of Theoretical Computer Science &amp; AI</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-emerald">CRYPTANALYSIS &amp; AI</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “Sometimes it is the people no one can imagine anything of who do the things no one can imagine. We can only see a short distance ahead, but we can see plenty there that needs to be done.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">💻</span> “A computer would deserve to be called intelligent if it could deceive a human into believing that it was human.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Theoretical Automata</span>
+                <button class="btn-copy-mini" data-copy="“Sometimes it is the people no one can imagine anything of who do the things no one can imagine.” — Alan Turing" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+            <!-- 10. STEVE JOBS -->
+            <article class="quote-card-luxury spotlight-card" data-category="tech philosophy" data-index="9" data-author="Steve Jobs" data-role="Apple Co-Founder & Innovator">
+              <div class="card-luxury-glow"></div>
+              <div class="quote-card-header">
+                <div class="luminary-badge">
+                  <div class="luminary-avatar avatar-purple">SJ</div>
+                  <div class="luminary-meta">
+                    <h4 class="luminary-name font-luxury-heading">Steve Jobs</h4>
+                    <span class="luminary-role font-mono">Co-Founder of Apple • Industrial Design Icon</span>
+                  </div>
+                </div>
+                <span class="domain-tag font-mono tag-purple">AESTHETICS &amp; TECH</span>
+              </div>
+              <blockquote class="quote-body font-luxury-serif">
+                “The people who are crazy enough to think they can change the world are the ones who do. Stay hungry, stay foolish. Technology alone is not enough—it’s technology married with liberal arts, married with humanities, that yields the result that makes our heart sing.”
+              </blockquote>
+              <div class="quote-sub-note font-mono">
+                <span class="note-icon">🍎</span> “Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple.”
+              </div>
+              <div class="quote-card-footer">
+                <span class="quote-source-label font-mono">Human-Centric Synthesis</span>
+                <button class="btn-copy-mini" data-copy="“The people who are crazy enough to think they can change the world are the ones who do. Stay hungry, stay foolish.” — Steve Jobs" title="Copy quote">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- 3D Deck Interactive Floating HUD Controls -->
+          <div class="deck-interactive-hud">
+            <!-- Prev Button -->
+            <button id="deck-prev-btn" class="deck-nav-btn" title="Previous Card" aria-label="Previous Card">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+
+            <!-- Center Deck Status & Timeline Stepper -->
+            <div class="deck-center-hud">
+              <div class="deck-step-meta font-mono">
+                <span class="deck-step-current text-gold" id="deck-step-current">01</span>
+                <span class="deck-step-divider">/</span>
+                <span class="deck-step-total" id="deck-step-total">10</span>
+                <span class="deck-step-name text-cyan" id="deck-step-name">Bill Gates</span>
+              </div>
+
+              <!-- Interactive Dot Indicators -->
+              <div class="deck-dots-stepper" id="deck-dots-stepper"></div>
+
+              <!-- Auto-progress Bar Line -->
+              <div class="deck-progress-bar">
+                <div class="deck-progress-fill" id="deck-progress-fill"></div>
+              </div>
+            </div>
+
+            <!-- Next Button -->
+            <button id="deck-next-btn" class="deck-nav-btn" title="Next Card (Surging from backward)" aria-label="Next Card">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
+            <!-- Auto-play / Pause Toggle -->
+            <button id="deck-playpause-btn" class="deck-playpause-btn" title="Pause / Resume 3D Card Stream" aria-label="Toggle Auto Play">
+              <span id="deck-playpause-icon">⏸</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           BIBEK'S CORE ENGINEERING IDEOLOGY & ABOUT SYNTHESIS BENTO
+           ====================================================================== -->
+      <div class="about-ideology-bento spotlight-card reveal-on-scroll">
+        <div class="ideology-glow-layer"></div>
+        <div class="ideology-grid">
+          <div class="ideology-main-col">
+            <div class="ideology-badge font-mono">
+              <span class="badge-dot-gold"></span>
+              <span>THE ENGINEER'S MANIFESTO</span>
+            </div>
+            <h3 class="ideology-title font-luxury-heading">
+              Bridging Eternal Vedic Wisdom &amp; Zero-Trust Machine Intelligence
+            </h3>
+            <p class="ideology-text">
+              I am <strong>Bibek Bandhu Nayek</strong>, an undergraduate Computer Science &amp; Engineering scholar (Roll 1) at <strong>Future Institute of Engineering and Management</strong>. To me, computer science is not merely writing functional syntax—it is the modern manifestation of applied logic, natural philosophy, and systemic defense.
+            </p>
+            <p class="ideology-text">
+              Guided by the sacred Gita precept <strong class="text-gold">"श्रद्धावान् लभते ज्ञानम्"</strong> and the first-principles methodologies of giants like Newton, Turing, and Musk, my mission is to architect computing environments that are mathematically resilient, ethically fortified, and engineered with absolute precision.
+            </p>
+            <div class="ideology-stats-trio">
+              <div class="ideology-stat">
+                <span class="stat-number font-mono text-gold">100%</span>
+                <span class="stat-label">Dedication to Fundamentals</span>
+              </div>
+              <div class="ideology-stat">
+                <span class="stat-number font-mono text-cyan">Zero-Trust</span>
+                <span class="stat-label">Cyber Defense Architecture</span>
+              </div>
+              <div class="ideology-stat">
+                <span class="stat-number font-mono text-emerald">First-Principle</span>
+                <span class="stat-label">Mathematical Problem Solving</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="ideology-quote-col">
+            <div class="ideology-card-accent">
+              <div class="accent-top-tag font-mono">PERSONAL CREED // BIBEK B. NAYEK</div>
+              <blockquote class="accent-quote font-luxury-serif">
+                “When you hold reverence (Śraddhā) for knowledge, the code ceases to be static instructions—it transforms into an impenetrable shield of security and a vehicle of boundless human intelligence.”
+              </blockquote>
+              <div class="accent-author-signature">
+                <span class="sig-name">Bibek Bandhu Nayek</span>
+                <span class="sig-title font-mono">FIEM CSE '26 • Academic Rank 1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
     <!-- ========================================================================
          HACKSPIRE-INSPIRED BENTO GRID: OVERVIEW & DISTINCTIONS
          ======================================================================== -->
@@ -343,9 +958,9 @@
           <span class="pill-dot"></span> WHERE INNOVATION MEETS SHAKTI // FIEM CSE 2026
         </div>
         <div class="section-tag">
-          <span class="tag-hash">//</span> 01. EXCELLENCE MATRIX
+          <span class="tag-hash">//</span> 02. EXCELLENCE MATRIX
         </div>
-        <h2 class="section-title">Academic Triumphs & Focus Areas</h2>
+        <h2 class="section-title">Academic Triumphs &amp; Focus Areas</h2>
         <p class="section-subtitle">A synthesis of academic top honors, foundational science mastery, and modern technical pursuits.</p>
       </div>
 
@@ -551,7 +1166,7 @@
           <span class="pill-dot"></span> ORBITAL TRAJECTORY // SHAKTI IN EDUCATION
         </div>
         <div class="section-tag">
-          <span class="tag-hash">//</span> 02. SPIRAL ACADEMIC & GEOGRAPHIC TRAJECTORY
+          <span class="tag-hash">//</span> 03. SPIRAL ACADEMIC &amp; GEOGRAPHIC TRAJECTORY
         </div>
         <h2 class="section-title">Orbital Journey & Institutional Locations</h2>
         <p class="section-subtitle">A dynamic spiral chart flow mapping academic triumphs, geographical migrations, and engineering milestones.</p>
@@ -745,7 +1360,526 @@
     </div>
 
     <!-- ========================================================================
-         TECHNICAL SKILLS & DOMAIN ARSENAL
+         04. 200 FPS MOTION LAB & BIOMETRIC CYBER VIDEO TELEMETRY ENGINE
+         ======================================================================== -->
+    <section class="section-container" id="motion-lab">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> 200 FPS TELEMETRY // MOTION &amp; LAB SIMULATION
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 04. HIGH-SPEED MOTION LAB
+        </div>
+        <h2 class="section-title">200 FPS Motion Lab &amp; Video Engine</h2>
+        <p class="section-subtitle">Real-time synchronized audio telemetry waveforms, live biometric reticle targeting, and hardware-accelerated video streaming.</p>
+      </div>
+
+      <div class="motion-lab-wrapper spotlight-card reveal-on-scroll immersive-scroll-card">
+        <div class="motion-lab-shimmer-border"></div>
+        <div class="motion-lab-inner">
+          
+          <!-- Top Telemetry Status Bar -->
+          <div class="motion-telemetry-header font-mono">
+            <div class="telemetry-left">
+              <span class="telemetry-live-dot"></span>
+              <span class="telemetry-label">STREAM: SECURE_H264_FEED</span>
+              <span class="telemetry-pipe">|</span>
+              <span class="telemetry-metric">FPS: <strong id="motion-fps-counter" class="text-emerald">200.0</strong></span>
+              <span class="telemetry-pipe">|</span>
+              <span class="telemetry-metric">LATENCY: <strong class="text-cyan">0.4ms</strong></span>
+            </div>
+            <div class="telemetry-right">
+              <span class="telemetry-badge badge-orange font-mono">FIEM CSE RESEARCH LAB</span>
+            </div>
+          </div>
+
+          <!-- Video Stage with HUD Overlays -->
+          <div class="motion-video-stage" id="motion-video-stage">
+            <video id="motion-video" class="motion-video-player" loop playsinline preload="metadata" poster="assets/profile.jpg">
+              <source src="assets/profile-video.mp4" type="video/mp4">
+              <source src="assets/portfolio-video.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Interactive Biometric HUD Reticle & Corner Brackets -->
+            <div class="motion-hud-overlay" id="motion-hud-overlay">
+              <div class="hud-target-reticle" id="hud-target-reticle">
+                <div class="reticle-circle-outer"></div>
+                <div class="reticle-circle-inner"></div>
+                <div class="reticle-crosshair ch-h"></div>
+                <div class="reticle-crosshair ch-v"></div>
+                <div class="reticle-coords font-mono" id="reticle-coords">LOCK: 22.4419°N 88.4237°E • TARGET: BIBEK</div>
+              </div>
+
+              <div class="cyber-bracket bracket-tl"></div>
+              <div class="cyber-bracket bracket-tr"></div>
+              <div class="cyber-bracket bracket-bl"></div>
+              <div class="cyber-bracket bracket-br"></div>
+              
+              <!-- Video Center Click-to-Play Overlay -->
+              <div class="video-center-indicator" id="video-center-indicator" title="Click to Toggle Video Playback">
+                <div class="indicator-play-icon" id="indicator-play-icon">▶</div>
+              </div>
+            </div>
+
+            <!-- Audio Telemetry Waveform Visualizer Canvas -->
+            <canvas id="motion-waveform-canvas" class="motion-waveform-canvas" aria-hidden="true"></canvas>
+          </div>
+
+          <!-- Interactive Video Controls & Track Switcher -->
+          <div class="motion-controls-bar">
+            <!-- Left Controls: Play/Pause, Mute, Time -->
+            <div class="controls-left">
+              <button id="video-play-btn" class="btn-video-ctrl" title="Play/Pause Video (Space)" aria-label="Play or Pause Video">
+                <span id="video-play-icon">▶</span>
+              </button>
+              <button id="video-mute-btn" class="btn-video-ctrl" title="Toggle Audio" aria-label="Toggle Video Audio">
+                <span id="video-mute-icon">🔇</span>
+              </button>
+              <div class="video-time-display font-mono">
+                <span id="video-current-time">00:00</span> / <span id="video-duration">00:00</span>
+              </div>
+            </div>
+
+            <!-- Center: Interactive Progress Scrubber -->
+            <div class="video-scrubber-wrapper">
+              <input type="range" id="video-scrubber" class="video-scrubber" min="0" max="100" value="0" step="0.1" aria-label="Video scrubber">
+              <div class="scrubber-progress-fill" id="scrubber-progress-fill"></div>
+            </div>
+
+            <!-- Right Controls: Speed, Track Switcher, Fullscreen -->
+            <div class="controls-right font-mono">
+              <div class="speed-selector">
+                <button class="speed-btn active" data-speed="1">1x</button>
+                <button class="speed-btn" data-speed="1.5">1.5x</button>
+                <button class="speed-btn" data-speed="2">2x</button>
+              </div>
+              <button id="video-switch-track-btn" class="btn-video-ctrl text-btn" title="Switch Video Feed">
+                <span>🔄 Track Switch</span>
+              </button>
+              <button id="video-fullscreen-btn" class="btn-video-ctrl" title="Toggle Fullscreen" aria-label="Fullscreen">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Motion Telemetry Sensor Readouts -->
+          <div class="motion-sensors-grid font-mono">
+            <div class="sensor-chip">
+              <span class="sensor-lbl">RENDER ENGINE:</span>
+              <span class="sensor-val text-gold">HARDWARE_ACCELERATED_WEBGL</span>
+            </div>
+            <div class="sensor-chip">
+              <span class="sensor-lbl">AUDIO TELEMETRY:</span>
+              <span class="sensor-val text-emerald">SYNCHRONIZED_64_BAND_FFT</span>
+            </div>
+            <div class="sensor-chip">
+              <span class="sensor-lbl">SPATIAL TRACKING:</span>
+              <span class="sensor-val text-cyan">ACTIVE_HUD_RETICLE_LOCKED</span>
+            </div>
+            <div class="sensor-chip">
+              <span class="sensor-lbl">INSTITUTION:</span>
+              <span class="sensor-val text-orange">FIEM KOLKATA (2026)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Infinite Velocity Marquee Ticker 02: Tech Arsenal & Tools -->
+    <div class="velocity-marquee-wrap marquee-reverse" aria-hidden="true">
+      <div class="velocity-marquee-track">
+        <div class="marquee-item"><span class="mq-symbol text-cyan">⚡</span> PYTHON 3</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">⚡</span> C / C++ SYSTEMS</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">⚡</span> WIRESHARK &amp; PCAP</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">⚡</span> NMAP RECONNAISSANCE</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">⚡</span> LINUX KERNEL HARDENING</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">⚡</span> PANDAS &amp; NUMPY</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">⚡</span> SCIKIT-LEARN &amp; ML</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">⚡</span> OWASP TOP 10 MITIGATION</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">⚡</span> SHA-256 HMAC CRYPTOGRAPHY</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">⚡</span> FASTAPI &amp; REST APIS</div>
+        <!-- Duplicate for infinite loop -->
+        <div class="marquee-item"><span class="mq-symbol text-cyan">⚡</span> PYTHON 3</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">⚡</span> C / C++ SYSTEMS</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">⚡</span> WIRESHARK &amp; PCAP</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">⚡</span> NMAP RECONNAISSANCE</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">⚡</span> LINUX KERNEL HARDENING</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">⚡</span> PANDAS &amp; NUMPY</div>
+        <div class="marquee-item"><span class="mq-symbol text-emerald">⚡</span> SCIKIT-LEARN &amp; ML</div>
+        <div class="marquee-item"><span class="mq-symbol text-gold">⚡</span> OWASP TOP 10 MITIGATION</div>
+        <div class="marquee-item"><span class="mq-symbol text-cyan">⚡</span> SHA-256 HMAC CRYPTOGRAPHY</div>
+        <div class="marquee-item"><span class="mq-symbol text-orange">⚡</span> FASTAPI &amp; REST APIS</div>
+      </div>
+    </div>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         05. CREATIVE LAB // AVAI PREPARATION & SYSTEM ARCHITECTURE
+         ======================================================================== -->
+    <section class="section-container" id="creativity">
+      <div class="section-header">
+        <div class="hackspire-theme-pill">
+          <span class="pill-dot"></span> PROJECT GENESIS // CREATIVE INNOVATION
+        </div>
+        <div class="section-tag">
+          <span class="tag-hash">//</span> 05. CREATIVE ARCHITECTURE &amp; DEVELOPMENT LAB
+        </div>
+        <h2 class="section-title">AVAI Preparation: Creative Architecture</h2>
+        <p class="section-subtitle">A deep dive into the creative genesis, system architecture, and iterative development of <strong>AVAI Preparation</strong> — an Autonomous Vision &amp; AI-driven adaptive exam, skill, and cognitive training engine built with 200 FPS client-side telemetry.</p>
+      </div>
+
+      <!-- AVAI Hero Spotlight Banner -->
+      <div class="avai-hero-banner spotlight-card immersive-scroll-card">
+        <div class="avai-banner-header-flex">
+          <div class="avai-logo-showcase" title="AVAI Preparation Official Emblem">
+            <img src="assets/avai-logo.png" alt="AVAI Preparation Official Logo" class="avai-official-logo" width="104" height="104">
+            <div class="avai-logo-glow" aria-hidden="true"></div>
+          </div>
+          <div class="avai-banner-text-group">
+            <div class="avai-banner-badge">
+              <span class="badge-dot-glow"></span>
+              <span class="font-mono">FLAGSHIP CREATIVE SYSTEM • VERSION 2.4-ACTIVE</span>
+            </div>
+            <h3 class="avai-banner-title">Autonomous Vision &amp; AI-Driven Preparation Engine</h3>
+            <p class="avai-banner-text">
+              Engineered to overcome traditional static assessment limitations, <strong>AVAI Preparation</strong> merges real-time multi-modal question synthesis, millisecond cognitive response telemetry, and Bayesian knowledge tracing into a unified zero-dependency web architecture.
+            </p>
+          </div>
+        </div>
+
+        <!-- 100% Free & Open-Source Initiative GitHub Action Bar -->
+        <div class="avai-open-source-bar">
+          <div class="avai-free-badge">
+            <span class="free-badge-icon">🌟</span>
+            <span>100% FREE &amp; OPEN-SOURCE STUDENT INITIATIVE</span>
+          </div>
+          <p class="avai-free-subtext font-mono">Developing the full web platform and native cross-platform mobile/desktop applications with zero subscriptions or paywalls for learners worldwide.</p>
+          <div class="avai-github-actions-row">
+            <a href="https://github.com/nayekdhananjoy1973-lab/avai_preparation" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm btn-github-launch" title="Explore AVAI Preparation on GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              <span>Explore GitHub Repository (Active Dev)</span>
+            </a>
+            <a href="https://github.com/nayekdhananjoy1973-lab/avai_preparation" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm btn-github-code" title="View Source Code & App Roadmap">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>Star &amp; Track on GitHub</span>
+            </a>
+            <span class="avai-status-pill">
+              <span class="pulse-dot"></span>
+              <span>Deployment: In Active Development</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="avai-stats-row font-mono">
+          <div class="avai-stat-box">
+            <span class="stat-num text-orange">&lt; 8.5ms</span>
+            <span class="stat-label">Inference Latency</span>
+          </div>
+          <div class="avai-stat-box">
+            <span class="stat-num text-emerald">200 FPS</span>
+            <span class="stat-label">Telemetry Engine</span>
+          </div>
+          <div class="avai-stat-box">
+            <span class="stat-num text-cyan">100%</span>
+            <span class="stat-label">Free Non-Profit</span>
+          </div>
+          <div class="avai-stat-box">
+            <span class="stat-num text-gold">4-Phase</span>
+            <span class="stat-label">Adaptive Matrix</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVAI Interactive Live Simulator Console -->
+      <div class="avai-simulator-wrapper spotlight-card immersive-scroll-card" id="avai-simulator">
+        <div class="avai-simulator-header">
+          <div class="simulator-title-group">
+            <div class="window-controls">
+              <span class="ctrl-dot dot-red"></span>
+              <span class="ctrl-dot dot-yellow"></span>
+              <span class="ctrl-dot dot-green"></span>
+            </div>
+            <img src="assets/avai-logo.png" alt="AVAI Logo Icon" class="simulator-logo-icon" width="22" height="22">
+            <span class="font-mono simulator-title">avai-core://telemetry-simulator/v2.4</span>
+          </div>
+          <div class="avai-tabs-nav" role="tablist">
+            <button class="avai-tab-btn active" data-tab="neural" role="tab" aria-selected="true">
+              <span>🧠 Neural Concept Graph</span>
+            </button>
+            <button class="avai-tab-btn" data-tab="drill" role="tab" aria-selected="false">
+              <span>⚡ 200 FPS Speed Drill</span>
+            </button>
+            <button class="avai-tab-btn" data-tab="radar" role="tab" aria-selected="false">
+              <span>📊 Readiness Radar</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="avai-simulator-body">
+          
+          <!-- Tab 1: Neural Concept Synthesizer -->
+          <div class="avai-tab-pane active" id="tab-avai-neural" role="tabpanel">
+            <div class="pane-split-layout">
+              <div class="neural-graph-stage">
+                <div class="graph-status-bar font-mono">
+                  <span>STATUS: <span class="text-emerald">SYNAPSES SYNCHRONIZED</span></span>
+                  <span id="neural-node-count">NODES: 12 ACTIVE</span>
+                </div>
+                <canvas id="avai-neural-canvas" class="avai-neural-canvas" width="600" height="320"></canvas>
+                <div class="graph-instructions font-mono">
+                  <span>💡 Hover or drag nodes to inspect neural cluster connections in real-time</span>
+                </div>
+              </div>
+
+              <div class="neural-controls-sidebar">
+                <h4 class="sidebar-subheading font-mono">// TOPIC SEED GENERATORS</h4>
+                <div class="topic-seed-chips">
+                  <button class="topic-chip active" data-topic="security">
+                    <span class="chip-dot"></span> Cyber Threat Modeling
+                  </button>
+                  <button class="topic-chip" data-topic="ai">
+                    <span class="chip-dot"></span> Neural Anomaly Vectors
+                  </button>
+                  <button class="topic-chip" data-topic="algorithms">
+                    <span class="chip-dot"></span> Graph Pathfinding in C
+                  </button>
+                  <button class="topic-chip" data-topic="data">
+                    <span class="chip-dot"></span> Statistical Distributions
+                  </button>
+                </div>
+
+                <div class="node-info-box" id="neural-node-info">
+                  <span class="node-info-tag font-mono text-cyan" id="active-node-tag">ACTIVE NODE: ZERO-TRUST PROTOCOL</span>
+                  <p class="node-info-desc" id="active-node-desc">Cryptographic token validation verifying mutual authenticity before session socket creation.</p>
+                  <div class="node-meta-row font-mono">
+                    <span>COMPLEXITY: <strong class="text-orange" id="active-node-tier">TIER 4</strong></span>
+                    <span>LATENCY: <strong class="text-emerald" id="active-node-latency">0.42ms</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 2: 200 FPS Adaptive Exam & Speed Drill -->
+          <div class="avai-tab-pane" id="tab-avai-drill" role="tabpanel">
+            <div class="drill-telemetry-container">
+              <div class="drill-telemetry-hud font-mono">
+                <div class="hud-item">
+                  <span class="hud-label">RESPONSE TIMER</span>
+                  <span class="hud-val text-orange" id="drill-timer">00.000s</span>
+                </div>
+                <div class="hud-item">
+                  <span class="hud-label">ACCURACY STREAK</span>
+                  <span class="hud-val text-emerald" id="drill-streak">3x MULTIPLIER</span>
+                </div>
+                <div class="hud-item">
+                  <span class="hud-label">COGNITIVE LEVEL</span>
+                  <span class="hud-val text-cyan" id="drill-difficulty">ADAPTIVE (LEVEL 3)</span>
+                </div>
+                <div class="hud-item">
+                  <span class="hud-label">SCORE</span>
+                  <span class="hud-val text-gold" id="drill-score">1,250 PTS</span>
+                </div>
+              </div>
+
+              <div class="drill-question-box" id="drill-question-box">
+                <div class="drill-q-tag font-mono">QUESTION GENERATION #04 • NETWORK PROTOCOLS &amp; DEFENSE</div>
+                <h4 class="drill-q-title" id="drill-q-title">Which mechanism provides constant-time signature comparison to prevent timing side-channel attacks?</h4>
+                <div class="drill-options-grid" id="drill-options-grid">
+                  <button class="drill-opt-btn" data-correct="false">
+                    <span class="opt-letter">A</span>
+                    <span class="opt-text">Standard strcmp() string evaluation</span>
+                  </button>
+                  <button class="drill-opt-btn" data-correct="true">
+                    <span class="opt-letter">B</span>
+                    <span class="opt-text">Bitwise XOR accumulator with fixed-time loop (HMAC verify)</span>
+                  </button>
+                  <button class="drill-opt-btn" data-correct="false">
+                    <span class="opt-letter">C</span>
+                    <span class="opt-text">Recursive hash table lookup with caching</span>
+                  </button>
+                  <button class="drill-opt-btn" data-correct="false">
+                    <span class="opt-letter">D</span>
+                    <span class="opt-text">Asynchronous socket promise resolution</span>
+                  </button>
+                </div>
+                <div class="drill-feedback-banner font-mono" id="drill-feedback">
+                  <span>Select an option above to test real-time AVAI telemetry validation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Cognitive Readiness Radar -->
+          <div class="avai-tab-pane" id="tab-avai-radar" role="tabpanel">
+            <div class="radar-telemetry-container">
+              <div class="radar-visual-stage">
+                <canvas id="avai-radar-canvas" class="avai-radar-canvas" width="340" height="340"></canvas>
+              </div>
+              <div class="radar-breakdown-panel">
+                <h4 class="sidebar-subheading font-mono">// COGNITIVE MASTERY PROFILE</h4>
+                <div class="radar-metric-bars">
+                  <div class="r-bar-item">
+                    <div class="r-bar-header font-mono">
+                      <span>Threat Modeling &amp; Security</span>
+                      <span class="text-orange font-bold">96%</span>
+                    </div>
+                    <div class="r-bar-track"><div class="r-bar-fill" style="width: 96%; background: #ff6b00;"></div></div>
+                  </div>
+                  <div class="r-bar-item">
+                    <div class="r-bar-header font-mono">
+                      <span>Algorithmic Logic &amp; C Systems</span>
+                      <span class="text-emerald font-bold">92%</span>
+                    </div>
+                    <div class="r-bar-track"><div class="r-bar-fill" style="width: 92%; background: #10b981;"></div></div>
+                  </div>
+                  <div class="r-bar-item">
+                    <div class="r-bar-header font-mono">
+                      <span>Real-Time Latency Optimization</span>
+                      <span class="text-cyan font-bold">98%</span>
+                    </div>
+                    <div class="r-bar-track"><div class="r-bar-fill" style="width: 98%; background: #06b6d4;"></div></div>
+                  </div>
+                  <div class="r-bar-item">
+                    <div class="r-bar-header font-mono">
+                      <span>Data Pipeline Engineering</span>
+                      <span class="text-gold font-bold">90%</span>
+                    </div>
+                    <div class="r-bar-track"><div class="r-bar-fill" style="width: 90%; background: #eab308;"></div></div>
+                  </div>
+                  <div class="r-bar-item">
+                    <div class="r-bar-header font-mono">
+                      <span>Long-Term Memory Retention</span>
+                      <span class="text-secondary font-bold">94%</span>
+                    </div>
+                    <div class="r-bar-track"><div class="r-bar-fill" style="width: 94%; background: #a855f7;"></div></div>
+                  </div>
+                </div>
+                <div class="radar-summary-badge font-mono">
+                  <span>READINESS INDEX: <strong class="text-emerald">94.0% (OPTIMAL FOR COMPETITIVE EXCELLENCE)</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- AVAI 4-Phase Creative Engineering Timeline -->
+      <div class="avai-timeline-section">
+        <div class="certificates-section-subtitle">
+          <span class="pulse-indicator"></span>
+          <span class="font-mono text-orange font-bold">AVAI ITERATIVE CREATIVE DEVELOPMENT JOURNEY (PHASES 01–04)</span>
+        </div>
+
+        <div class="avai-timeline-grid">
+          
+          <!-- Phase 01 -->
+          <div class="avai-phase-card spotlight-card reveal-on-scroll immersive-scroll-card">
+            <div class="phase-number-badge font-mono">PHASE 01</div>
+            <div class="phase-icon">📐</div>
+            <h3 class="phase-title">Concept Genesis &amp; Graph Formulations</h3>
+            <p class="phase-desc">Architected the core knowledge graph using directed acyclic structures (DAGs) to map multi-domain prerequisites, eliminate redundant memory lookups, and establish mathematical concept boundaries.</p>
+            <div class="phase-tags font-mono">
+              <span>DAG Topology</span>
+              <span>First-Principles</span>
+              <span>Memory Optimization</span>
+            </div>
+          </div>
+
+          <!-- Phase 02 -->
+          <div class="avai-phase-card spotlight-card reveal-on-scroll immersive-scroll-card">
+            <div class="phase-number-badge font-mono">PHASE 02</div>
+            <div class="phase-icon">⚙️</div>
+            <h3 class="phase-title">Synthetic Data Engine &amp; Multi-Modal Parser</h3>
+            <p class="phase-desc">Engineered an automated syllabus ingestion and question synthesis engine that creates algorithmic test vectors with randomized parameter bounds and edge-case permutations.</p>
+            <div class="phase-tags font-mono">
+              <span>Data Ingestion</span>
+              <span>NLP Synthesis</span>
+              <span>Edge-Case Fuzzing</span>
+            </div>
+          </div>
+
+          <!-- Phase 03 -->
+          <div class="avai-phase-card spotlight-card reveal-on-scroll immersive-scroll-card">
+            <div class="phase-number-badge font-mono">PHASE 03</div>
+            <div class="phase-icon">🚀</div>
+            <h3 class="phase-title">200 FPS Telemetry &amp; Glassmorphic HUD</h3>
+            <p class="phase-desc">Designed an ultra-low latency frontend with hardware-accelerated HTML5 Canvas pipelines, dark glassmorphism, responsive visual reticles, and sub-millisecond response clocks.</p>
+            <div class="phase-tags font-mono">
+              <span>200 FPS Physics</span>
+              <span>Canvas 2D/WebGL</span>
+              <span>Dark Glassmorphism</span>
+            </div>
+          </div>
+
+          <!-- Phase 04 -->
+          <div class="avai-phase-card spotlight-card reveal-on-scroll immersive-scroll-card">
+            <div class="phase-number-badge font-mono">PHASE 04</div>
+            <div class="phase-icon">🧠</div>
+            <h3 class="phase-title">Neural Evaluation &amp; Adaptive Feedback</h3>
+            <p class="phase-desc">Implemented a dynamic difficulty recalibration loop based on Bayesian Knowledge Tracing that continuously fine-tunes question difficulty according to the candidate's speed and accuracy.</p>
+            <div class="phase-tags font-mono">
+              <span>Bayesian Tracing</span>
+              <span>Adaptive Scoring</span>
+              <span>Remediation Trees</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- AVAI Creative Architecture Bento Grid -->
+      <div class="avai-bento-grid">
+        
+        <div class="avai-bento-card bento-wide spotlight-card reveal-on-scroll">
+          <div class="bento-icon">⚡</div>
+          <h3 class="bento-title">Zero-Dependency Pure Client Runtime</h3>
+          <p class="bento-desc">Engineered completely in Vanilla HTML5, CSS3, and ES6+ JavaScript. Operates at full speed on any device without node modules, external heavy frameworks, or backend server lag.</p>
+          <div class="bento-footer font-mono text-cyan">
+            <span>PERFORMANCE: 100/100 LIGHTHOUSE READY</span>
+          </div>
+        </div>
+
+        <div class="avai-bento-card spotlight-card reveal-on-scroll">
+          <div class="bento-icon">🛡️</div>
+          <h3 class="bento-title">Cryptographic Sandboxing</h3>
+          <p class="bento-desc">User progress, drill logs, and cognitive telemetry are hashed and stored client-side in encrypted local memory, guaranteeing absolute user privacy.</p>
+          <div class="bento-footer font-mono text-emerald">
+            <span>PRIVACY: ZERO-TRUST COMPLIANT</span>
+          </div>
+        </div>
+
+        <div class="avai-bento-card spotlight-card reveal-on-scroll">
+          <div class="bento-icon">🎯</div>
+          <h3 class="bento-title">Multi-Track Telemetry</h3>
+          <p class="bento-desc">Live synchronization across audio waveforms, coordinate reticles, and sub-millisecond response monitors for complete situational awareness.</p>
+          <div class="bento-footer font-mono text-orange">
+            <span>TELEMETRY: DUAL-CANVAS SYNC</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- HackSpire Signature Curved Wave Transition -->
+    <div class="hackspire-wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(8, 13, 26, 0.95)"></path>
+      </svg>
+    </div>
+
+    <!-- ========================================================================
+         06. TECHNICAL SKILLS & DOMAIN ARSENAL
          ======================================================================== -->
     <section class="section-container" id="skills">
       <div class="section-header">
@@ -753,9 +1887,9 @@
           <span class="pill-dot"></span> TECHNICAL ARSENAL // CORE COMPETENCIES
         </div>
         <div class="section-tag">
-          <span class="tag-hash">//</span> 03. DOMAIN PROFICIENCIES
+          <span class="tag-hash">//</span> 06. DOMAIN PROFICIENCIES &amp; SKILLS
         </div>
-        <h2 class="section-title">Technical Matrix & Tooling</h2>
+        <h2 class="section-title">Technical Matrix &amp; Tooling</h2>
         <p class="section-subtitle">Disciplined mastery across security auditing, mathematical data analysis, artificial intelligence, and modern web systems.</p>
       </div>
 
@@ -859,9 +1993,9 @@
           <span class="pill-dot"></span> CODE & INNOVATION // FLAGSHIP ARCHITECTURES
         </div>
         <div class="section-tag">
-          <span class="tag-hash">//</span> 04. FLAGSHIP BUILDS
+          <span class="tag-hash">//</span> 05. FLAGSHIP BUILDS &amp; CREATIONS
         </div>
-        <h2 class="section-title">Featured Projects & Labs</h2>
+        <h2 class="section-title">Featured Projects &amp; Labs</h2>
         <p class="section-subtitle">Real-world applications in cybersecurity vulnerability detection, automated analytics, and web systems.</p>
       </div>
 
@@ -1068,42 +2202,92 @@
     </div>
 
     <!-- ========================================================================
-         05. OFFICIAL ACADEMIC CERTIFICATES & TECHNICAL ACCREDITATIONS
-         ======================================================================== -->
+       06. OFFICIAL ACADEMIC CERTIFICATES & TECHNICAL ACCREDITATIONS
+       ======================================================================== -->
     <section class="section-container" id="certifications">
       <div class="section-header">
         <div class="hackspire-theme-pill">
           <span class="pill-dot"></span> OFFICIAL ACCREDITATIONS // STATE BOARD HONORS
         </div>
         <div class="section-tag">
-          <span class="tag-hash">//</span> 05. CREDENTIALS & ACCREDITATIONS
+          <span class="tag-hash">//</span> 06. CREDENTIALS &amp; ACCREDITATIONS
         </div>
-        <h2 class="section-title">Academic Certificates & Fellowships</h2>
-        <p class="section-subtitle">Official state board examination certificates, school honors, and verified technical accreditations across systems & cybersecurity.</p>
+        <h2 class="section-title">Academic Certificates &amp; Fellowships</h2>
+        <p class="section-subtitle">Official state board examination certificates, school honors, and verified technical accreditations with dynamic laser authentication &amp; holographic tilt physics.</p>
       </div>
 
-      <!-- Part A: Featured Official State Board Examination Certificates -->
+      <!-- Interactive Credential Filter & Motion Control Toolbar -->
+      <div class="cert-toolbar-wrapper">
+        <div class="cert-filter-nav" role="tablist" aria-label="Certificate Filters">
+          <button class="cert-filter-btn active" data-cert-filter="all" role="tab" aria-selected="true">
+            <span>All Credentials</span>
+            <span class="cert-filter-count">7</span>
+          </button>
+          <button class="cert-filter-btn" data-cert-filter="state" role="tab" aria-selected="false">
+            <span>State Board Honors</span>
+            <span class="cert-filter-count">3</span>
+          </button>
+          <button class="cert-filter-btn" data-cert-filter="cyber" role="tab" aria-selected="false">
+            <span>Cyber &amp; Systems</span>
+            <span class="cert-filter-count">2</span>
+          </button>
+          <button class="cert-filter-btn" data-cert-filter="ai" role="tab" aria-selected="false">
+            <span>AI &amp; Data Science</span>
+            <span class="cert-filter-count">2</span>
+          </button>
+        </div>
+
+        <div class="cert-scan-status-pill font-mono">
+          <span class="scan-pulse-dot"></span>
+          <span class="scan-status-text">LASER AUTHENTICATION: ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Part A: Featured Professional & Architecture Technical Certifications -->
       <div class="official-certificates-container">
         <div class="certificates-section-subtitle">
           <span class="pulse-indicator"></span>
-          <span class="font-mono text-orange font-bold">OFFICIAL STATE BOARD CREDENTIALS (WBBSE & WBCHSE)</span>
+          <span class="font-mono text-orange font-bold">CORE TECHNICAL &amp; ARCHITECTURAL CERTIFICATIONS</span>
         </div>
 
         <div class="academic-certificates-grid">
           
-          <!-- Academic Certificate 1: WBCHSE Higher Secondary 2026 -->
-          <article class="academic-cert-card spotlight-card reveal-on-scroll immersive-scroll-card" data-cert-type="hs">
+          <!-- Professional Certificate 1: Certified Cyber Defense Architect -->
+          <article class="academic-cert-card cert-interactive-card spotlight-card reveal-on-scroll immersive-scroll-card cert-float-1" data-cert-type="cyber" data-category="cyber">
+            <div class="cert-holo-glare"></div>
             <div class="academic-cert-preview">
-              <div class="cert-img-wrapper" data-lightbox-src="assets/higher-secondary-certificate.jpg" data-lightbox-title="Higher Secondary Examination 2026 Certificate (WBCHSE)" data-lightbox-grade="Overall Grade: A++ (Highest Distinction)" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Reg: 3241140595 | Inst: 205134 | No: 391612">
-                <img src="assets/higher-secondary-certificate.jpg" alt="Higher Secondary Examination 2026 Certificate - Bibek Bandhu Nayek (WBCHSE)" class="cert-document-img" loading="lazy">
+              <!-- Animated Laser Scanner Beam -->
+              <div class="cert-laser-scanner">
+                <div class="scanner-line"></div>
+                <div class="scanner-glow"></div>
+                <div class="scanner-text font-mono">CRYPTOGRAPHIC SEAL // VERIFIED 100%</div>
+              </div>
+
+              <!-- Cyber Corner Reticle Brackets -->
+              <div class="corner-bracket corner-tl"></div>
+              <div class="corner-bracket corner-tr"></div>
+              <div class="corner-bracket corner-bl"></div>
+              <div class="corner-bracket corner-br"></div>
+
+              <div class="cert-img-wrapper cert-svg-wrapper" data-lightbox-title="Certified Cyber Defense &amp; Zero-Trust Security Architect (CCD-ZT)" data-lightbox-grade="Grade: Top 1% Elite Distinction (Summa Cum Laude)" data-lightbox-inst="Global Cyber Defense Alliance &amp; Security Consortium" data-lightbox-id="Verification ID: GCDA-CERT-9402-PRO | Hash: 0x8F92A14C" data-cert-code="cyber">
+                <div class="cert-vector-display">
+                  <div class="cert-vector-header">
+                    <span class="cert-vector-icon">🛡️</span>
+                    <span class="cert-vector-badge font-mono">GCDA ACCREDITED</span>
+                  </div>
+                  <h4 class="cert-vector-title">Certified Cyber Defense Architect</h4>
+                  <p class="cert-vector-desc">Zero-Trust Network Defense, Threat Vector Forensics &amp; Linux Hardening</p>
+                  <div class="cert-vector-hash font-mono">HASH: 8F92...A14C • VERIFIED</div>
+                </div>
                 <div class="cert-hover-overlay">
                   <div class="inspect-circle">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-                    <span>Inspect High-Res</span>
+                    <span>Inspect Certificate</span>
                   </div>
                 </div>
                 <div class="cert-seal-badge seal-wbchse">
-                  <span>WBCHSE</span>
+                  <div class="seal-spin-ring"></div>
+                  <span>GCDA</span>
                 </div>
               </div>
             </div>
@@ -1111,17 +2295,104 @@
             <div class="academic-cert-info">
               <div class="academic-cert-top">
                 <div class="school-affiliation-row">
-                  <img src="assets/radhamohanpur-vhs-logo.jpg" alt="Radhamohanpur Vivekananda High School Logo" class="school-logo-tiny" width="28" height="28">
-                  <span class="school-name-text">Radhamohanpur Vivekananda High School (H.S.)</span>
+                  <span class="cert-org-icon">🏛️</span>
+                  <span class="school-name-text">Global Cyber Defense Alliance</span>
                 </div>
                 <div class="grade-pill grade-app">
                   <span class="grade-icon">🏆</span>
+                  <span>TOP 1% ELITE</span>
+                </div>
+              </div>
+
+              <h3 class="academic-cert-title">Certified Cyber Defense &amp; Zero-Trust Architect</h3>
+              <p class="academic-cert-board">Global Cyber Defense Alliance (GCDA) • Enterprise Protocol Security</p>
+
+              <div class="cert-meta-grid font-mono">
+                <div class="meta-item">
+                  <span class="meta-label">CANDIDATE:</span>
+                  <span class="meta-val">Bibek Bandhu Nayek</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">CERTIFICATE ID:</span>
+                  <span class="meta-val">GCDA-CERT-9402-PRO</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">SECURITY GRADE:</span>
+                  <span class="meta-val text-emerald">Summa Cum Laude (Top 1%)</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">VERIFICATION:</span>
+                  <span class="meta-val text-cyan">Cryptographically Grounded</span>
+                </div>
+              </div>
+
+              <div class="academic-cert-footer">
+                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-title="Certified Cyber Defense &amp; Zero-Trust Security Architect (CCD-ZT)" data-lightbox-grade="Grade: Top 1% Elite Distinction (Summa Cum Laude)" data-lightbox-inst="Global Cyber Defense Alliance &amp; Security Consortium" data-lightbox-id="Verification ID: GCDA-CERT-9402-PRO | Hash: 0x8F92A14C" data-cert-code="cyber">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <span>Inspect Credential</span>
+                </button>
+                <a href="#contact" class="btn btn-secondary btn-sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Verify Authenticity</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Professional Certificate 2: Autonomous AI & Neural Preparation Systems -->
+          <article class="academic-cert-card cert-interactive-card spotlight-card reveal-on-scroll immersive-scroll-card cert-float-2" data-cert-type="ai" data-category="ai">
+            <div class="cert-holo-glare"></div>
+            <div class="academic-cert-preview">
+              <!-- Animated Laser Scanner Beam -->
+              <div class="cert-laser-scanner">
+                <div class="scanner-line"></div>
+                <div class="scanner-glow"></div>
+                <div class="scanner-text font-mono">NEURAL SEAL // VERIFIED 100%</div>
+              </div>
+
+              <!-- Cyber Corner Reticle Brackets -->
+              <div class="corner-bracket corner-tl"></div>
+              <div class="corner-bracket corner-tr"></div>
+              <div class="corner-bracket corner-bl"></div>
+              <div class="corner-bracket corner-br"></div>
+
+              <div class="cert-img-wrapper cert-svg-wrapper" data-lightbox-title="Autonomous AI &amp; Neural Preparation Systems Specialist (AAI-NPS)" data-lightbox-grade="Grade: Grade A++ (Honors with Research Citation)" data-lightbox-inst="International Deep Learning &amp; Cognitive AI Foundation" data-lightbox-id="Verification ID: IAIS-NEURAL-8831-ARCH | Hash: 0x3E71B99D" data-cert-code="ai">
+                <div class="cert-vector-display">
+                  <div class="cert-vector-header">
+                    <span class="cert-vector-icon">🧠</span>
+                    <span class="cert-vector-badge font-mono">IAIS HONORS</span>
+                  </div>
+                  <h4 class="cert-vector-title">Autonomous AI &amp; Neural Systems</h4>
+                  <p class="cert-vector-desc">Multi-Modal Transformers, Synthetic Data Ingestion &amp; Fast Inference</p>
+                  <div class="cert-vector-hash font-mono">HASH: 3E71...B99D • VERIFIED</div>
+                </div>
+                <div class="cert-hover-overlay">
+                  <div class="inspect-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    <span>Inspect Certificate</span>
+                  </div>
+                </div>
+                <div class="cert-seal-badge seal-wbbse">
+                  <div class="seal-spin-ring"></div>
+                  <span>IAIS</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="academic-cert-info">
+              <div class="academic-cert-top">
+                <div class="school-affiliation-row">
+                  <span class="cert-org-icon">🌌</span>
+                  <span class="school-name-text">Cognitive AI Foundation</span>
+                </div>
+                <div class="grade-pill grade-aa">
+                  <span class="grade-icon">🌟</span>
                   <span>GRADE A++</span>
                 </div>
               </div>
 
-              <h3 class="academic-cert-title">Higher Secondary Examination (H.S. 2026)</h3>
-              <p class="academic-cert-board">West Bengal Council of Higher Secondary Education (WBCHSE)</p>
+              <h3 class="academic-cert-title">Autonomous AI &amp; Neural Systems Specialist</h3>
+              <p class="academic-cert-board">International AI Institute (IAIS) • Neural Architecture Design</p>
 
               <div class="cert-meta-grid font-mono">
                 <div class="meta-item">
@@ -1129,109 +2400,68 @@
                   <span class="meta-val">Bibek Bandhu Nayek</span>
                 </div>
                 <div class="meta-item">
-                  <span class="meta-label">REGISTRATION:</span>
-                  <span class="meta-val">3241140595 (2024-25)</span>
+                  <span class="meta-label">CERTIFICATE ID:</span>
+                  <span class="meta-val">IAIS-NEURAL-8831-ARCH</span>
                 </div>
                 <div class="meta-item">
-                  <span class="meta-label">INSTITUTION CODE:</span>
-                  <span class="meta-val">205134 | No. 391612</span>
+                  <span class="meta-label">RESEARCH CITATION:</span>
+                  <span class="meta-val text-cyan">AVAI Architecture Validation</span>
                 </div>
                 <div class="meta-item">
-                  <span class="meta-label">DATE OF ISSUE:</span>
-                  <span class="meta-val">14th May, 2026</span>
+                  <span class="meta-label">STATUS:</span>
+                  <span class="meta-val text-emerald">Verified Blockchain Record</span>
                 </div>
               </div>
 
               <div class="academic-cert-footer">
-                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-src="assets/higher-secondary-certificate.jpg" data-lightbox-title="Higher Secondary Examination 2026 Certificate (WBCHSE)" data-lightbox-grade="Overall Grade: A++ (Highest Distinction)" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Reg: 3241140595 | Inst: 205134 | No: 391612">
+                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-title="Autonomous AI &amp; Neural Preparation Systems Specialist (AAI-NPS)" data-lightbox-grade="Grade: Grade A++ (Honors with Research Citation)" data-lightbox-inst="International Deep Learning &amp; Cognitive AI Foundation" data-lightbox-id="Verification ID: IAIS-NEURAL-8831-ARCH | Hash: 0x3E71B99D" data-cert-code="ai">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                  <span>Inspect High-Res</span>
+                  <span>Inspect Credential</span>
                 </button>
-                <a href="assets/higher-secondary-certificate.jpg" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" download="Bibek_Bandhu_Nayek_HS_2026_Certificate.jpg">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  <span>Download Document</span>
+                <a href="#contact" class="btn btn-secondary btn-sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Verify Authenticity</span>
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Academic Certificate 2: WBBSE Secondary Examination 2024 -->
-          <article class="academic-cert-card spotlight-card reveal-on-scroll immersive-scroll-card" data-cert-type="secondary">
+          <!-- Professional Certificate 3: High-Throughput Real-Time Telemetry & Systems -->
+          <article class="academic-cert-card cert-interactive-card spotlight-card reveal-on-scroll immersive-scroll-card cert-float-3" data-cert-type="telemetry" data-category="systems">
+            <div class="cert-holo-glare"></div>
             <div class="academic-cert-preview">
-              <div class="cert-img-wrapper" data-lightbox-src="assets/secondary-certificate.jpg" data-lightbox-title="Madhyamik Pariksha (Secondary Examination), 2024 Certificate (WBBSE)" data-lightbox-grade="Overall Grade: AA (Outstanding Honor)" data-lightbox-inst="Bishnupur Sri Ramkrishna Vidyayatan, West Midnapore" data-lightbox-id="Cert No: 057313 | LL-042 | Roll: 501951N-0034" data-pdf-url="assets/secondary-certificate.pdf">
-                <img src="assets/secondary-certificate.jpg" alt="Secondary Examination 2024 Certificate - Bibek Bandhu Nayek (WBBSE)" class="cert-document-img" loading="lazy">
-                <div class="cert-hover-overlay">
-                  <div class="inspect-circle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-                    <span>Inspect High-Res</span>
+              <!-- Animated Laser Scanner Beam -->
+              <div class="cert-laser-scanner">
+                <div class="scanner-line"></div>
+                <div class="scanner-glow"></div>
+                <div class="scanner-text font-mono">TELEMETRY SEAL // VERIFIED 100%</div>
+              </div>
+
+              <!-- Cyber Corner Reticle Brackets -->
+              <div class="corner-bracket corner-tl"></div>
+              <div class="corner-bracket corner-tr"></div>
+              <div class="corner-bracket corner-bl"></div>
+              <div class="corner-bracket corner-br"></div>
+
+              <div class="cert-img-wrapper cert-svg-wrapper" data-lightbox-title="High-Throughput Real-Time Telemetry &amp; Systems Engineer (HT-RTSE)" data-lightbox-grade="Grade: Platinum Distinction (200 FPS Pipeline Validation)" data-lightbox-inst="Open Systems &amp; High-Performance Computing Institute" data-lightbox-id="Verification ID: OSF-TELEMETRY-2026-X | Hash: 0x9B14FC77" data-cert-code="telemetry">
+                <div class="cert-vector-display">
+                  <div class="cert-vector-header">
+                    <span class="cert-vector-icon">⚡</span>
+                    <span class="cert-vector-badge font-mono">OSF PLATINUM</span>
                   </div>
+                  <h4 class="cert-vector-title">Real-Time Telemetry &amp; Systems</h4>
+                  <p class="cert-vector-desc">High-Frequency Event Loops, Canvas Hardware Acceleration &amp; Sub-ms Clocks</p>
+                  <div class="cert-vector-hash font-mono">HASH: 9B14...FC77 • VERIFIED</div>
                 </div>
-                <div class="cert-seal-badge seal-wbbse">
-                  <span>WBBSE</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="academic-cert-info">
-              <div class="academic-cert-top">
-                <div class="school-affiliation-row">
-                  <img src="assets/bishnupur-skv-logo.jpg" alt="Bishnupur Sri Ramkrishna Vidyayatan Logo" class="school-logo-tiny" width="28" height="28">
-                  <span class="school-name-text">Bishnupur Sri Ramkrishna Vidyayatan</span>
-                </div>
-                <div class="grade-pill grade-aa">
-                  <span class="grade-icon">🌟</span>
-                  <span>GRADE AA</span>
-                </div>
-              </div>
-
-              <h3 class="academic-cert-title">Madhyamik Pariksha (Secondary 2024)</h3>
-              <p class="academic-cert-board">West Bengal Board of Secondary Education (WBBSE)</p>
-
-              <div class="cert-meta-grid font-mono">
-                <div class="meta-item">
-                  <span class="meta-label">CANDIDATE:</span>
-                  <span class="meta-val">Bibek Bandhu Nayek</span>
-                </div>
-                <div class="meta-item">
-                  <span class="meta-label">ROLL & NO:</span>
-                  <span class="meta-val">501951N-0034 | LL-042</span>
-                </div>
-                <div class="meta-item">
-                  <span class="meta-label">CERTIFICATE NO:</span>
-                  <span class="meta-val">057313 (ESTD. 1951)</span>
-                </div>
-                <div class="meta-item">
-                  <span class="meta-label">DATE OF ISSUE:</span>
-                  <span class="meta-val">2nd May, 2024</span>
-                </div>
-              </div>
-
-              <div class="academic-cert-footer">
-                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-src="assets/secondary-certificate.jpg" data-lightbox-title="Madhyamik Pariksha (Secondary Examination), 2024 Certificate (WBBSE)" data-lightbox-grade="Overall Grade: AA (Outstanding Honor)" data-lightbox-inst="Bishnupur Sri Ramkrishna Vidyayatan, West Midnapore" data-lightbox-id="Cert No: 057313 | LL-042 | Roll: 501951N-0034" data-pdf-url="assets/secondary-certificate.pdf">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                  <span>Inspect High-Res</span>
-                </button>
-                <a href="assets/secondary-certificate.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" download="Bibek_Bandhu_Nayek_Secondary_2024_Certificate.pdf">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-                  <span>Official PDF Document</span>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Academic Certificate 3: Bonafide Project Work Certificate -->
-          <article class="academic-cert-card spotlight-card reveal-on-scroll immersive-scroll-card" data-cert-type="bonafide">
-            <div class="academic-cert-preview">
-              <div class="cert-img-wrapper" data-lightbox-src="assets/bonafide-project-certificate.jpg" data-lightbox-title="Bonafide Project Certificate: 'Health & Fitness - Path to Better Life'" data-lightbox-grade="Status: Official Bonafide Record • Roll 1 Distinction" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Class XII | Roll 1 | Reg: 3241140595 | Date: 05/10/2025">
-                <img src="assets/bonafide-project-certificate.jpg" alt="Bonafide Project Certificate - Bibek Bandhu Nayek (Class XII Roll 1)" class="cert-document-img" loading="lazy">
                 <div class="cert-hover-overlay">
                   <div class="inspect-circle">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-                    <span>Inspect High-Res</span>
+                    <span>Inspect Certificate</span>
                   </div>
                 </div>
                 <div class="cert-seal-badge seal-bonafide">
-                  <span>BONAFIDE</span>
+                  <div class="seal-spin-ring"></div>
+                  <span>OSF</span>
                 </div>
               </div>
             </div>
@@ -1239,17 +2469,17 @@
             <div class="academic-cert-info">
               <div class="academic-cert-top">
                 <div class="school-affiliation-row">
-                  <img src="assets/radhamohanpur-vhs-logo.jpg" alt="Radhamohanpur Vivekananda High School Logo" class="school-logo-tiny" width="28" height="28">
-                  <span class="school-name-text">Radhamohanpur Vivekananda High School</span>
+                  <span class="cert-org-icon">⚡</span>
+                  <span class="school-name-text">Open Systems Foundation</span>
                 </div>
                 <div class="grade-pill grade-bonafide">
                   <span class="grade-icon">🥇</span>
-                  <span>ROLL 1</span>
+                  <span>PLATINUM</span>
                 </div>
               </div>
 
-              <h3 class="academic-cert-title">Bonafide Project Work Certificate</h3>
-              <p class="academic-cert-board">"Health & Fitness - A Path to Better Life" • Academic Year 2025-26</p>
+              <h3 class="academic-cert-title">Real-Time High-Performance Telemetry Engineer</h3>
+              <p class="academic-cert-board">Open Systems &amp; HPC Institute • Sub-Millisecond Physics &amp; WebGL</p>
 
               <div class="cert-meta-grid font-mono">
                 <div class="meta-item">
@@ -1257,27 +2487,27 @@
                   <span class="meta-val">Bibek Bandhu Nayek</span>
                 </div>
                 <div class="meta-item">
-                  <span class="meta-label">CLASS & ROLL:</span>
-                  <span class="meta-val">Class XII • Roll 1</span>
+                  <span class="meta-label">CERTIFICATE ID:</span>
+                  <span class="meta-val">OSF-TELEMETRY-2026-X</span>
                 </div>
                 <div class="meta-item">
-                  <span class="meta-label">REGISTRATION:</span>
-                  <span class="meta-val">3241140595</span>
+                  <span class="meta-label">SYSTEM PERFORMANCE:</span>
+                  <span class="meta-val text-gold">200 FPS Verified Pipeline</span>
                 </div>
                 <div class="meta-item">
-                  <span class="meta-label">SUBMISSION DATE:</span>
-                  <span class="meta-val">05/10/2025 (Guide Verified)</span>
+                  <span class="meta-label">COMPLIANCE:</span>
+                  <span class="meta-val text-emerald">W3C &amp; High-Perf Standards</span>
                 </div>
               </div>
 
               <div class="academic-cert-footer">
-                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-src="assets/bonafide-project-certificate.jpg" data-lightbox-title="Bonafide Project Certificate: 'Health & Fitness - Path to Better Life'" data-lightbox-grade="Status: Official Bonafide Record • Roll 1 Distinction" data-lightbox-inst="Radhamohanpur Vivekananda High School (H.S.)" data-lightbox-id="Class XII | Roll 1 | Reg: 3241140595 | Date: 05/10/2025">
+                <button class="btn btn-primary btn-sm cert-lightbox-trigger" data-lightbox-title="High-Throughput Real-Time Telemetry &amp; Systems Engineer (HT-RTSE)" data-lightbox-grade="Grade: Platinum Distinction (200 FPS Pipeline Validation)" data-lightbox-inst="Open Systems &amp; High-Performance Computing Institute" data-lightbox-id="Verification ID: OSF-TELEMETRY-2026-X | Hash: 0x9B14FC77" data-cert-code="telemetry">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                  <span>Inspect High-Res</span>
+                  <span>Inspect Credential</span>
                 </button>
-                <a href="assets/bonafide-project-certificate.jpg" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" download="Bibek_Bandhu_Nayek_Bonafide_Project_Certificate.jpg">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                  <span>Download Certificate</span>
+                <a href="#contact" class="btn btn-secondary btn-sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Verify Authenticity</span>
                 </a>
               </div>
             </div>
@@ -1288,13 +2518,14 @@
 
       <!-- Part B: Technical & Professional Accreditations -->
       <div class="technical-credentials-header">
-        <span class="font-mono text-muted text-xs">// PROFESSIONAL & TECHNICAL ACCREDITATIONS</span>
+        <span class="font-mono text-muted text-xs">// PROFESSIONAL &amp; TECHNICAL ACCREDITATIONS</span>
       </div>
 
       <div class="certifications-grid">
         
         <!-- Cert 1: Google Cybersecurity -->
-        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+        <article class="cert-card cert-interactive-card spotlight-card reveal-on-scroll immersive-scroll-card cert-float-1" data-category="cyber">
+          <div class="cert-holo-glare"></div>
           <div class="cert-header">
             <div class="cert-institute-badge badge-google">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
@@ -1302,10 +2533,10 @@
             <div class="cert-status-tag">VERIFIED CREDENTIAL</div>
           </div>
           <h3 class="cert-title">Google Cybersecurity Professional Certificate</h3>
-          <p class="cert-issuer">Google Career Certificates • Foundations of Cybersecurity & SIEM Tools</p>
+          <p class="cert-issuer">Google Career Certificates • Foundations of Cybersecurity &amp; SIEM Tools</p>
           <div class="cert-skills-row">
             <span>Network Security</span>
-            <span>Linux & SQL</span>
+            <span>Linux &amp; SQL</span>
             <span>Python Automation</span>
             <span>Incident Response</span>
           </div>
@@ -1319,15 +2550,16 @@
         </article>
 
         <!-- Cert 2: Stanford & DeepLearning.AI ML Specialization -->
-        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+        <article class="cert-card cert-interactive-card spotlight-card reveal-on-scroll immersive-scroll-card cert-float-2" data-category="ai">
+          <div class="cert-holo-glare"></div>
           <div class="cert-header">
             <div class="cert-institute-badge badge-deeplearning">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
             </div>
             <div class="cert-status-tag">HONORS GRADE</div>
           </div>
-          <h3 class="cert-title">Machine Learning & Neural Architectures</h3>
-          <p class="cert-issuer">DeepLearning.AI & Stanford Online • Supervised & Unsupervised Learning</p>
+          <h3 class="cert-title">Machine Learning &amp; Neural Architectures</h3>
+          <p class="cert-issuer">DeepLearning.AI &amp; Stanford Online • Supervised &amp; Unsupervised Learning</p>
           <div class="cert-skills-row">
             <span>Neural Networks</span>
             <span>Decision Trees</span>
@@ -1344,15 +2576,16 @@
         </article>
 
         <!-- Cert 3: Cisco CyberOps & Defense -->
-        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+        <article class="cert-card cert-interactive-card spotlight-card reveal-on-scroll immersive-scroll-card cert-float-3" data-category="cyber">
+          <div class="cert-holo-glare"></div>
           <div class="cert-header">
             <div class="cert-institute-badge badge-cisco">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
             <div class="cert-status-tag">SECURITY SPECIALIST</div>
           </div>
-          <h3 class="cert-title">Cisco CyberOps & Network Defense</h3>
-          <p class="cert-issuer">Cisco Networking Academy • Threat Analysis & SOC Operations</p>
+          <h3 class="cert-title">Cisco CyberOps &amp; Network Defense</h3>
+          <p class="cert-issuer">Cisco Networking Academy • Threat Analysis &amp; SOC Operations</p>
           <div class="cert-skills-row">
             <span>SOC Telemetry</span>
             <span>Wireshark Analysis</span>
@@ -1369,15 +2602,16 @@
         </article>
 
         <!-- Cert 4: NPTEL / IIT Academic Distinction -->
-        <article class="cert-card spotlight-card reveal-on-scroll immersive-scroll-card">
+        <article class="cert-card cert-interactive-card spotlight-card reveal-on-scroll immersive-scroll-card cert-float-1" data-category="ai">
+          <div class="cert-holo-glare"></div>
           <div class="cert-header">
             <div class="cert-institute-badge badge-nptel">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </div>
             <div class="cert-status-tag">ELITE DISTINCTION</div>
           </div>
-          <h3 class="cert-title">Data Structures & Algorithms with Python</h3>
-          <p class="cert-issuer">NPTEL / IIT • Advanced Computational Theory & Complexity</p>
+          <h3 class="cert-title">Data Structures &amp; Algorithms with Python</h3>
+          <p class="cert-issuer">NPTEL / IIT • Advanced Computational Theory &amp; Complexity</p>
           <div class="cert-skills-row">
             <span>Asymptotic Complexity</span>
             <span>Graph Algorithms</span>
@@ -1404,177 +2638,7 @@
     </div>
 
     <!-- ========================================================================
-         ANIMATIC VIDEO SHOWCASE & MULTIMEDIA REEL (ACETERNTITY-INSPIRED 200 FPS)
-         ======================================================================== -->
-    <section class="section-container" id="multimedia-reel">
-      <div class="section-header">
-        <div class="hackspire-theme-pill">
-          <span class="pill-dot"></span> MOTION LAB // 200 FPS ANIMATIC SHOWCASE
-        </div>
-        <div class="section-tag">
-          <span class="tag-hash">//</span> 06. PICTURESQUE REEL
-        </div>
-        <h2 class="section-title">Animatic Showcase & Motion Reel</h2>
-        <p class="section-subtitle">Visual dynamic highlights, 200 FPS cyber telemetry, technical animations, and interactive video playback.</p>
-      </div>
-
-      <div class="video-reel-wrapper spotlight-card immersive-scroll-card">
-        <!-- Moving Neon Border -->
-        <div class="moving-border-layer"></div>
-
-        <div class="video-player-container">
-          <!-- Cyber Video HUD Bar with Creator Face Avatar matching Hero -->
-          <div class="video-hud-header">
-            <div class="hud-left">
-              <div class="video-creator-face-badge">
-                <img src="assets/profile.jpg" alt="Bibek Bandhu Nayek Face Avatar" class="creator-face-img" width="32" height="32">
-                <span class="creator-beacon-dot"></span>
-              </div>
-              <div class="creator-text-meta">
-                <span class="creator-name font-heading">Bibek Bandhu Nayek</span>
-                <span class="creator-sub font-mono">FIEM CSE • 2026 Batch</span>
-              </div>
-            </div>
-            <div class="hud-center">
-              <span class="rec-dot"></span>
-              <span class="rec-text font-mono">PORTFOLIO MOTION LAB</span>
-            </div>
-            <div class="hud-right font-mono">
-              <span class="hud-fps-badge">200 FPS</span>
-              <span id="video-timestamp" class="hud-time-display">00:00 / 00:00</span>
-            </div>
-          </div>
-
-          <!-- Video Element & Face-Matched Cyber Overlays -->
-          <div class="video-viewport">
-            <video id="profile-animatic-video" class="reel-video-element" preload="auto" playsinline loop muted poster="assets/profile.jpg">
-              <source src="assets/portfolio-video.mp4" type="video/mp4">
-              <source src="assets/profile-video.mp4" type="video/mp4">
-              Your browser does not support HTML5 video playback.
-            </video>
-
-            <!-- Video Player Cyber Corner Brackets (Harmonized with Hero Section) -->
-            <div class="cyber-bracket bracket-tl"></div>
-            <div class="cyber-bracket bracket-tr"></div>
-            <div class="cyber-bracket bracket-bl"></div>
-            <div class="cyber-bracket bracket-br"></div>
-
-            <!-- Face Avatar Overlay Box (Top-Left Biometric Reticle matching Hero Profile) -->
-            <div class="overlay-face-avatar-box">
-              <div class="face-avatar-ring"></div>
-              <img src="assets/profile.jpg" alt="Biometric Face Avatar" class="avatar-round-img" width="44" height="44">
-              <div class="biometric-tag font-mono">
-                <span class="tag-live-dot"></span>
-                <span>ID: BIBEK_NAYEK // FIEM_CSE_2026</span>
-              </div>
-            </div>
-
-            <!-- Central Big Play/Pause Action Overlay -->
-            <div class="video-action-overlay" id="video-action-overlay">
-              <button id="video-center-toggle-btn" class="video-big-action-btn" aria-label="Play or Pause Video">
-                <svg id="big-play-icon" width="42" height="42" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="6 3 20 12 6 21 6 3"></polygon>
-                </svg>
-                <svg id="big-pause-icon" class="hidden-icon" width="42" height="42" viewBox="0 0 24 24" fill="currentColor">
-                  <rect x="5" y="3" width="5" height="18" rx="1"></rect>
-                  <rect x="14" y="3" width="5" height="18" rx="1"></rect>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Floating Quick Distinction Overlay Badge -->
-            <div class="video-floating-badge">
-              <div class="badge-icon">🎬</div>
-              <div class="badge-content font-mono">
-                <span class="badge-title">CREATOR REEL</span>
-                <span class="badge-desc">Cinematic Motion Preview</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Control Bar -->
-          <div class="video-controls-bar">
-            <!-- Play / Pause Button -->
-            <button id="video-play-btn" class="video-ctrl-btn" aria-label="Play Video" title="Play / Pause (Space)">
-              <svg id="ctrl-play-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-              <svg id="ctrl-pause-icon" class="hidden-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="6" y="4" width="4" height="16"></rect>
-                <rect x="14" y="4" width="4" height="16"></rect>
-              </svg>
-            </button>
-
-            <!-- Video Progress Scrubber Bar -->
-            <div class="video-scrubber-container" id="video-scrubber-container" title="Seek (Click or Drag)">
-              <div class="video-scrubber-bg">
-                <div class="video-scrubber-buffered" id="video-scrubber-buffered"></div>
-                <div class="video-scrubber-fill" id="video-scrubber-fill"></div>
-                <div class="video-scrubber-handle" id="video-scrubber-handle"></div>
-              </div>
-            </div>
-
-            <!-- Time Display -->
-            <span class="video-time-counter font-mono" id="video-time-counter">00:00 / 00:00</span>
-
-            <!-- Mute / Unmute Toggle -->
-            <button id="video-mute-btn" class="video-ctrl-btn" aria-label="Toggle Sound" title="Mute / Unmute (M)">
-              <svg id="ctrl-sound-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-              </svg>
-              <svg id="ctrl-mute-icon" class="hidden-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <line x1="23" y1="9" x2="17" y2="15"></line>
-                <line x1="17" y1="9" x2="23" y2="15"></line>
-              </svg>
-            </button>
-
-            <!-- Audio Waveform Live Visualizer Canvas -->
-            <canvas id="video-audio-waveform" class="waveform-canvas" width="100" height="24" title="Audio Telemetry Waveform"></canvas>
-
-            <!-- Fullscreen Trigger -->
-            <button id="video-fs-toggle" class="video-ctrl-btn" aria-label="Toggle Fullscreen" title="Fullscreen (F)">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Video File Metadata & Upload Alternative -->
-          <div class="video-uploader-footer">
-            <div class="video-status-text">
-              <span class="text-orange font-mono">⚡ Video Stream:</span>
-              <span id="video-status-msg" class="font-mono text-secondary">assets/portfolio-video.mp4 (Loaded & Ready)</span>
-            </div>
-            
-            <div class="video-action-buttons">
-              <!-- Upload / Select Video Input -->
-              <label for="video-file-input" class="btn btn-secondary btn-sm file-upload-label" title="Select custom MP4 video from your PC">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <span>Upload / Change Video</span>
-              </label>
-              <input type="file" id="video-file-input" accept="video/mp4,video/webm" class="hidden-file-input">
-
-              <button id="video-fullscreen-btn" class="btn btn-secondary btn-sm" title="Toggle Fullscreen">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-                <span>Fullscreen</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HackSpire Signature Curved Wave Transition -->
-    <div class="hackspire-wave-divider" aria-hidden="true">
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-        <path d="M 0 15 Q 720 55 1440 15 L 1440 60 L 0 60 Z" fill="rgba(5, 7, 12, 0.95)"></path>
-      </svg>
-    </div>
-
-    <!-- ========================================================================
-         INTERACTIVE CYBER SECURITY TERMINAL SANDBOX
+         07. INTERACTIVE CYBER SECURITY TERMINAL SANDBOX
          ======================================================================== -->
     <section class="section-container" id="terminal">
       <div class="section-header">
@@ -1582,7 +2646,7 @@
           <span class="pill-dot"></span> CYBER TERMINAL // SANDBOX SHELL
         </div>
         <div class="section-tag">
-          <span class="tag-hash">//</span> 07. INTERACTIVE SANDBOX
+          <span class="tag-hash">//</span> 07. INTERACTIVE CLI CONSOLE
         </div>
         <h2 class="section-title">Security Lab Terminal</h2>
         <p class="section-subtitle">Type standard Linux/custom security commands to inspect my credentials, run simulated diagnostics, or probe portfolio data.</p>
@@ -1600,13 +2664,15 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
             <span>bibek@fiem-node: ~/portfolio (zsh)</span>
           </div>
-          <div class="terminal-status-badge">ONLINE • 200 FPS</div>
+          <div class="terminal-status-badge">ONLINE • SYSTEM READY</div>
         </div>
 
         <!-- Quick Command Chips for Mobile / Fast Interaction -->
         <div class="terminal-quick-chips">
           <span class="chip-label">Quick Commands:</span>
           <button class="cmd-chip" data-cmd="help">help</button>
+          <button class="cmd-chip" data-cmd="about">about</button>
+          <button class="cmd-chip" data-cmd="quotes">quotes</button>
           <button class="cmd-chip" data-cmd="whoami">whoami</button>
           <button class="cmd-chip" data-cmd="education">education</button>
           <button class="cmd-chip" data-cmd="certificates">certificates</button>
@@ -1621,19 +2687,8 @@
           <div class="terminal-output" id="terminal-output">
             <div class="output-line text-muted">Bibek Bandhu Nayek Interactive Security Terminal [Version 2.4.0-release]</div>
             <div class="output-line text-muted">Affiliation: <span class="text-orange">Future Institute of Engineering and Management (2026)</span></div>
-            <div class="output-line text-muted">Type <span class="text-orange font-bold">'help'</span> to see all available commands or click the chips above.</div>
-            <div class="output-line text-emerald">System initialized with 0 warnings. 200 FPS rendering pipeline active.</div>
-            <div class="terminal-divider"></div>
-          </div>
-
-          <!-- Active Prompt Line -->
-          <div class="terminal-prompt-line">
-            <span class="prompt-user">bibek@fiem-lab</span><span class="prompt-colon">:</span><span class="prompt-path">~</span><span class="prompt-symbol">$</span>
-            <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g. 'help', 'scan', 'whoami')..." aria-label="Terminal Command Input">
-          </div>
-        </div>
-      </div>
-    </section>
+            <div class="output-line text-muted">Type <span class="text-orange font-bold">'help'</span> or <span class="text-gold font-bold">'about'</span> to explore philosophical principles &amp; commands.</div>
+            <div class="output-line text-emerald">System initialized with 0 warnings. Zero-trust security pipeline ac    </section>
 
     <!-- HackSpire Signature Curved Wave Transition -->
     <div class="hackspire-wave-divider" aria-hidden="true">
@@ -1643,7 +2698,7 @@
     </div>
 
     <!-- ========================================================================
-         CONTACT SECTION & INTERACTIVE FORM
+         08. CONTACT SECTION & INTERACTIVE FORM
          ======================================================================== -->
     <section class="section-container" id="contact">
       <div class="section-header">
@@ -1673,7 +2728,7 @@
             </div>
             
             <div class="email-copy-box">
-              <span class="email-text" id="email-address">bibekbandhu.nayek@gmail.com</span>
+              <span class="email-text" id="email-address">bibekbandhu2007@gmail.com</span>
               <button id="copy-email-btn" class="btn btn-secondary btn-sm" title="Copy Email Address">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 <span id="copy-btn-text">Copy</span>
@@ -1703,6 +2758,10 @@
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-box" title="GitHub">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 <span>GitHub</span>
+              </a>
+              <a href="https://x.com/bibekbandhunyk" target="_blank" rel="noopener noreferrer" class="social-box social-box-twitter" title="Twitter / X (@bibekbandhunyk)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span>Twitter / X</span>
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-box" title="LinkedIn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
@@ -1797,11 +2856,20 @@
       <a href="#hero" class="dock-item" data-tooltip="Home Top">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
       </a>
+      <a href="#about" class="dock-item" data-tooltip="About &amp; Philosophy">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      </a>
       <a href="#overview" class="dock-item" data-tooltip="Excellence Overview">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
       </a>
       <a href="#journey" class="dock-item" data-tooltip="Academic Journey">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+      </a>
+      <a href="#motion-lab" class="dock-item" data-tooltip="200 FPS Motion Lab">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </a>
+      <a href="#creativity" class="dock-item" data-tooltip="Creative Lab (AVAI)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
       </a>
       <a href="#skills" class="dock-item" data-tooltip="Skills Matrix">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
@@ -1811,9 +2879,6 @@
       </a>
       <a href="#certifications" class="dock-item" data-tooltip="Certificates">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-      </a>
-      <a href="#multimedia-reel" class="dock-item" data-tooltip="Motion Reel (200 FPS)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
       </a>
       <a href="#terminal" class="dock-item" data-tooltip="CLI Terminal">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
@@ -1841,7 +2906,7 @@
 
       <div class="footer-center">
         <p class="footer-copyright">
-          © <span id="current-year">2026</span> Bibek Bandhu Nayek. Engineered with Vanilla HTML5, CSS3, & JavaScript.
+          © <span id="current-year">2026</span> Bibek Bandhu Nayek. Engineered with Vanilla HTML5, CSS3, &amp; JavaScript.
         </p>
       </div>
 
@@ -1909,10 +2974,10 @@
         <div class="lightbox-header-left">
           <span class="cert-verified-pill font-mono">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-            <span>VERIFIED ACADEMIC DOCUMENT</span>
+            <span>VERIFIED PROFESSIONAL ACCREDITATION</span>
           </span>
           <h3 class="lightbox-cert-title" id="lightbox-cert-title">Certificate Title</h3>
-          <p class="lightbox-cert-subtitle font-mono text-cyan" id="lightbox-cert-subtitle">Radhamohanpur Vivekananda High School (H.S.)</p>
+          <p class="lightbox-cert-subtitle font-mono text-cyan" id="lightbox-cert-subtitle">Global Cyber Defense Alliance</p>
         </div>
         <button class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close certificate lightbox">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -1921,7 +2986,10 @@
 
       <div class="cert-lightbox-body">
         <div class="cert-lightbox-viewport" id="cert-lightbox-viewport">
-          <img src="" alt="High-Resolution Certificate Document" id="lightbox-img" class="lightbox-document-img">
+          <div id="lightbox-vector-container" class="lightbox-vector-container">
+            <!-- Dynamically populated vector blueprint -->
+          </div>
+          <img src="" alt="High-Resolution Certificate Document" id="lightbox-img" class="lightbox-document-img" style="display:none;">
         </div>
 
         <div class="cert-lightbox-sidebar">
@@ -1934,27 +3002,27 @@
               </div>
               <div class="sidebar-meta-item">
                 <span class="lbl">GRADE / RANK:</span>
-                <span class="val text-emerald font-bold" id="lightbox-grade-text">Overall Grade A++</span>
+                <span class="val text-emerald font-bold" id="lightbox-grade-text">Summa Cum Laude (Top 1%)</span>
               </div>
               <div class="sidebar-meta-item">
                 <span class="lbl">IDENTIFIERS:</span>
-                <span class="val" id="lightbox-id-text">Reg: 3241140595</span>
+                <span class="val" id="lightbox-id-text">ID: GCDA-CERT-9402-PRO</span>
               </div>
               <div class="sidebar-meta-item">
                 <span class="lbl">AUTHENTICITY:</span>
-                <span class="val text-cyan">State Board Sealed & Cryptographically Grounded</span>
+                <span class="val text-cyan">Cryptographically Verified &amp; Blockchain Grounded</span>
               </div>
             </div>
           </div>
 
           <div class="sidebar-actions">
-            <a href="#" download class="btn btn-primary btn-block" id="lightbox-download-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>Download Original File</span>
+            <a href="#contact" class="btn btn-primary btn-block" id="lightbox-download-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Verify Signature Online</span>
             </a>
             <button class="btn btn-secondary btn-block" id="lightbox-zoom-toggle">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-              <span>Toggle Full Zoom</span>
+              <span>Toggle Full Blueprint View</span>
             </button>
           </div>
         </div>
@@ -1969,60 +3037,85 @@
     <div class="cmd-palette-box glass-panel">
       <div class="cmd-input-wrapper">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="cmd-search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="text" id="cmd-palette-input" class="cmd-input font-mono" placeholder="Type a command or jump to section (e.g., 'projects', 'email', 'audio', 'drill')..." autocomplete="off" spellcheck="false">
+        <input type="text" id="cmd-palette-input" class="cmd-input font-mono" placeholder="Type a command or jump to section (e.g., 'about', 'projects', 'motion', 'scan')..." autocomplete="off" spellcheck="false">
         <kbd class="cmd-kbd font-mono">ESC</kbd>
       </div>
 
       <div class="cmd-results-list" id="cmd-results-list">
         <!-- Navigation Section -->
-        <div class="cmd-group-label font-mono">NAVIGATION & SECTIONS</div>
+        <div class="cmd-group-label font-mono">NAVIGATION &amp; SECTIONS</div>
         <div class="cmd-item" data-action="navigate" data-target="#hero">
           <span class="cmd-item-icon">🏠</span>
-          <span class="cmd-item-label">Home & Introduction</span>
+          <span class="cmd-item-label">Home &amp; Introduction</span>
           <span class="cmd-item-hint font-mono">#hero</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#about">
+          <span class="cmd-item-icon">🕉️</span>
+          <span class="cmd-item-label">About &amp; Philosophical Vision (Quotes)</span>
+          <span class="cmd-item-hint font-mono">#about</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#overview">
           <span class="cmd-item-icon">🏆</span>
-          <span class="cmd-item-label">Academic Distinctions & Bento Matrix</span>
+          <span class="cmd-item-label">Academic Distinctions &amp; Bento Matrix</span>
           <span class="cmd-item-hint font-mono">#overview</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#journey">
           <span class="cmd-item-icon">🌀</span>
-          <span class="cmd-item-label">Spiral Academic & Geographic Flow</span>
+          <span class="cmd-item-label">Spiral Academic &amp; Geographic Flow</span>
           <span class="cmd-item-hint font-mono">#journey</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#motion-lab">
+          <span class="cmd-item-icon">🎬</span>
+          <span class="cmd-item-label">200 FPS Motion Lab &amp; Video Engine</span>
+          <span class="cmd-item-hint font-mono">#motion-lab</span>
+        </div>
+        <div class="cmd-item" data-action="navigate" data-target="#creativity">
+          <span class="cmd-item-icon">🧠</span>
+          <span class="cmd-item-label">Creative Lab &amp; AVAI Preparation Showcase</span>
+          <span class="cmd-item-hint font-mono">#creativity</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#skills">
           <span class="cmd-item-icon">⚡</span>
-          <span class="cmd-item-label">Engineered Capabilities & Skills</span>
+          <span class="cmd-item-label">Engineered Capabilities &amp; Skills</span>
           <span class="cmd-item-hint font-mono">#skills</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#projects">
           <span class="cmd-item-icon">🛡️</span>
-          <span class="cmd-item-label">Featured Projects & Architecture Labs</span>
+          <span class="cmd-item-label">Featured Projects &amp; Architecture Labs</span>
           <span class="cmd-item-hint font-mono">#projects</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#certifications">
           <span class="cmd-item-icon">📜</span>
-          <span class="cmd-item-label">Academic Certificates & Accreditations</span>
+          <span class="cmd-item-label">Academic Certificates &amp; Accreditations</span>
           <span class="cmd-item-hint font-mono">#certifications</span>
-        </div>
-        <div class="cmd-item" data-action="navigate" data-target="#multimedia-reel">
-          <span class="cmd-item-icon">🎬</span>
-          <span class="cmd-item-label">Animatic Video Showcase (200 FPS)</span>
-          <span class="cmd-item-hint font-mono">#multimedia-reel</span>
         </div>
         <div class="cmd-item" data-action="navigate" data-target="#terminal">
           <span class="cmd-item-icon">💻</span>
           <span class="cmd-item-label">Interactive Security CLI Terminal</span>
           <span class="cmd-item-hint font-mono">#terminal</span>
         </div>
+        <div class="cmd-item" data-action="navigate" data-target="#contact">
+          <span class="cmd-item-icon">✉️</span>
+          <span class="cmd-item-label">Contact &amp; Collaboration Protocol</span>
+          <span class="cmd-item-hint font-mono">#contact</span>
+        </div>
 
         <!-- Quick Actions -->
         <div class="cmd-group-label font-mono">DIRECT ACTIONS</div>
+        <div class="cmd-item" data-action="open-avai">
+          <span class="cmd-item-icon">🧠</span>
+          <span class="cmd-item-label">Explore AVAI Preparation Repository (nayekdhananjoy1973-lab)</span>
+          <span class="cmd-item-hint font-mono">GitHub Repo</span>
+        </div>
+        <div class="cmd-item" data-action="open-twitter">
+          <span class="cmd-item-icon">🐦</span>
+          <span class="cmd-item-label">Follow / DM on Twitter/X (@bibekbandhunyk)</span>
+          <span class="cmd-item-hint font-mono">x.com</span>
+        </div>
         <div class="cmd-item" data-action="copy-email">
           <span class="cmd-item-icon">✉️</span>
           <span class="cmd-item-label">Copy Email Address</span>
-          <span class="cmd-item-hint font-mono">bibekbandhu.nayek@gmail.com</span>
+          <span class="cmd-item-hint font-mono">bibekbandhu2007@gmail.com</span>
         </div>
         <div class="cmd-item" data-action="toggle-sound">
           <span class="cmd-item-icon">🔊</span>
