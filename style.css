@@ -216,7 +216,7 @@ img {
   width: var(--scroll-progress, 0%);
   background: linear-gradient(90deg, var(--orange-shakti) 0%, var(--white-pure) 50%, var(--emerald-primary) 100%);
   box-shadow: 0 0 16px var(--orange-shakti), 0 0 10px var(--emerald-primary);
-  transition: width 0.06s linear;
+  will-change: width;
 }
 
 .laser-head {
@@ -229,7 +229,7 @@ img {
   background: #ffffff;
   box-shadow: 0 0 14px var(--orange-light), 0 0 22px var(--emerald-primary);
   transform: translateX(-50%);
-  transition: left 0.06s linear;
+  will-change: left;
 }
 
 /* =============================================================================
@@ -253,7 +253,7 @@ img {
   pointer-events: none;
   z-index: -1;
   opacity: 0.32;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 
 .glow-top {
@@ -650,7 +650,7 @@ img {
   transform: perspective(1200px) rotateX(var(--hero-rotate, 0deg)) translateY(var(--hero-translate, 0px)) scale(var(--hero-scale, 1));
   opacity: var(--hero-opacity, 1);
   transform-origin: center top;
-  transition: transform 0.08s linear, opacity 0.08s linear;
+  will-change: transform, opacity;
 }
 
 /* High-Impact CSE Department Institutional Banner Badge (First on Page) */
@@ -1250,8 +1250,8 @@ img {
 }
 
 .immersive-scroll-card {
-  will-change: transform, opacity;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 /* =============================================================================
@@ -4642,6 +4642,41 @@ img {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --glass-blur: blur(8px);
+  }
+
+  .grain-overlay {
+    display: none !important;
+  }
+
+  .spotlight-pointer {
+    display: none !important;
+  }
+
+  .ambient-glow {
+    filter: blur(50px) !important;
+    opacity: 0.15 !important;
+    transform: none !important;
+  }
+
+  .immersive-hero-parallax {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .immersive-scroll-card {
+    transform: none !important;
+  }
+
+  .tilt-card .project-card-inner {
+    transform: none !important;
+  }
+
+  .cert-interactive-card {
+    transform: none !important;
+  }
+
   .nav-menu { display: none; }
   .hamburger-btn { display: flex; }
 
@@ -5285,7 +5320,6 @@ img {
   width: 16px;
   height: 16px;
   pointer-events: none;
-  transition: top 0.08s linear;
 }
 
 .laser-core {

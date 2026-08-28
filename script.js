@@ -20,18 +20,47 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     
+    let isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    let prevInnerWidth = window.innerWidth;
+    let prevInnerHeight = window.innerHeight;
     let mouse = { x: null, y: null, prevX: null, prevY: null, speed: 0 };
+    let isCanvasRunning = true;
+    let animId = null;
 
+    let resizeDebounce = null;
     window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      const curW = window.innerWidth;
+      const curH = window.innerHeight;
+      // Filter out small vertical shifts from Android address-bar collapse
+      if (Math.abs(curW - prevInnerWidth) > 12 || Math.abs(curH - prevInnerHeight) > 120) {
+        clearTimeout(resizeDebounce);
+        resizeDebounce = setTimeout(() => {
+          isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+          prevInnerWidth = width;
+          prevInnerHeight = height;
+        }, 120);
+      }
     }, { passive: true });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        isCanvasRunning = false;
+        if (animId) cancelAnimationFrame(animId);
+      } else {
+        if (!isCanvasRunning) {
+          isCanvasRunning = true;
+          animId = requestAnimationFrame(animate);
+        }
+      }
+    });
 
     // 3D Fluid Ripples Pool
     const ripples = [];
-    const maxRipples = 65;
+    const maxRipples = isMobile ? 8 : 35;
 
     const addRipple = (x, y, strength = 1, colorType = 'cyan') => {
       if (ripples.length >= maxRipples) ripples.shift();
@@ -39,9 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
         x,
         y,
         radius: 2,
-        maxRadius: Math.random() * 45 + 35 + strength * 25,
-        speed: (Math.random() * 0.8 + 1.2) * (strength > 1 ? 1.4 : 1.0),
-        opacity: Math.min(0.65 * strength, 0.9),
+        maxRadius: Math.random() * 35 + 25 + strength * 18,
+        speed: (Math.random() * 0.8 + 1.2) * (strength > 1 ? 1.3 : 1.0),
+        opacity: Math.min(0.6 * strength, 0.85),
         colorType: colorType,
         aspectRatio: 0.65 // 3D perspective tilt
       });
@@ -49,56 +78,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Splash Particles Pool
     const splashParticles = [];
-    const maxSplashes = 50;
+    const maxSplashes = isMobile ? 8 : 28;
 
-    const addSplash = (x, y, count = 8) => {
+    const addSplash = (x, y, count = isMobile ? 4 : 8) => {
       for (let i = 0; i < count; i++) {
         if (splashParticles.length >= maxSplashes) splashParticles.shift();
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 3.5 + 1.5;
+        const speed = Math.random() * 3.0 + 1.2;
         splashParticles.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - (Math.random() * 2.5 + 1.0),
+          vy: Math.sin(angle) * speed - (Math.random() * 2.2 + 0.8),
           gravity: 0.12,
-          radius: Math.random() * 2.2 + 1.0,
-          opacity: 0.9,
+          radius: Math.random() * 2.0 + 1.0,
+          opacity: 0.85,
           decay: Math.random() * 0.02 + 0.015
         });
       }
     };
 
-    window.addEventListener('mousemove', (e) => {
-      if (mouse.x !== null && mouse.y !== null) {
-        const dx = e.clientX - mouse.x;
-        const dy = e.clientY - mouse.y;
-        mouse.speed = Math.hypot(dx, dy);
-        
-        // Spawn hydrodynamic wave trail on cursor motion
-        if (mouse.speed > 6 && Math.random() < 0.45) {
-          addRipple(e.clientX, e.clientY, Math.min(mouse.speed / 15, 1.6), Math.random() > 0.4 ? 'cyan' : 'orange');
+    if (!isMobile) {
+      window.addEventListener('mousemove', (e) => {
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = e.clientX - mouse.x;
+          const dy = e.clientY - mouse.y;
+          mouse.speed = Math.hypot(dx, dy);
+          
+          if (mouse.speed > 8 && Math.random() < 0.35) {
+            addRipple(e.clientX, e.clientY, Math.min(mouse.speed / 16, 1.4), Math.random() > 0.4 ? 'cyan' : 'orange');
+          }
         }
-      }
-      mouse.prevX = mouse.x;
-      mouse.prevY = mouse.y;
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+        mouse.prevX = mouse.x;
+        mouse.prevY = mouse.y;
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
 
-      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-    }, { passive: true });
+        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+      }, { passive: true });
 
-    window.addEventListener('click', (e) => {
-      addRipple(e.clientX, e.clientY, 2.2, 'cyan');
-      addRipple(e.clientX, e.clientY, 1.6, 'orange');
-      addSplash(e.clientX, e.clientY, 10);
-    }, { passive: true });
+      window.addEventListener('click', (e) => {
+        addRipple(e.clientX, e.clientY, 2.0, 'cyan');
+        addRipple(e.clientX, e.clientY, 1.4, 'orange');
+        addSplash(e.clientX, e.clientY, 8);
+      }, { passive: true });
 
-    window.addEventListener('mouseout', () => {
-      mouse.x = null;
-      mouse.y = null;
-    }, { passive: true });
+      window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+      }, { passive: true });
+    }
 
     // 3D Volumetric Water Droplet Class
     class WaterDroplet {
@@ -108,19 +138,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       reset(initial = false) {
         this.x = Math.random() * width;
-        this.y = initial ? Math.random() * height : -30 - Math.random() * 50;
-        // Depth perception Z-axis: 0.4 (far/slow/small) to 1.6 (near/fast/large)
-        this.z = Math.random() * 1.2 + 0.4;
-        this.baseRadius = Math.random() * 3.5 + 2.0;
+        this.y = initial ? Math.random() * height : -20 - Math.random() * 40;
+        this.z = Math.random() * 1.0 + 0.5;
+        this.baseRadius = Math.random() * 3.0 + 2.0;
         this.radius = this.baseRadius * this.z;
         this.vy = (0.75 + Math.random() * 1.25) * this.z;
-        this.vx = (Math.random() - 0.5) * 0.25;
+        this.vx = (Math.random() - 0.5) * 0.2;
         this.wobblePhase = Math.random() * Math.PI * 2;
         this.wobbleSpeed = Math.random() * 0.04 + 0.02;
-        this.wobbleAmp = (Math.random() * 0.6 + 0.2) * this.z;
-        this.opacity = Math.min((0.55 + this.z * 0.35), 0.95);
-        this.tailLength = Math.random() * 8 + 4;
-        this.nextRippleTime = Math.random() * 180 + 80;
+        this.wobbleAmp = (Math.random() * 0.5 + 0.2) * this.z;
+        this.opacity = Math.min((0.5 + this.z * 0.35), 0.9);
+        this.nextRippleTime = Math.random() * 220 + 100;
       }
 
       update() {
@@ -129,38 +157,38 @@ document.addEventListener('DOMContentLoaded', () => {
         this.x += currentVx;
         this.y += this.vy;
 
-        // Interaction with mouse proximity
-        if (mouse.x !== null && mouse.y !== null) {
+        // Interaction with mouse proximity on desktop
+        if (!isMobile && mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - this.x;
           const dy = mouse.y - this.y;
           const dist = Math.hypot(dx, dy);
-          const influenceRadius = 100 * this.z;
+          const influenceRadius = 90 * this.z;
           if (dist < influenceRadius && dist > 0) {
             const force = (influenceRadius - dist) / influenceRadius;
-            this.x -= (dx / dist) * force * 3.2;
-            this.y -= (dy / dist) * force * 2.0;
+            this.x -= (dx / dist) * force * 2.8;
+            this.y -= (dy / dist) * force * 1.8;
           }
         }
 
         // Periodic minor ripple emission
         this.nextRippleTime--;
         if (this.nextRippleTime <= 0) {
-          if (this.z > 0.9 && Math.random() < 0.35) {
-            addRipple(this.x, this.y, this.z * 0.5, 'cyan');
+          if (this.z > 0.95 && Math.random() < 0.25) {
+            addRipple(this.x, this.y, this.z * 0.4, 'cyan');
           }
-          this.nextRippleTime = Math.random() * 200 + 120;
+          this.nextRippleTime = Math.random() * 240 + 140;
         }
 
         // Landing at bottom
-        if (this.y > height + 20) {
-          if (this.z > 0.7) {
-            addRipple(this.x, height - 10, this.z * 0.8, Math.random() > 0.5 ? 'cyan' : 'emerald');
-            if (this.z > 1.2) addSplash(this.x, height - 10, 4);
+        if (this.y > height + 15) {
+          if (this.z > 0.8) {
+            addRipple(this.x, height - 8, this.z * 0.7, Math.random() > 0.5 ? 'cyan' : 'emerald');
+            if (!isMobile && this.z > 1.2) addSplash(this.x, height - 8, 3);
           }
           this.reset(false);
         }
-        if (this.x < -40) this.x = width + 40;
-        if (this.x > width + 40) this.x = -40;
+        if (this.x < -30) this.x = width + 30;
+        if (this.x > width + 30) this.x = -30;
       }
 
       draw() {
@@ -169,10 +197,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const cx = this.x;
         const cy = this.y;
 
-        // 1. Soft Ambient Refractive Drop Shadow (Bottom-Right Offset)
+        if (isMobile) {
+          // Ultra-fast mobile path: single lightweight fill & stroke
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(6, 182, 212, ${0.4 * this.opacity})`;
+          ctx.fill();
+          ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * this.opacity})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+          ctx.restore();
+          return;
+        }
+
+        // 1. Soft Ambient Refractive Drop Shadow
         ctx.beginPath();
         ctx.ellipse(cx + r * 0.22, cy + r * 0.28, r * 0.95, r * 0.8, 0, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 0, 0, ${0.35 * this.opacity})`;
+        ctx.fillStyle = `rgba(0, 0, 0, ${0.3 * this.opacity})`;
         ctx.fill();
 
         // 2. Volumetric Liquid Droplet Body with Refraction
@@ -186,18 +227,17 @@ document.addEventListener('DOMContentLoaded', () => {
         bodyGrad.addColorStop(1, `rgba(255, 107, 0, ${0.18 * this.opacity})`);
 
         ctx.beginPath();
-        // Droplet tear shape with slight vertical elongation when falling faster
         const stretch = Math.min(1 + (this.vy / 10), 1.25);
         ctx.ellipse(cx, cy, r, r * stretch, 0, 0, Math.PI * 2);
         ctx.fillStyle = bodyGrad;
         ctx.fill();
 
-        // 3. Crisp Caustic Rim Highlight (Outer Border Refraction)
+        // 3. Crisp Caustic Rim Highlight
         ctx.strokeStyle = `rgba(220, 245, 255, ${0.35 * this.opacity})`;
         ctx.lineWidth = Math.max(0.6 * this.z, 0.4);
         ctx.stroke();
 
-        // 4. Primary Specular Glare (Top-Left Curved Reflection)
+        // 4. Primary Specular Glare
         ctx.beginPath();
         ctx.ellipse(
           cx - r * 0.32,
@@ -211,24 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = `rgba(255, 255, 255, ${0.85 * this.opacity})`;
         ctx.fill();
 
-        // 5. Secondary Caustic Refraction Glare (Bottom-Right Rim)
-        ctx.beginPath();
-        ctx.arc(
-          cx + r * 0.28,
-          cy + r * 0.28 * stretch,
-          r * 0.16,
-          0,
-          Math.PI * 2
-        );
-        ctx.fillStyle = `rgba(6, 182, 212, ${0.75 * this.opacity})`;
-        ctx.fill();
-
         ctx.restore();
       }
     }
 
-    // Number of 3D droplets scaled to display resolution
-    const dropletCount = Math.min(Math.floor((width * height) / 18000), 70);
+    // Number of 3D droplets scaled to display resolution & hardware capability
+    const dropletCount = isMobile
+      ? Math.min(Math.floor((width * height) / 45000), 12)
+      : Math.min(Math.floor((width * height) / 18000), 45);
     const droplets = Array.from({ length: dropletCount }, () => new WaterDroplet());
 
     // Ambient Meteor / Light Streamer
@@ -240,10 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
       reset() {
         this.x = Math.random() * width + 150;
         this.y = -60;
-        this.len = Math.random() * 120 + 80;
-        this.speed = Math.random() * 5 + 6;
+        this.len = Math.random() * 110 + 70;
+        this.speed = Math.random() * 4 + 5;
         this.angle = Math.PI / 4;
-        this.opacity = Math.random() * 0.6 + 0.2;
+        this.opacity = Math.random() * 0.5 + 0.2;
         this.active = false;
         this.timer = Math.random() * 250 + 120;
       }
@@ -268,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grad.addColorStop(0.3, `rgba(6, 182, 212, ${this.opacity * 0.8})`);
         grad.addColorStop(1, 'transparent');
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.4;
+        ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(tailX, tailY);
@@ -276,17 +306,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const lightBeams = Array.from({ length: 3 }, () => new CausticLightBeam());
+    const lightBeams = Array.from({ length: isMobile ? 1 : 2 }, () => new CausticLightBeam());
 
     // Main 60-200 FPS Animation Loop
     const animate = () => {
+      if (!isCanvasRunning) return;
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Draw & Update Fluid Ripples (Bottom Layer)
+      // 1. Draw & Update Fluid Ripples
       for (let i = ripples.length - 1; i >= 0; i--) {
         const rp = ripples[i];
         rp.radius += rp.speed;
-        rp.opacity -= 0.012;
+        rp.opacity -= 0.015;
 
         if (rp.opacity <= 0 || rp.radius >= rp.maxRadius) {
           ripples.splice(i, 1);
@@ -304,15 +335,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           ctx.strokeStyle = `rgba(6, 182, 212, ${strokeAlpha * 0.55})`;
         }
-        ctx.lineWidth = Math.max(1.5 * (1 - rp.radius / rp.maxRadius), 0.5);
+        ctx.lineWidth = Math.max(1.4 * (1 - rp.radius / rp.maxRadius), 0.5);
         ctx.stroke();
 
-        // Subtle secondary inner wave crest
-        if (rp.radius > 12) {
+        if (!isMobile && rp.radius > 14) {
           ctx.beginPath();
           ctx.ellipse(rp.x, rp.y, rp.radius * 0.65, rp.radius * 0.65 * rp.aspectRatio, 0, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(255, 255, 255, ${strokeAlpha * 0.25})`;
-          ctx.lineWidth = 0.75;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${strokeAlpha * 0.2})`;
+          ctx.lineWidth = 0.6;
           ctx.stroke();
         }
         ctx.restore();
@@ -333,11 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.beginPath();
         ctx.arc(sp.x, sp.y, sp.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(180, 235, 255, ${sp.opacity * 0.8})`;
+        ctx.fillStyle = `rgba(180, 235, 255, ${sp.opacity * 0.7})`;
         ctx.fill();
       }
 
-      // 3. Draw & Update 3D Water Droplets (Sorted by Depth Z)
+      // 3. Draw & Update 3D Water Droplets
       droplets.forEach((d) => {
         d.update();
         d.draw();
@@ -349,10 +379,10 @@ document.addEventListener('DOMContentLoaded', () => {
         lb.draw();
       });
 
-      requestAnimationFrame(animate);
+      animId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animId = requestAnimationFrame(animate);
   };
 
   initBackgroundCanvas();
@@ -367,6 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!beamContainer || !laserDot) return;
 
     const updateBeam = () => {
+      if (window.innerWidth <= 768) return;
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollHeight > 0 ? Math.min(Math.max(scrollTop / scrollHeight, 0), 1) : 0;
@@ -398,133 +429,149 @@ document.addEventListener('DOMContentLoaded', () => {
     const centerIcon = document.getElementById('indicator-play-icon');
     const muteBtn = document.getElementById('video-mute-btn');
     const muteIcon = document.getElementById('video-mute-icon');
+    const timeDisplay = document.getElementById('video-time');
+    const durationDisplay = document.getElementById('video-duration');
     const scrubber = document.getElementById('video-scrubber');
-    const timeDisplay = document.getElementById('video-time-display');
-    const fpsCounter = document.getElementById('motion-fps-counter');
-    const speedBtns = document.querySelectorAll('.speed-btn');
-    const switchTrackBtn = document.getElementById('video-switch-track-btn');
+    const speedButtons = document.querySelectorAll('.speed-pill');
+    const switchTrackBtn = document.getElementById('btn-switch-track');
     const fullscreenBtn = document.getElementById('video-fullscreen-btn');
+    const targetReticle = document.getElementById('hud-target-reticle');
+    const fpsCounter = document.getElementById('telemetry-fps-counter');
     const waveformCanvas = document.getElementById('motion-waveform-canvas');
-    const reticleCoords = document.getElementById('reticle-coords');
-    const targetReticle = document.querySelector('.hud-target-reticle');
 
     if (!video || !videoStage) return;
-
-    let activeTrack = 'profile'; // 'profile' or 'portfolio'
-    const tracks = {
-      profile: 'assets/profile-video.mp4',
-      portfolio: 'assets/portfolio-video.mp4'
-    };
 
     const togglePlay = () => {
       if (video.paused || video.ended) {
         video.play().then(() => {
-          videoStage.classList.add('playing');
-          if (playIcon) playIcon.textContent = '⏸️';
-          if (centerIcon) centerIcon.textContent = '⏸️';
-        }).catch(err => {
-          console.warn('Video play action note:', err);
-        });
+          updatePlayIcons(true);
+          centerIndicator?.classList.add('hidden');
+        }).catch(() => {});
       } else {
         video.pause();
-        videoStage.classList.remove('playing');
-        if (playIcon) playIcon.textContent = '▶️';
-        if (centerIcon) centerIcon.textContent = '▶️';
+        updatePlayIcons(false);
+        centerIndicator?.classList.remove('hidden');
       }
+    };
+
+    const updatePlayIcons = (isPlaying) => {
+      if (playIcon) playIcon.textContent = isPlaying ? '⏸' : '▶';
+      if (centerIcon) centerIcon.textContent = isPlaying ? '⏸' : '▶';
     };
 
     playBtn?.addEventListener('click', togglePlay);
     centerIndicator?.addEventListener('click', togglePlay);
+    video.addEventListener('click', togglePlay);
 
-    // Mute/Unmute
     muteBtn?.addEventListener('click', () => {
       video.muted = !video.muted;
-      if (muteIcon) {
-        muteIcon.textContent = video.muted ? '🔇' : '🔊';
-      }
+      if (muteIcon) muteIcon.textContent = video.muted ? '🔇' : '🔊';
     });
 
-    // Time Format Helper
     const formatTime = (seconds) => {
-      if (isNaN(seconds)) return '00:00';
-      const m = Math.floor(seconds / 60);
-      const s = Math.floor(seconds % 60);
-      return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      const ms = Math.floor((seconds % 1) * 100);
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
     };
 
-    // Scrubber & Progress Update
+    video.addEventListener('loadedmetadata', () => {
+      if (durationDisplay) durationDisplay.textContent = formatTime(video.duration || 0);
+    });
+
     video.addEventListener('timeupdate', () => {
-      if (!video.duration) return;
-      const progress = (video.currentTime / video.duration) * 100;
-      if (scrubber) scrubber.value = progress;
-      if (timeDisplay) {
-        timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      if (timeDisplay) timeDisplay.textContent = formatTime(video.currentTime);
+      if (scrubber && video.duration) {
+        const percent = (video.currentTime / video.duration) * 100;
+        scrubber.value = percent;
+        scrubber.style.setProperty('--seek-progress', `${percent}%`);
       }
     });
 
     scrubber?.addEventListener('input', (e) => {
-      if (!video.duration) return;
-      const targetTime = (e.target.value / 100) * video.duration;
-      video.currentTime = targetTime;
+      if (video.duration) {
+        const targetTime = (e.target.value / 100) * video.duration;
+        video.currentTime = targetTime;
+      }
     });
 
-    // Speed Selector
-    speedBtns.forEach(btn => {
+    speedButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        speedBtns.forEach(b => b.classList.remove('active'));
+        speedButtons.forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
-        const speed = parseFloat(btn.dataset.speed || '1');
-        video.playbackRate = speed;
+        video.playbackRate = parseFloat(btn.dataset.speed || '1');
       });
     });
 
-    // Switch Video Track
+    const videoTracks = [
+      'assets/profile-video.mp4',
+      'assets/portfolio-video.mp4'
+    ];
+    let currentTrackIdx = 0;
+
     switchTrackBtn?.addEventListener('click', () => {
-      activeTrack = activeTrack === 'profile' ? 'portfolio' : 'profile';
-      const currentSrc = tracks[activeTrack];
-      video.src = currentSrc;
+      currentTrackIdx = (currentTrackIdx + 1) % videoTracks.length;
+      const wasPlaying = !video.paused;
+      video.src = videoTracks[currentTrackIdx];
       video.load();
-      togglePlay();
-      showToast(`Switched to Track 0${activeTrack === 'profile' ? '1' : '2'} (${activeTrack === 'profile' ? 'Profile Video' : 'Portfolio Video'})`, 'info');
+      if (wasPlaying) {
+        video.play().catch(() => {});
+      }
     });
 
-    // Fullscreen
     fullscreenBtn?.addEventListener('click', () => {
       if (!document.fullscreenElement) {
-        videoStage.requestFullscreen?.() || videoStage.webkitRequestFullscreen?.();
+        videoStage.requestFullscreen?.().catch(() => {});
       } else {
-        document.exitFullscreen?.() || document.webkitExitFullscreen?.();
+        document.exitFullscreen?.().catch(() => {});
       }
     });
 
-    // Reticle Mouse Follower on Stage
-    videoStage.addEventListener('mousemove', (e) => {
-      const rect = videoStage.getBoundingClientRect();
-      const x = Math.round(e.clientX - rect.left);
-      const y = Math.round(e.clientY - rect.top);
-      if (reticleCoords) {
-        reticleCoords.textContent = `TARGET LOC: [${x}px, ${y}px]`;
-      }
-      if (targetReticle) {
-        targetReticle.style.transform = `translate(${x - rect.width / 2}px, ${y - rect.height / 2}px)`;
-      }
-    });
+    if (window.matchMedia('(hover: hover)').matches) {
+      videoStage.addEventListener('mousemove', (e) => {
+        if (!targetReticle) return;
+        const rect = videoStage.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        targetReticle.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+      });
 
-    videoStage.addEventListener('mouseleave', () => {
-      if (targetReticle) {
-        targetReticle.style.transform = `translate(0px, 0px)`;
-      }
-    });
+      videoStage.addEventListener('mouseleave', () => {
+        if (targetReticle) {
+          targetReticle.style.transform = `translate(0px, 0px)`;
+        }
+      });
+    }
 
     // 200 FPS Telemetry Counter & Waveform Visualizer
     let lastFrameTime = performance.now();
     let currentFps = 200.0;
+    let isMotionLabInView = false;
+    let telemetryAnimId = null;
 
     const waveformCtx = waveformCanvas?.getContext('2d');
-    const bands = 48;
+    const bands = 36;
     const bandHeights = new Array(bands).fill(10);
+    let cachedWaveformWidth = 600;
+    let cachedWaveformHeight = 56;
+
+    const updateWaveformDimensions = () => {
+      if (waveformCanvas) {
+        cachedWaveformWidth = waveformCanvas.width = waveformCanvas.clientWidth || 600;
+        cachedWaveformHeight = waveformCanvas.height = 56;
+      }
+    };
+    updateWaveformDimensions();
+
+    let resizeWaveformTimeout = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeWaveformTimeout);
+      resizeWaveformTimeout = setTimeout(updateWaveformDimensions, 150);
+    }, { passive: true });
 
     const renderMotionTelemetry = (now) => {
+      if (!isMotionLabInView) return;
+
       if (now - lastFrameTime >= 500) {
         currentFps = 198.2 + Math.random() * 2.8;
         if (fpsCounter) {
@@ -533,13 +580,13 @@ document.addEventListener('DOMContentLoaded', () => {
         lastFrameTime = now;
       }
 
-      // Draw audio waveform equalizer on canvas
+      // Draw audio waveform equalizer without layout thrashing
       if (waveformCtx && waveformCanvas) {
-        const w = (waveformCanvas.width = waveformCanvas.clientWidth || 600);
-        const h = (waveformCanvas.height = 56);
+        const w = cachedWaveformWidth;
+        const h = cachedWaveformHeight;
         waveformCtx.clearRect(0, 0, w, h);
 
-        const barWidth = (w / bands) - 3;
+        const barWidth = Math.max((w / bands) - 3, 2);
         const activeMultiplier = (!video.paused && !video.ended) ? 1.0 : 0.22;
 
         for (let i = 0; i < bands; i++) {
@@ -561,10 +608,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      requestAnimationFrame(renderMotionTelemetry);
+      telemetryAnimId = requestAnimationFrame(renderMotionTelemetry);
     };
 
-    requestAnimationFrame(renderMotionTelemetry);
+    // IntersectionObserver to avoid background CPU burn
+    const motionSection = document.getElementById('motion-lab');
+    if (motionSection) {
+      const motionObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isMotionLabInView = entry.isIntersecting;
+          if (isMotionLabInView) {
+            cancelAnimationFrame(telemetryAnimId);
+            telemetryAnimId = requestAnimationFrame(renderMotionTelemetry);
+          }
+        });
+      }, { threshold: 0.05 });
+      motionObs.observe(motionSection);
+    }
   };
 
   initMotionLab();
@@ -851,6 +911,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 04. 3D TILT & MOUSE SPOTLIGHT TRACKING
   // ===========================================================================
   const initCardEffects = () => {
+    // Only bind mouse tilt effects on pointer devices (skip on mobile touch)
+    if (window.matchMedia('(hover: none) or (pointer: coarse)').matches) return;
+
     const spotlightCards = document.querySelectorAll('.spotlight-card');
     const tiltCards = document.querySelectorAll('.tilt-card');
 
@@ -902,27 +965,44 @@ document.addEventListener('DOMContentLoaded', () => {
     let isTicking = false;
 
     const onScroll = () => {
+      const isMobile = window.innerWidth <= 768;
       const scrollTop = window.scrollY || root.scrollTop;
       const docHeight = root.scrollHeight - root.clientHeight;
       const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 
       root.style.setProperty('--scroll-progress', `${scrollPercent.toFixed(2)}%`);
-      root.style.setProperty('--glow-offset-y', `${(scrollTop * 0.15).toFixed(1)}px`);
 
-      if (heroSection) {
-        const heroHeight = heroSection.offsetHeight;
-        if (scrollTop <= heroHeight) {
-          const progress = scrollTop / heroHeight;
-          const rotateX = progress * -18;
-          const translateY = progress * 60;
-          const scale = 1 - progress * 0.08;
-          const opacity = Math.max(1 - progress * 1.1, 0.05);
+      // On mobile viewports, skip heavy 3D transform updates during touch scrolling
+      if (!isMobile) {
+        root.style.setProperty('--glow-offset-y', `${(scrollTop * 0.15).toFixed(1)}px`);
 
-          root.style.setProperty('--hero-rotate', `${rotateX.toFixed(2)}deg`);
-          root.style.setProperty('--hero-translate', `${translateY.toFixed(1)}px`);
-          root.style.setProperty('--hero-scale', `${scale.toFixed(3)}`);
-          root.style.setProperty('--hero-opacity', `${opacity.toFixed(2)}`);
+        if (heroSection) {
+          const heroHeight = heroSection.offsetHeight;
+          if (scrollTop <= heroHeight) {
+            const progress = scrollTop / heroHeight;
+            const rotateX = progress * -18;
+            const translateY = progress * 60;
+            const scale = 1 - progress * 0.08;
+            const opacity = Math.max(1 - progress * 1.1, 0.05);
+
+            root.style.setProperty('--hero-rotate', `${rotateX.toFixed(2)}deg`);
+            root.style.setProperty('--hero-translate', `${translateY.toFixed(1)}px`);
+            root.style.setProperty('--hero-scale', `${scale.toFixed(3)}`);
+            root.style.setProperty('--hero-opacity', `${opacity.toFixed(2)}`);
+          }
         }
+
+        const vhCenter = window.innerHeight / 2;
+        immersiveCards.forEach((card) => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.top + cardRect.height / 2;
+          const diff = (cardCenter - vhCenter) / vhCenter;
+
+          if (cardRect.top < window.innerHeight && cardRect.bottom > 0) {
+            const tiltAngle = Math.max(Math.min(diff * 4, 8), -8);
+            card.style.transform = `perspective(1000px) rotateX(${tiltAngle.toFixed(1)}deg)`;
+          }
+        });
       }
 
       // Dynamic Spiral Orbit & Trajectory Flow
@@ -940,18 +1020,6 @@ document.addEventListener('DOMContentLoaded', () => {
           spiralSpline.style.strokeDashoffset = `${offsetVal.toFixed(1)}`;
         }
       }
-
-      const vhCenter = window.innerHeight / 2;
-      immersiveCards.forEach((card) => {
-        const cardRect = card.getBoundingClientRect();
-        const cardCenter = cardRect.top + cardRect.height / 2;
-        const diff = (cardCenter - vhCenter) / vhCenter;
-
-        if (cardRect.top < window.innerHeight && cardRect.bottom > 0) {
-          const tiltAngle = Math.max(Math.min(diff * 4, 8), -8);
-          card.style.transform = `perspective(1000px) rotateX(${tiltAngle.toFixed(1)}deg)`;
-        }
-      });
 
       isTicking = false;
     };
@@ -1469,14 +1537,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Automatic Wisdom Spotlight Rotation (Every 6.5 seconds)
-    setInterval(() => {
-      currentSpotlightIdx = (currentSpotlightIdx + 1) % quotesArchive.length;
-      renderSpotlight(currentSpotlightIdx);
-    }, 6500);
+    let spotlightInterval = null;
+
+    const startSpotlightTimer = () => {
+      if (spotlightInterval) clearInterval(spotlightInterval);
+      spotlightInterval = setInterval(() => {
+        if (!isQuotesSectionInView) return;
+        currentSpotlightIdx = (currentSpotlightIdx + 1) % quotesArchive.length;
+        renderSpotlight(currentSpotlightIdx);
+      }, 6500);
+    };
 
     // Initialize 3D Depth Deck and Continuous Auto-play stream
     update3DDeck(false);
-    startProgressLoop();
+
+    let isQuotesSectionInView = false;
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      const quotesObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isQuotesSectionInView = entry.isIntersecting;
+          if (isQuotesSectionInView) {
+            if (isAutoPlaying) startProgressLoop();
+            startSpotlightTimer();
+          } else {
+            if (progressTimer) clearInterval(progressTimer);
+            if (spotlightInterval) clearInterval(spotlightInterval);
+          }
+        });
+      }, { threshold: 0.05 });
+      quotesObserver.observe(aboutSection);
+    } else {
+      startProgressLoop();
+      startSpotlightTimer();
+    }
   };
 
   initAboutQuotesController();
@@ -1620,35 +1714,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const certCards = document.querySelectorAll('.cert-interactive-card');
     const filterBtns = document.querySelectorAll('.cert-filter-btn');
 
-    // 1. Dynamic 3D Tilt & Holographic Prismatic Foil Movement
-    certCards.forEach((card) => {
-      const holoGlare = card.querySelector('.cert-holo-glare');
+    // 1. Dynamic 3D Tilt & Holographic Prismatic Foil Movement (Desktop only)
+    if (!window.matchMedia('(hover: none) or (pointer: coarse)').matches) {
+      certCards.forEach((card) => {
+        const holoGlare = card.querySelector('.cert-holo-glare');
 
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const cardX = e.clientX - rect.left;
-        const cardY = e.clientY - rect.top;
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const cardX = e.clientX - rect.left;
+          const cardY = e.clientY - rect.top;
 
-        // Normalized offsets from center: [-1, 1]
-        const normX = (cardX / rect.width - 0.5) * 2;
-        const normY = (cardY / rect.height - 0.5) * 2;
+          // Normalized offsets from center: [-1, 1]
+          const normX = (cardX / rect.width - 0.5) * 2;
+          const normY = (cardY / rect.height - 0.5) * 2;
 
-        const rotateX = -normY * 11; // Max 11 deg pitch
-        const rotateY = normX * 11;  // Max 11 deg yaw
+          const rotateX = -normY * 11; // Max 11 deg pitch
+          const rotateY = normX * 11;  // Max 11 deg yaw
 
-        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px) scale3d(1.02, 1.02, 1.02)`;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px) scale3d(1.02, 1.02, 1.02)`;
 
-        if (holoGlare) {
-          const posX = ((normX + 1) / 2) * 100;
-          const posY = ((normY + 1) / 2) * 100;
-          holoGlare.style.backgroundPosition = `${posX.toFixed(1)}% ${posY.toFixed(1)}%`;
-        }
+          if (holoGlare) {
+            const posX = ((normX + 1) / 2) * 100;
+            const posY = ((normY + 1) / 2) * 100;
+            holoGlare.style.backgroundPosition = `${posX.toFixed(1)}% ${posY.toFixed(1)}%`;
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
       });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
+    }
 
     // 2. Credential Category Filter Navigation
     filterBtns.forEach((btn) => {
@@ -1866,8 +1962,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    let isAvaiSectionInView = false;
+
     const drawNeuralGraph = () => {
-      if (!canvas || !ctx) return;
+      if (!canvas || !ctx || !isAvaiSectionInView) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const time = Date.now() * 0.002;
@@ -1958,7 +2056,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    drawNeuralGraph();
+    const avaiSection = document.getElementById('avai-creative-lab');
+    if (avaiSection) {
+      const avaiObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isAvaiSectionInView = entry.isIntersecting;
+          if (isAvaiSectionInView) {
+            cancelAnimationFrame(neuralAnimId);
+            neuralAnimId = requestAnimationFrame(drawNeuralGraph);
+          }
+        });
+      }, { threshold: 0.05 });
+      avaiObs.observe(avaiSection);
+    }
 
     // 3. Tab 2: 200 FPS Speed Drill Engine
     const drillQuestions = [
@@ -1998,6 +2108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let drillScore = 1250;
     let drillStreak = 3;
     let drillStartTime = performance.now();
+    let drillTimerInterval = null;
 
     const timerEl = document.getElementById('drill-timer');
     const scoreEl = document.getElementById('drill-score');
@@ -2007,17 +2118,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const qTitleEl = document.getElementById('drill-q-title');
     const optGrid = document.getElementById('drill-options-grid');
 
-    setInterval(() => {
-      if (!timerEl) return;
-      const elapsedSec = ((performance.now() - drillStartTime) / 1000).toFixed(3);
-      timerEl.textContent = `${elapsedSec.padStart(6, '0')}s`;
-    }, 25);
+    const startDrillTimer = () => {
+      if (drillTimerInterval) clearInterval(drillTimerInterval);
+      drillStartTime = performance.now();
+      drillTimerInterval = setInterval(() => {
+        if (!timerEl) return;
+        const elapsedSec = ((performance.now() - drillStartTime) / 1000).toFixed(3);
+        timerEl.textContent = `${elapsedSec.padStart(6, '0')}s`;
+      }, 50);
+    };
+
+    const stopDrillTimer = () => {
+      if (drillTimerInterval) {
+        clearInterval(drillTimerInterval);
+        drillTimerInterval = null;
+      }
+    };
 
     const loadDrillQuestion = (idx) => {
       const qData = drillQuestions[idx % drillQuestions.length];
       if (!qData || !qTitleEl || !optGrid) return;
 
-      drillStartTime = performance.now();
+      startDrillTimer();
       if (qTagEl) qTagEl.textContent = qData.tag;
       qTitleEl.textContent = qData.q;
 
@@ -2036,6 +2158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       optGrid.querySelectorAll('.drill-opt-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
+          stopDrillTimer();
           const isCorrect = btn.dataset.correct === 'true';
           const elapsed = ((performance.now() - drillStartTime) / 1000).toFixed(3);
 
