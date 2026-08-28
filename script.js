@@ -18,9 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const initBackgroundCanvas = () => {
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
     
-    let isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+    if (isMobile) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
     let prevInnerWidth = window.innerWidth;

@@ -4643,7 +4643,12 @@ img {
 
 @media (max-width: 768px) {
   :root {
-    --glass-blur: blur(8px);
+    --glass-blur: none !important;
+  }
+
+  /* 1. Stop heavy background canvas rendering and composite glittering on mobile */
+  #bg-canvas {
+    display: none !important;
   }
 
   .grain-overlay {
@@ -4654,9 +4659,52 @@ img {
     display: none !important;
   }
 
+  /* 2. Remove continuous text shimmer / drop-shadow pulsing on mobile (eliminates text glittering) */
+  .greeting-hi-bangers,
+  .greeting-myself-guarantia,
+  .greeting-name-bukhari {
+    animation: none !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6)) !important;
+  }
+
+  /* 3. Remove rotating conic borders, laser sweeps & floating animations on mobile */
+  .conic-border-glow::before {
+    animation: none !important;
+    background: var(--border-medium) !important;
+  }
+
+  .wisdom-spotlight-shimmer,
+  .laser-scan-bar,
+  .laser-glow-bar {
+    display: none !important;
+  }
+
+  .cert-float-1,
+  .cert-float-2,
+  .cert-float-3 {
+    animation: none !important;
+  }
+
+  /* 4. Disable backdrop-filter across all card surfaces on mobile to prevent GPU tile glittering */
+  .glass-card,
+  .bento-card,
+  .project-card,
+  .academic-cert-card,
+  .interactive-terminal,
+  .spotlight-card,
+  .navbar,
+  .mobile-drawer,
+  .floating-dock,
+  .quote-3d-card,
+  .wisdom-spotlight-box {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(10, 15, 29, 0.95) !important;
+  }
+
   .ambient-glow {
-    filter: blur(50px) !important;
-    opacity: 0.15 !important;
+    filter: blur(40px) !important;
+    opacity: 0.12 !important;
     transform: none !important;
   }
 
