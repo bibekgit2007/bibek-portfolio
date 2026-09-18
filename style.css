@@ -6474,4 +6474,95 @@ img {
   }
 }
 
+/* =============================================================================
+   MOBILE PERFORMANCE & HARDWARE ACCELERATION ENGINE
+   Eliminates all mobile glitching, layout thrashing, and GPU thermal throttling
+   ============================================================================= */
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  /* 1. Eliminate heavy full-screen noise layers and background canvas overdraw */
+  .grain-overlay,
+  #bg-canvas,
+  .ambient-glow,
+  .glow-top,
+  .glow-bottom,
+  .spotlight-pointer,
+  .aceternity-tracing-beam-container,
+  .tracing-beam-container {
+    display: none !important;
+  }
+
+  /* 2. Replace costly backdrop-filter blurs with crisp, fast, opaque surfaces */
+  .navbar,
+  .navbar.scrolled {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: #0b1122 !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .glass-card,
+  .quote-card-luxury,
+  .cert-interactive-card,
+  .project-card,
+  .project-card-inner,
+  .immersive-scroll-card,
+  .mobile-drawer,
+  .timeline-card,
+  .about-story,
+  .about-facts,
+  .skill-category-card,
+  .stat-card,
+  .hero-cse-dept-banner,
+  .profile-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #0e1526 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    transform: none !important;
+  }
+
+  /* 3. Disable continuous 3D perspective transforms during mobile touch scroll */
+  .hero-section,
+  .hero-container,
+  .immersive-hero-parallax {
+    perspective: none !important;
+    transform: none !important;
+    transform-style: flat !important;
+  }
+
+  /* 4. Touch-optimized scrolling and zero horizontal glitch */
+  html, body {
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: none;
+    touch-action: pan-y;
+  }
+
+  /* 5. Smooth, responsive card transitions without 3D tilt overhead */
+  .tilt-card .project-card-inner,
+  .spotlight-card {
+    transform: none !important;
+    transition: transform var(--transition-fast) !important;
+  }
+
+  /* 6. Lightweight quotes stage on mobile */
+  .quotes-3d-stage {
+    perspective: none !important;
+  }
+
+  .quote-card-luxury[data-stack-pos="0"] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .quote-card-luxury[data-stack-pos="1"],
+  .quote-card-luxury[data-stack-pos="2"],
+  .quote-card-luxury[data-stack-pos="3"],
+  .quote-card-luxury[data-stack-pos="hidden-back"] {
+    display: none !important;
+  }
+}
+
+
 

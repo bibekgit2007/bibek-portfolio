@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) return;
     
-    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
-    if (isMobile) {
+    const isTouchOrMobile = window.innerWidth <= 1024 || window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
+    if (isTouchOrMobile) {
       canvas.style.display = 'none';
       return;
     }
@@ -401,8 +401,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeLine = document.getElementById('tracing-beam-active-line');
     if (!beamContainer || !laserDot) return;
 
+    if (window.innerWidth <= 1024 || window.matchMedia('(pointer: coarse)').matches) {
+      beamContainer.style.display = 'none';
+      return;
+    }
+
+    let isTicking = false;
     const updateBeam = () => {
-      if (window.innerWidth <= 768) return;
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollHeight > 0 ? Math.min(Math.max(scrollTop / scrollHeight, 0), 1) : 0;
@@ -413,10 +418,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const containerHeight = beamContainer.clientHeight || window.innerHeight;
         activeLine.setAttribute('y2', `${(progress * containerHeight).toFixed(1)}`);
       }
+      isTicking = false;
     };
 
-    window.addEventListener('scroll', updateBeam, { passive: true });
-    window.addEventListener('resize', updateBeam, { passive: true });
+    window.addEventListener('scroll', () => {
+      if (!isTicking) {
+        window.requestAnimationFrame(updateBeam);
+        isTicking = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      if (!isTicking) {
+        window.requestAnimationFrame(updateBeam);
+        isTicking = true;
+      }
+    }, { passive: true });
+
     updateBeam();
   };
 
@@ -751,14 +769,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let isTicking = false;
 
     const onScroll = () => {
-      const isMobile = window.innerWidth <= 768;
+      const isMobile = window.innerWidth <= 1024 || window.matchMedia('(pointer: coarse)').matches;
       const scrollTop = window.scrollY || root.scrollTop;
       const docHeight = root.scrollHeight - root.clientHeight;
       const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 
       root.style.setProperty('--scroll-progress', `${scrollPercent.toFixed(2)}%`);
 
-      // On mobile viewports, skip heavy 3D transform updates during touch scrolling
+      // On mobile viewports, skip heavy 3D transform updates and layout bounding rects to prevent GPU throttling
       if (!isMobile) {
         root.style.setProperty('--glow-offset-y', `${(scrollTop * 0.15).toFixed(1)}px`);
 
@@ -789,21 +807,21 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = `perspective(1000px) rotateX(${tiltAngle.toFixed(1)}deg)`;
           }
         });
-      }
 
-      // Dynamic Spiral Orbit & Trajectory Flow
-      if (spiralWrapper && spiralSpline) {
-        const rect = spiralWrapper.getBoundingClientRect();
-        const winHeight = window.innerHeight;
+        // Dynamic Spiral Orbit & Trajectory Flow on Desktop
+        if (spiralWrapper && spiralSpline) {
+          const rect = spiralWrapper.getBoundingClientRect();
+          const winHeight = window.innerHeight;
 
-        if (rect.top <= winHeight && rect.bottom >= 0) {
-          const totalDistance = rect.height + winHeight;
-          const currentProgress = (winHeight - rect.top) / totalDistance;
-          const clamped = Math.min(Math.max(currentProgress, 0), 1);
-          
-          // Animate spiral stroke offset & radar rings
-          const offsetVal = 1200 * (1 - clamped);
-          spiralSpline.style.strokeDashoffset = `${offsetVal.toFixed(1)}`;
+          if (rect.top <= winHeight && rect.bottom >= 0) {
+            const totalDistance = rect.height + winHeight;
+            const currentProgress = (winHeight - rect.top) / totalDistance;
+            const clamped = Math.min(Math.max(currentProgress, 0), 1);
+            
+            // Animate spiral stroke offset & radar rings
+            const offsetVal = 1200 * (1 - clamped);
+            spiralSpline.style.strokeDashoffset = `${offsetVal.toFixed(1)}`;
+          }
         }
       }
 
@@ -1044,11 +1062,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (progressFillEl) progressFillEl.style.width = '0%';
 
       if (progressTimer) clearInterval(progressTimer);
-      const stepMs = 40;
+      const isMobileDevice = window.innerWidth <= 768;
+      const stepMs = isMobileDevice ? 100 : 40;
       const stepIncrement = (stepMs / AUTO_PLAY_INTERVAL) * 100;
 
       progressTimer = setInterval(() => {
-        if (!isAutoPlaying || viewMode !== 'deck') return;
+        if (!isQuotesSectionInView || !isAutoPlaying || viewMode !== 'deck') return;
         progressValue += stepIncrement;
         if (progressFillEl) progressFillEl.style.width = `${Math.min(progressValue, 100)}%`;
 
@@ -2219,6 +2238,31 @@ document.addEventListener('DOMContentLoaded', () => {
       progressCircle.style.strokeDashoffset = circumference;
     }
 
+    // High-Performance Section Spy with Zero Layout-Thrashing (IntersectionObserver)
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const activeId = entry.target.getAttribute('id');
+          navLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${activeId}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+          mobileLinks.forEach((link) => {
+            if (link.getAttribute('href') === `#${activeId}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+
+    sections.forEach((sec) => sectionObserver.observe(sec));
+
     let isTicking = false;
     window.addEventListener('scroll', () => {
       if (!isTicking) {
@@ -2238,27 +2282,11 @@ document.addEventListener('DOMContentLoaded', () => {
             progressCircle.style.strokeDashoffset = offset;
           }
 
-          let currentSectionId = '';
-          sections.forEach((section) => {
-            const sectionTop = section.offsetTop - 140;
-            const sectionHeight = section.offsetHeight;
-            if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
-              currentSectionId = section.getAttribute('id');
-            }
-          });
-
-          navLinks.forEach((link) => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSectionId}`) {
-              link.classList.add('active');
-            }
-          });
-
           isTicking = false;
         });
         isTicking = true;
       }
-    });
+    }, { passive: true });
 
     backToTopBtn?.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
