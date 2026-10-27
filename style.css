@@ -2098,6 +2098,859 @@ body.admin-mode-active .admin-only {
 }
 
 /* -----------------------------------------------------------------------------
+   14B. BOTANICAL PRESENCE STRIP & AUDIO TOGGLE
+   ----------------------------------------------------------------------------- */
+.presence-strip-container {
+  margin-top: 3.5rem;
+}
+
+.botanical-presence-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-pill);
+  padding: 0.95rem 2rem;
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.presence-col {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.presence-pulse-sprout {
+  font-size: 0.85rem;
+  animation: sproutPulse 2s infinite ease-in-out;
+}
+
+.presence-icon-symbol {
+  font-size: 1.15rem;
+}
+
+.presence-meta-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+}
+
+.presence-meta-val {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--moss-darkest);
+}
+
+.presence-divider-stem {
+  width: 1px;
+  height: 28px;
+  background: var(--border-organic);
+}
+
+.nature-audio-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-organic);
+  color: var(--moss-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.nature-audio-btn:hover {
+  background: var(--bg-surface-warm);
+  transform: scale(1.08);
+  border-color: var(--border-moss);
+}
+
+/* -----------------------------------------------------------------------------
+   14C. PHILOSOPHICAL PILLARS (ŚRADDHĀ & FIRST PRINCIPLES)
+   ----------------------------------------------------------------------------- */
+.pillars-master-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+.pillar-box-nature {
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-md);
+  padding: 1.85rem 1.65rem;
+  box-shadow: var(--shadow-subtle);
+  transition: all var(--trans-smooth);
+}
+
+.pillar-box-nature:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-moss);
+  box-shadow: var(--shadow-card);
+}
+
+.pillar-sprout-icon {
+  font-size: 1.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.pillar-name {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--moss-darkest);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.pillar-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* -----------------------------------------------------------------------------
+   14D. THE BOTANICAL READING ROOM // GUIDING MINDS & PHILOSOPHERS
+   ----------------------------------------------------------------------------- */
+.reading-room-container {
+  margin-top: 4.5rem;
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-tint-sage) 100%);
+  border: 1px solid var(--border-moss);
+  border-radius: var(--radius-xl);
+  padding: 2.75rem 2.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.reading-room-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.reading-room-title {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 600;
+  color: var(--moss-darkest);
+}
+
+.reading-room-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.reading-quote-plate {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2.25rem 2rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+.reading-glyph {
+  position: absolute;
+  top: 0.5rem;
+  left: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  color: var(--sage-muted);
+  opacity: 0.45;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.reading-quote-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.3vw, 1.5rem);
+  font-style: italic;
+  color: var(--moss-darkest);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.reading-author-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.author-monogram-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--moss-primary);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  box-shadow: 0 4px 10px rgba(45, 76, 56, 0.2);
+}
+
+.author-name-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--moss-darkest);
+  line-height: 1.2;
+}
+
+.author-meta-text {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.author-domain-pill {
+  margin-left: auto;
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: var(--bg-tint-sage);
+  color: var(--moss-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+/* -----------------------------------------------------------------------------
+   14E. AVAI PREPARATION NATURE LAB & INTERACTIVE SIMULATOR
+   ----------------------------------------------------------------------------- */
+.avai-nature-banner {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-xl);
+  padding: 2.75rem 2.5rem;
+  box-shadow: var(--shadow-card);
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+
+.avai-banner-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.avai-emblem-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--bg-surface-warm);
+  border: 2px solid var(--border-moss);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+}
+
+.avai-pill-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  margin-bottom: 0.45rem;
+}
+
+.avai-title-text {
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 700;
+  color: var(--moss-darkest);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.avai-lead-text {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.avai-links-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avai-stats-trio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-left: 1px solid var(--border-subtle);
+  padding-left: 2.5rem;
+}
+
+.stat-unit {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-big-val {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.stat-caption {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* AVAI Simulator Box */
+.avai-simulator-box {
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 3.5rem;
+}
+
+.simulator-top-bar {
+  background: var(--bg-surface-warm);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.sim-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--moss-primary);
+  font-weight: 600;
+}
+
+.sim-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sage-primary);
+}
+
+.sim-tabs-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sim-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.sim-tab-btn:hover {
+  color: var(--moss-primary);
+}
+
+.sim-tab-btn.active {
+  background: var(--moss-primary);
+  color: #ffffff;
+}
+
+.simulator-body {
+  padding: 2rem;
+}
+
+.sim-pane {
+  display: none;
+}
+
+.sim-pane.active {
+  display: block;
+}
+
+/* Tab 1: Neural Graph */
+.neural-pane-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.neural-canvas-stage {
+  background: #ffffff;
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-telemetry-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.nature-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  background: #fdfcf9;
+}
+
+.canvas-hint {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+.neural-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-title {
+  font-size: 0.75rem;
+  color: var(--terracotta);
+  letter-spacing: 0.05em;
+}
+
+.topic-chips-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topic-seed-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.topic-seed-btn:hover,
+.topic-seed-btn.active {
+  background: var(--bg-tint-sage);
+  border-color: var(--border-moss);
+  color: var(--moss-primary);
+}
+
+.active-node-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  font-size: 0.78rem;
+}
+
+.active-node-tag {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.active-node-desc {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Tab 2: Speed Drill */
+.drill-telemetry-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.82rem;
+}
+
+.drill-question-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+}
+
+.drill-q-kicker {
+  font-size: 0.72rem;
+  color: var(--terracotta);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.drill-q-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--moss-darkest);
+  line-height: 1.35;
+  margin-bottom: 1.5rem;
+}
+
+.drill-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.drill-opt-btn {
+  background: var(--bg-surface-warm);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+  font-size: 0.92rem;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.drill-opt-btn:hover {
+  background: var(--bg-tint-sage);
+  border-color: var(--border-moss);
+}
+
+.drill-opt-btn.correct {
+  background: #e2ede5;
+  border-color: var(--moss-primary);
+  color: var(--moss-darkest);
+  font-weight: 600;
+}
+
+.drill-opt-btn.wrong {
+  background: #fcedea;
+  border-color: var(--terracotta);
+  color: #9c452b;
+}
+
+.drill-feedback-pill {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Tab 3: Readiness Radar */
+.radar-pane-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.radar-canvas-center {
+  display: flex;
+  justify-content: center;
+}
+
+.radar-bars-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 0.8rem;
+}
+
+.radar-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.radar-summary-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* AVAI 4 Phases */
+.avai-phases-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.phase-unit {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.25rem;
+}
+
+.phase-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.phase-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--moss-darkest);
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.phase-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* -----------------------------------------------------------------------------
+   14F. 52-WEEK BOTANICAL COMMIT HEATMAP
+   ----------------------------------------------------------------------------- */
+.heatmap-botanical-card {
+  margin-top: 4.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+.heatmap-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.heatmap-main-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--moss-darkest);
+  margin-bottom: 0.25rem;
+}
+
+.heatmap-sub-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.heatmap-legend-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.legend-leaf,
+.heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  transition: transform var(--trans-fast);
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.4);
+  z-index: 5;
+}
+
+.lvl-0 { background: #ede8dc; }
+.lvl-1 { background: #cbd8cf; }
+.lvl-2 { background: #8ca695; }
+.lvl-3 { background: #446e53; }
+.lvl-4 { background: #1f3627; }
+
+.heatmap-scroll-area {
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 12px);
+  grid-auto-flow: column;
+  grid-auto-columns: 12px;
+  gap: 4px;
+  width: max-content;
+}
+
+.heatmap-footer-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* -----------------------------------------------------------------------------
+   14G. BOTANICAL FIELD TERMINAL & INTERACTIVE CLI
+   ----------------------------------------------------------------------------- */
+.botanical-terminal-box {
+  background: #14221a;
+  border: 1px solid var(--border-moss);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(19, 34, 24, 0.35);
+  font-family: var(--font-mono);
+}
+
+.term-title-bar {
+  background: #0d1711;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(98, 130, 110, 0.2);
+}
+
+.term-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.t-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #e06c55; }
+.dot-yellow { background: #e8a84c; }
+.dot-green { background: #4caf50; }
+
+.term-title-text {
+  font-size: 0.78rem;
+  color: #a4beae;
+}
+
+.term-status-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #68d391;
+  background: rgba(104, 211, 145, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-xs);
+}
+
+.term-quick-chips {
+  background: rgba(20, 34, 26, 0.6);
+  border-bottom: 1px solid rgba(98, 130, 110, 0.15);
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.chip-hint {
+  font-size: 0.72rem;
+  color: #8ca695;
+  margin-right: 0.25rem;
+}
+
+.term-cmd-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd8cf;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.term-cmd-chip:hover {
+  background: var(--moss-primary);
+  color: #ffffff;
+}
+
+.term-body {
+  padding: 1.5rem;
+  min-height: 280px;
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.term-output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  color: #e2ede5;
+}
+
+.term-line {
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.term-prompt-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.term-prompt-prefix {
+  font-weight: 700;
+  color: #68d391;
+}
+
+.term-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  caret-color: #68d391;
+}
+
+/* -----------------------------------------------------------------------------
    15. RESPONSIVE DESIGN & MOBILE OPTIMIZATIONS
    ----------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
@@ -2117,6 +2970,28 @@ body.admin-mode-active .admin-only {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+  .pillars-master-row {
+    grid-template-columns: 1fr;
+  }
+  .avai-nature-banner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .avai-stats-trio {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 1.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .neural-pane-layout,
+  .radar-pane-layout {
+    grid-template-columns: 1fr;
+  }
+  .avai-phases-row {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -2154,6 +3029,17 @@ body.admin-mode-active .admin-only {
   .admin-hud-inner {
     justify-content: center;
     gap: 0.5rem;
+  }
+  .botanical-presence-card {
+    border-radius: var(--radius-lg);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .presence-divider-stem {
+    display: none;
+  }
+  .avai-phases-row {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -82,17 +82,23 @@
       <!-- Desktop Navigation Menu -->
       <nav class="nature-nav" aria-label="Main Navigation">
         <ul class="nav-links">
-          <li><a href="#about" class="nav-item">About</a></li>
+          <li><a href="#about" class="nav-item">About &amp; Ethos</a></li>
           <li><a href="#journey" class="nav-item">Growth Path</a></li>
+          <li><a href="#creativity" class="nav-item">AVAI Lab</a></li>
           <li><a href="#certificates" class="nav-item">Achievements</a></li>
           <li><a href="#skills" class="nav-item">Disciplines</a></li>
           <li><a href="#projects" class="nav-item">Cultivated Works</a></li>
+          <li><a href="#terminal" class="nav-item">Field CLI</a></li>
           <li><a href="#contact" class="nav-item">Contact</a></li>
         </ul>
       </nav>
 
       <!-- Quick Actions -->
       <div class="header-actions">
+        <!-- Mechanical Sound Toggle -->
+        <button id="audio-toggle-btn" class="nature-audio-btn" title="Toggle Mechanical Audio Clicks" aria-label="Toggle Sound">
+          <span id="audio-icon">🔊</span>
+        </button>
         <a href="#contact" class="btn btn-terracotta btn-sm">
           <span>Plant a Seed</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -108,11 +114,13 @@
   <!-- Mobile Drawer -->
   <div class="mobile-menu-drawer" id="mobile-drawer" aria-hidden="true">
     <nav class="mobile-nav-links">
-      <a href="#about" class="mobile-link">About &amp; Journey</a>
+      <a href="#about" class="mobile-link">About &amp; Ethos</a>
       <a href="#journey" class="mobile-link">Growth Path &amp; Academics</a>
+      <a href="#creativity" class="mobile-link">AVAI Preparation Lab</a>
       <a href="#certificates" class="mobile-link">Certificates &amp; Achievements</a>
       <a href="#skills" class="mobile-link">Botanical Disciplines</a>
       <a href="#projects" class="mobile-link">Cultivated Works</a>
+      <a href="#terminal" class="mobile-link">Botanical Field CLI</a>
       <a href="#contact" class="mobile-link">Get in Touch</a>
     </nav>
     <div class="mobile-drawer-footer">
@@ -242,6 +250,51 @@
         </div>
 
       </div>
+
+      <!-- ======================================================================
+           BOTANICAL PRESENCE & LIVE FIELD STRIP
+           ====================================================================== -->
+      <div class="nature-container presence-strip-container">
+        <div class="botanical-presence-card">
+          <div class="presence-col">
+            <span class="presence-pulse-sprout">🟢</span>
+            <div>
+              <span class="presence-meta-label font-mono">ACTIVE FIELD STATUS</span>
+              <span class="presence-meta-val">Coding in FIEM CSE Lab &bull; Building AVAI</span>
+            </div>
+          </div>
+
+          <div class="presence-divider-stem"></div>
+
+          <div class="presence-col">
+            <span class="presence-icon-symbol">📍</span>
+            <div>
+              <span class="presence-meta-label font-mono">LOCATION &amp; LIVE TIME</span>
+              <span class="presence-meta-val font-mono" id="botanical-ist-clock">Kolkata, WB (IST) — --:--:--</span>
+            </div>
+          </div>
+
+          <div class="presence-divider-stem"></div>
+
+          <div class="presence-col">
+            <span class="presence-icon-symbol">🌿</span>
+            <div>
+              <span class="presence-meta-label font-mono">CURRENT CULTIVATION</span>
+              <span class="presence-meta-val">Packet Inspection in C &amp; Bayesian AI</span>
+            </div>
+          </div>
+
+          <div class="presence-divider-stem"></div>
+
+          <div class="presence-col">
+            <span class="presence-icon-symbol">💻</span>
+            <div>
+              <span class="presence-meta-label font-mono">ENVIRONMENT &amp; TOOLS</span>
+              <span class="presence-meta-val font-mono">Ubuntu / Arch Linux &bull; Neovim &bull; VS Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Organic Botanical Divider -->
@@ -321,6 +374,65 @@
             </div>
           </article>
 
+        </div>
+
+        <!-- ====================================================================
+             CORE PHILOSOPHICAL PILLARS (ŚRADDHĀ & FIRST PRINCIPLES)
+             ==================================================================== -->
+        <div class="pillars-master-row">
+          <div class="pillar-box-nature">
+            <div class="pillar-sprout-icon">🎯</div>
+            <h4 class="pillar-name font-mono">ŚRADDHĀ (REVERENCE)</h4>
+            <p class="pillar-desc">Deep devotion to foundational sciences, mathematical purity, and learning without superficial shortcuts.</p>
+          </div>
+
+          <div class="pillar-box-nature">
+            <div class="pillar-sprout-icon">⚡</div>
+            <h4 class="pillar-name font-mono">FIRST PRINCIPLES</h4>
+            <p class="pillar-desc">Boiling problems down to elemental physical and mathematical truths rather than reasoning by analogy.</p>
+          </div>
+
+          <div class="pillar-box-nature">
+            <div class="pillar-sprout-icon">🛡️</div>
+            <h4 class="pillar-name font-mono">ZERO TRUST RIGOR</h4>
+            <p class="pillar-desc">Engineering resilient, self-verifying systems with uncompromising integrity and constant-time safety.</p>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             THE BOTANICAL READING ROOM // GUIDING MINDS & PHILOSOPHERS
+             ==================================================================== -->
+        <div class="reading-room-container">
+          <div class="reading-room-header">
+            <div>
+              <span class="section-kicker font-mono text-terracotta">// SCHOLAR'S ARBORETUM</span>
+              <h3 class="reading-room-title">Guiding Minds &amp; Timeless Wisdom</h3>
+            </div>
+            <div class="reading-room-actions">
+              <button type="button" class="btn btn-outline btn-sm" id="btn-shuffle-wisdom" title="Shuffle Quote">
+                <span>Inspire Me</span>
+                <span class="action-icon">🌿</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-copy-wisdom" title="Copy quote to clipboard">
+                <span id="copy-wisdom-text">Copy Quote</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="reading-quote-plate" id="reading-quote-plate">
+            <div class="reading-glyph" aria-hidden="true">“</div>
+            <blockquote class="reading-quote-text" id="active-wisdom-quote">
+              “Software is a magnificent combination between artistry and engineering. Patience, continuous learning, and curiosity are the keys to revolutionizing the world.”
+            </blockquote>
+            <div class="reading-author-row">
+              <div class="author-monogram-circle" id="active-wisdom-monogram">BG</div>
+              <div>
+                <h4 class="author-name-text" id="active-wisdom-name">Bill Gates</h4>
+                <p class="author-meta-text font-mono" id="active-wisdom-title">Co-Founder of Microsoft &bull; Global Technologist</p>
+              </div>
+              <span class="author-domain-pill font-mono" id="active-wisdom-domain">SOFTWARE CRAFT</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -463,18 +575,201 @@
       <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
         <path d="M0,30 Q300,5 600,30 T1200,30" fill="none" stroke="#cbd8cf" stroke-width="2" stroke-dasharray="4 6"></path>
       </svg>
+      <div class="divider-leaf-icon">🧠</div>
+    </div>
+
+    <!-- ========================================================================
+         04. CREATIVITY LAB // AVAI PREPARATION ARCHITECTURE & SIMULATOR
+         ======================================================================== -->
+    <section class="section-container" id="creativity">
+      <div class="nature-container">
+        
+        <div class="section-intro">
+          <span class="section-kicker font-mono">// 03. CREATIVE ARCHITECTURE &amp; RESEARCH</span>
+          <h2 class="section-title">AVAI Preparation: Adaptive Cognitive Lab</h2>
+          <p class="section-description">
+            A deep exploration into <strong>AVAI Preparation</strong> — an Autonomous Vision &amp; AI-driven adaptive exam, skill, and cognitive training engine built with sub-millisecond client telemetry.
+          </p>
+        </div>
+
+        <!-- AVAI Spotlight Botanical Card -->
+        <div class="avai-nature-banner">
+          <div class="avai-banner-left">
+            <div class="avai-emblem-circle">
+              <img src="assets/avai-logo.png" alt="AVAI Emblem" width="75" height="75">
+            </div>
+            <div>
+              <div class="avai-pill-tag font-mono">100% FREE &amp; OPEN-SOURCE INITIATIVE</div>
+              <h3 class="avai-title-text">Autonomous Vision &amp; AI-Driven Preparation Engine</h3>
+              <p class="avai-lead-text">
+                Engineered to eliminate costly paywalls and static question banks for learners worldwide, merging real-time multi-modal question synthesis, millisecond cognitive telemetry, and Bayesian knowledge tracing into a zero-dependency web runtime.
+              </p>
+              <div class="avai-links-row">
+                <a href="https://github.com/nayekdhananjoy1973-lab/avai_preparation" target="_blank" rel="noopener noreferrer" class="btn btn-moss btn-sm">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  <span>Explore on GitHub (Active Dev)</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="avai-stats-trio font-mono">
+            <div class="stat-unit">
+              <span class="stat-big-val text-moss">&lt; 8.5ms</span>
+              <span class="stat-caption">Inference Clocks</span>
+            </div>
+            <div class="stat-unit">
+              <span class="stat-big-val text-terracotta">200 FPS</span>
+              <span class="stat-caption">Telemetry Engine</span>
+            </div>
+            <div class="stat-unit">
+              <span class="stat-big-val text-moss">100%</span>
+              <span class="stat-caption">Zero Paywalls</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AVAI Interactive Live Simulator Console -->
+        <div class="avai-simulator-box" id="avai-simulator">
+          <div class="simulator-top-bar">
+            <div class="sim-badge font-mono">
+              <span class="sim-dot"></span>
+              <span>avai-core://telemetry-simulator/v2.4</span>
+            </div>
+            <div class="sim-tabs-nav" role="tablist">
+              <button class="sim-tab-btn active" data-tab="neural">🧠 Concept Graph</button>
+              <button class="sim-tab-btn" data-tab="drill">⚡ 200 FPS Speed Drill</button>
+              <button class="sim-tab-btn" data-tab="radar">📊 Readiness Radar</button>
+            </div>
+          </div>
+
+          <!-- Simulator Body -->
+          <div class="simulator-body">
+            
+            <!-- Tab 1: Neural Concept Synthesizer -->
+            <div class="sim-pane active" id="pane-sim-neural">
+              <div class="neural-pane-layout">
+                <div class="neural-canvas-stage">
+                  <div class="canvas-telemetry-hud font-mono">
+                    <span>SYNAPSES: <strong class="text-moss">SYNCHRONIZED</strong></span>
+                    <span id="neural-status-nodes">NODES: 12 ACTIVE</span>
+                  </div>
+                  <canvas id="avai-neural-canvas" width="600" height="300" class="nature-canvas"></canvas>
+                  <p class="canvas-hint font-mono">💡 Hover or drag nodes to observe dynamic neural cluster connections in real-time</p>
+                </div>
+                <div class="neural-sidebar">
+                  <h4 class="sidebar-title font-mono">// TOPIC SEED GENERATORS</h4>
+                  <div class="topic-chips-group">
+                    <button class="topic-seed-btn active" data-topic="security">🌱 Cyber Threat Modeling</button>
+                    <button class="topic-seed-btn" data-topic="ai">🧠 Neural Anomaly Vectors</button>
+                    <button class="topic-seed-btn" data-topic="algorithms">🧩 Graph Pathfinding in C</button>
+                    <button class="topic-seed-btn" data-topic="data">📊 Statistical Distributions</button>
+                  </div>
+                  <div class="active-node-box font-mono" id="active-node-box">
+                    <span class="active-node-tag text-moss" id="active-node-tag">ACTIVE NODE: ZERO-TRUST PROTOCOL</span>
+                    <p class="active-node-desc" id="active-node-desc">Cryptographic token validation verifying mutual authenticity before session socket creation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2: 200 FPS Speed Drill -->
+            <div class="sim-pane" id="pane-sim-drill">
+              <div class="drill-telemetry-strip font-mono">
+                <div><span>RESPONSE CLOCK:</span> <strong class="text-terracotta" id="drill-timer">00.000s</strong></div>
+                <div><span>STREAK:</span> <strong class="text-moss" id="drill-streak">3x Multiplier</strong></div>
+                <div><span>SCORE:</span> <strong class="text-moss" id="drill-score">1,250 PTS</strong></div>
+              </div>
+              <div class="drill-question-card">
+                <span class="drill-q-kicker font-mono">QUESTION #04 &bull; NETWORK PROTOCOLS &amp; DEFENSE</span>
+                <h4 class="drill-q-title">Which mechanism provides constant-time signature comparison to prevent timing side-channel attacks?</h4>
+                <div class="drill-options-grid" id="drill-options-grid">
+                  <button class="drill-opt-btn" data-correct="false">A. Standard strcmp() string evaluation</button>
+                  <button class="drill-opt-btn" data-correct="true">B. Bitwise XOR accumulator with fixed-time loop (HMAC verify)</button>
+                  <button class="drill-opt-btn" data-correct="false">C. Recursive hash table lookup with caching</button>
+                  <button class="drill-opt-btn" data-correct="false">D. Asynchronous socket promise resolution</button>
+                </div>
+                <div class="drill-feedback-pill font-mono" id="drill-feedback">
+                  <span>Select an option above to test real-time AVAI telemetry validation</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 3: Cognitive Readiness Radar -->
+            <div class="sim-pane" id="pane-sim-radar">
+              <div class="radar-pane-layout">
+                <div class="radar-canvas-center">
+                  <canvas id="avai-radar-canvas" width="320" height="320" class="nature-canvas"></canvas>
+                </div>
+                <div class="radar-bars-col font-mono">
+                  <h4 class="sidebar-title">// COGNITIVE MASTERY PROFILE</h4>
+                  <div class="radar-metric">
+                    <span>Threat Modeling &amp; Security: <strong>96%</strong></span>
+                    <div class="growth-track"><div class="growth-fill" style="width: 96%;"></div></div>
+                  </div>
+                  <div class="radar-metric">
+                    <span>Algorithmic Logic in C: <strong>92%</strong></span>
+                    <div class="growth-track"><div class="growth-fill" style="width: 92%;"></div></div>
+                  </div>
+                  <div class="radar-metric">
+                    <span>Real-Time Latency Optimization: <strong>98%</strong></span>
+                    <div class="growth-track"><div class="growth-fill" style="width: 98%;"></div></div>
+                  </div>
+                  <div class="radar-metric">
+                    <span>Data Pipeline Engineering: <strong>90%</strong></span>
+                    <div class="growth-track"><div class="growth-fill" style="width: 90%;"></div></div>
+                  </div>
+                  <p class="radar-summary-note">READINESS INDEX: <strong class="text-moss">94.0% (OPTIMAL FOR COMPETITIVE EXCELLENCE)</strong></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- AVAI 4-Phase Iterative Journey -->
+        <div class="avai-phases-row">
+          <div class="phase-unit">
+            <span class="phase-num font-mono">PHASE 01</span>
+            <h4 class="phase-name">Concept Genesis &amp; DAG Graphs</h4>
+            <p class="phase-desc">Architected knowledge graphs using directed acyclic structures (DAGs) to map multi-domain prerequisites.</p>
+          </div>
+          <div class="phase-unit">
+            <span class="phase-num font-mono">PHASE 02</span>
+            <h4 class="phase-name">Synthetic Data &amp; NLP Ingestion</h4>
+            <p class="phase-desc">Engineered question synthesis generators with randomized parameter bounds and edge-case fuzzing.</p>
+          </div>
+          <div class="phase-unit">
+            <span class="phase-num font-mono">PHASE 03</span>
+            <h4 class="phase-name">200 FPS Telemetry &amp; Canvas</h4>
+            <p class="phase-desc">Hardware-accelerated HTML5 Canvas rendering pipeline delivering sub-millisecond clock tracking.</p>
+          </div>
+          <div class="phase-unit">
+            <span class="phase-num font-mono">PHASE 04</span>
+            <h4 class="phase-name">Bayesian Knowledge Tracing</h4>
+            <p class="phase-desc">Implemented continuous difficulty recalibration loops based on candidate speed and accuracy metrics.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Organic Botanical Divider -->
+    <div class="botanical-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 Q300,5 600,30 T1200,30" fill="none" stroke="#cbd8cf" stroke-width="2" stroke-dasharray="4 6"></path>
+      </svg>
       <div class="divider-leaf-icon">📜</div>
     </div>
 
     <!-- ========================================================================
-         04. CERTIFICATES & ACHIEVEMENTS: 3D NATURAL GALLERY
+         05. CERTIFICATES & ACHIEVEMENTS: 3D NATURAL GALLERY
          ======================================================================== -->
     <section class="section-container" id="certificates">
       <div class="nature-container">
         
         <div class="section-intro-flex">
           <div>
-            <span class="section-kicker font-mono">// 03. PRESSED BOTANICAL SHOWROOM</span>
+            <span class="section-kicker font-mono">// 04. PRESSED BOTANICAL SHOWROOM</span>
             <h2 class="section-title">Verified Achievements &amp; Accreditations</h2>
             <p class="section-description">
               A curated 3D gallery of academic laurels, national honors, and technical credentials — naturally lit with gentle depth and perspective.
@@ -520,13 +815,13 @@
     </div>
 
     <!-- ========================================================================
-         05. DISCIPLINES & SKILLS (GROWTH METERS & BOTANICAL METRICES)
+         06. DISCIPLINES & SKILLS (GROWTH METERS & BOTANICAL METRICES)
          ======================================================================== -->
     <section class="section-container" id="skills">
       <div class="nature-container">
         
         <div class="section-intro">
-          <span class="section-kicker font-mono">// 04. FLORA OF COMPETENCIES</span>
+          <span class="section-kicker font-mono">// 05. FLORA OF COMPETENCIES</span>
           <h2 class="section-title">Technical Disciplines &amp; Tooling</h2>
           <p class="section-description">
             Disciplined mastery across systems programming, cyber defense, data science, and mathematical foundations.
@@ -693,6 +988,40 @@
 
         </div>
 
+        <!-- ====================================================================
+             52-WEEK BOTANICAL ENGINEERING COMMIT & LAB MATRIX
+             ==================================================================== -->
+        <div class="heatmap-botanical-card">
+          <div class="heatmap-header-row">
+            <div>
+              <span class="section-kicker font-mono text-terracotta">// CONTINUOUS GROWTH</span>
+              <h3 class="heatmap-main-title">Engineering Commit &amp; Lab Activity Matrix</h3>
+              <p class="heatmap-sub-text">100+ verified commits across cybersecurity drills, socket programming, and AI research repositories.</p>
+            </div>
+            <div class="heatmap-legend-box font-mono">
+              <span>Less</span>
+              <div class="legend-leaf lvl-0"></div>
+              <div class="legend-leaf lvl-1"></div>
+              <div class="legend-leaf lvl-2"></div>
+              <div class="legend-leaf lvl-3"></div>
+              <div class="legend-leaf lvl-4"></div>
+              <span>More</span>
+            </div>
+          </div>
+
+          <div class="heatmap-scroll-area">
+            <div class="heatmap-grid" id="github-heatmap-grid">
+              <!-- Dynamically generated 52-week activity cells with tooltips -->
+            </div>
+          </div>
+
+          <div class="heatmap-footer-strip font-mono">
+            <span>🔥 Streak: <strong>18 Days</strong></span>
+            <span>⚡ Focus: <strong>Python, C, JavaScript</strong></span>
+            <span>🛡️ Repos: <strong>5 Open-Source Labs</strong></span>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -705,13 +1034,13 @@
     </div>
 
     <!-- ========================================================================
-         06. CULTIVATED WORKS // FEATURED PROJECTS
+         07. CULTIVATED WORKS // FEATURED PROJECTS
          ======================================================================== -->
     <section class="section-container" id="projects">
       <div class="nature-container">
         
         <div class="section-intro">
-          <span class="section-kicker font-mono">// 05. CULTIVATED WORKS &amp; LABS</span>
+          <span class="section-kicker font-mono">// 06. CULTIVATED WORKS &amp; LABS</span>
           <h2 class="section-title">Grounded Projects &amp; Explorations</h2>
           <p class="section-description">
             Hand-crafted architectures in cybersecurity vulnerability prevention, adaptive exams, and data intelligence.
@@ -799,6 +1128,96 @@
             </div>
           </article>
 
+          <!-- Project 4: Automated Data Cleaning & EDA Pipeline -->
+          <article class="project-nature-card">
+            <div class="project-tag-strip font-mono">
+              <span>DATA SCIENCE</span>
+              <span>PREDICTIVE ML</span>
+            </div>
+            <h3 class="project-title">Exploratory Data Analytics &amp; Pipeline Engine</h3>
+            <p class="project-desc">
+              Automated outlier detection using IQR and Z-scores, feature correlation matrices, and reproducible Jupyter notebook generators built for rigorous data exploration.
+            </p>
+            <div class="project-tech-seeds font-mono">
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>NumPy</span>
+              <span>Scikit-Learn</span>
+            </div>
+            <div class="project-links-row">
+              <a href="https://github.com/bibekgit2007" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                <span>View Lab Code</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Organic Botanical Divider -->
+    <div class="botanical-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 Q300,5 600,30 T1200,30" fill="none" stroke="#cbd8cf" stroke-width="2" stroke-dasharray="4 6"></path>
+      </svg>
+      <div class="divider-leaf-icon">💻</div>
+    </div>
+
+    <!-- ========================================================================
+         08. BOTANICAL FIELD TERMINAL & INTERACTIVE CLI
+         ======================================================================== -->
+    <section class="section-container" id="terminal">
+      <div class="nature-container">
+        
+        <div class="section-intro">
+          <span class="section-kicker font-mono">// 07. INTERACTIVE FIELD SHELL</span>
+          <h2 class="section-title">The Botanical Terminal: Shell of First Principles</h2>
+          <p class="section-description">
+            Interact with Bibek's portfolio via an authentic Unix-style terminal CLI. Type <code>help</code>, <code>academics</code>, <code>certs</code>, <code>quotes</code>, or <code>admin</code>.
+          </p>
+        </div>
+
+        <div class="botanical-terminal-box">
+          <div class="term-title-bar">
+            <div class="term-dots">
+              <span class="t-dot dot-red"></span>
+              <span class="t-dot dot-yellow"></span>
+              <span class="t-dot dot-green"></span>
+            </div>
+            <div class="term-title-text font-mono">bibek@flora-fiem: ~ (zsh)</div>
+            <div class="term-status-badge font-mono">READY</div>
+          </div>
+
+          <!-- Quick Command Chips -->
+          <div class="term-quick-chips">
+            <span class="chip-hint font-mono">QUICK DISPATCH:</span>
+            <button type="button" class="term-cmd-chip" data-cmd="help">help</button>
+            <button type="button" class="term-cmd-chip" data-cmd="about">about</button>
+            <button type="button" class="term-cmd-chip" data-cmd="academics">academics</button>
+            <button type="button" class="term-cmd-chip" data-cmd="certs">certs</button>
+            <button type="button" class="term-cmd-chip" data-cmd="skills">skills</button>
+            <button type="button" class="term-cmd-chip" data-cmd="projects">projects</button>
+            <button type="button" class="term-cmd-chip" data-cmd="quotes">quotes</button>
+            <button type="button" class="term-cmd-chip" data-cmd="avai">avai</button>
+            <button type="button" class="term-cmd-chip" data-cmd="status">status</button>
+            <button type="button" class="term-cmd-chip" data-cmd="admin">admin</button>
+            <button type="button" class="term-cmd-chip" data-cmd="clear">clear</button>
+          </div>
+
+          <!-- Terminal Output & Prompt Body -->
+          <div class="term-body" id="botanical-terminal-body">
+            <div class="term-output" id="botanical-terminal-output">
+              <div class="term-line text-moss font-bold">🌿 Welcome to Bibek Bandhu Nayek's Botanical Field Shell v2.6.</div>
+              <div class="term-line">B.Tech CSE undergraduate at Future Institute of Engineering and Management (MAKAUT).</div>
+              <div class="term-line">Type <span class="text-terracotta font-bold">help</span> to inspect available commands or click quick dispatch chips above.</div>
+            </div>
+            
+            <form id="botanical-terminal-form" class="term-prompt-line">
+              <span class="term-prompt-prefix font-mono text-moss">bibek@flora-fiem:~$</span>
+              <input type="text" id="botanical-terminal-input" class="term-input font-mono" autofocus autocomplete="off" spellcheck="false">
+            </form>
+          </div>
         </div>
 
       </div>
@@ -813,7 +1232,7 @@
     </div>
 
     <!-- ========================================================================
-         07. CONTACT & INVITATION: PLANT A SEED
+         09. CONTACT & INVITATION: PLANT A SEED
          ======================================================================== -->
     <section class="section-container" id="contact">
       <div class="nature-container">
@@ -822,7 +1241,7 @@
           <div class="contact-grid">
             
             <div class="contact-copy-col">
-              <span class="section-kicker font-mono">// 06. CONNECT &amp; COLLABORATE</span>
+              <span class="section-kicker font-mono">// 08. CONNECT &amp; COLLABORATE</span>
               <h2 class="contact-heading">Let's plant a seed and build something meaningful.</h2>
               <p class="contact-subtext">
                 Whether you wish to discuss cybersecurity research, collaborate on open-source educational systems, or simply talk about computing and mathematics — my inbox is always open.
@@ -895,7 +1314,7 @@
   </main>
 
   <!-- ==========================================================================
-       08. BOTANICAL FOOTER
+       10. BOTANICAL FOOTER
        ========================================================================== -->
   <footer class="nature-footer">
     <div class="nature-container footer-inner">
@@ -922,7 +1341,7 @@
   </footer>
 
   <!-- ==========================================================================
-       09. LIGHTBOX MODAL FOR HIGH-RESOLUTION CERTIFICATE INSPECTION
+       11. LIGHTBOX MODAL FOR HIGH-RESOLUTION CERTIFICATE INSPECTION
        ========================================================================== -->
   <dialog id="certificate-lightbox" class="nature-dialog lightbox-dialog" aria-labelledby="lightbox-title">
     <div class="lightbox-card">
@@ -942,7 +1361,7 @@
   </dialog>
 
   <!-- ==========================================================================
-       10. OWNER PASSCODE AUTHENTICATION DIALOG (Default PIN: 2026)
+       12. OWNER PASSCODE AUTHENTICATION DIALOG (Default PIN: 2026)
        ========================================================================== -->
   <dialog id="owner-passcode-dialog" class="nature-dialog passcode-dialog" aria-labelledby="passcode-title">
     <div class="passcode-card">
@@ -990,7 +1409,7 @@
   </dialog>
 
   <!-- ==========================================================================
-       11. ADD/EDIT CERTIFICATE MODAL (Owner Only)
+       13. ADD/EDIT CERTIFICATE MODAL (Owner Only)
        ========================================================================== -->
   <dialog id="add-cert-dialog" class="nature-dialog form-dialog" aria-labelledby="add-cert-title">
     <div class="form-dialog-card">
@@ -1064,7 +1483,7 @@
   </dialog>
 
   <!-- ==========================================================================
-       12. PROFILE PHOTO MANAGER DIALOG (Owner Only)
+       14. PROFILE PHOTO MANAGER DIALOG (Owner Only)
        ========================================================================== -->
   <dialog id="avatar-manager-dialog" class="nature-dialog form-dialog" aria-labelledby="avatar-dialog-title">
     <div class="form-dialog-card">
@@ -1101,7 +1520,7 @@
   </dialog>
 
   <!-- ==========================================================================
-       13. EDIT JOURNEY NARRATIVE DIALOG (Owner Only)
+       15. EDIT JOURNEY NARRATIVE DIALOG (Owner Only)
        ========================================================================== -->
   <dialog id="edit-journey-dialog" class="nature-dialog form-dialog" aria-labelledby="edit-journey-title">
     <div class="form-dialog-card">
@@ -1136,7 +1555,7 @@
   </dialog>
 
   <!-- ==========================================================================
-       14. BACKUP & SYNC DIALOG (Owner Only)
+       16. BACKUP & SYNC DIALOG (Owner Only)
        ========================================================================== -->
   <dialog id="backup-dialog" class="nature-dialog form-dialog" aria-labelledby="backup-dialog-title">
     <div class="form-dialog-card">
@@ -1174,7 +1593,7 @@
   </dialog>
 
   <!-- ==========================================================================
-       15. CHANGE PASSCODE DIALOG (Owner Only)
+       17. CHANGE PASSCODE DIALOG (Owner Only)
        ========================================================================== -->
   <dialog id="change-pin-dialog" class="nature-dialog form-dialog" aria-labelledby="change-pin-title">
     <div class="form-dialog-card">

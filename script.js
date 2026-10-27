@@ -871,7 +871,627 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---------------------------------------------------------------------------
-  // 11. CONTACT FIELD NOTE FORM
+  // 11. LIVE IST CLOCK
+  // ---------------------------------------------------------------------------
+  const initLiveIstClock = () => {
+    const clockEl = document.getElementById('botanical-ist-clock');
+    if (!clockEl) return;
+    const update = () => {
+      const now = new Date();
+      const options = { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      const timeStr = now.toLocaleTimeString('en-US', options);
+      clockEl.textContent = `Kolkata, WB (IST) — ${timeStr}`;
+    };
+    update();
+    setInterval(update, 1000);
+  };
+
+  // ---------------------------------------------------------------------------
+  // 12. WISDOM READING ROOM & LUMINARY QUOTES
+  // ---------------------------------------------------------------------------
+  const WISDOM_QUOTES = [
+    {
+      author: 'Bill Gates',
+      monogram: 'BG',
+      title: 'Co-Founder of Microsoft • Global Technologist',
+      domain: 'SOFTWARE CRAFT',
+      quote: '“Software is a magnificent combination between artistry and engineering. Patience, continuous learning, and curiosity are the keys to revolutionizing the world.”'
+    },
+    {
+      author: 'Sir Isaac Newton',
+      monogram: 'IN',
+      title: 'Polymath • Pioneer of Calculus & Mechanics',
+      domain: 'MATHEMATICAL NATURALIS',
+      quote: '“If I have seen further than others, it is by standing upon the shoulders of Giants. What we know is a drop; what we do not know is an ocean.”'
+    },
+    {
+      author: 'Stephen Hawking',
+      monogram: 'SH',
+      title: 'Theoretical Physicist & Cosmologist',
+      domain: 'THEORETICAL FRONTIERS',
+      quote: '“Remember to look up at the stars and not down at your feet. Try to make sense of what you see and wonder about what makes the universe exist. Be curious. Intelligence is the ability to adapt to change.”'
+    },
+    {
+      author: 'Mahatma Gandhi',
+      monogram: 'MG',
+      title: 'Father of the Nation • Champion of Truth',
+      domain: 'UNWAVERING INTEGRITY',
+      quote: '“Live as if you were to die tomorrow. Learn as if you were to live forever. The future depends entirely on what you do today.”'
+    },
+    {
+      author: 'Elon Musk',
+      monogram: 'EM',
+      title: 'Chief Engineer @ SpaceX & Tesla',
+      domain: 'FIRST PRINCIPLES',
+      quote: '“When something is important enough, you do it even if the odds are not in your favor. Physics is the ultimate framework for first-principles thinking—boil things down to fundamental truths.”'
+    },
+    {
+      author: 'Swami Vivekananda',
+      monogram: 'SV',
+      title: 'Vedantic Philosopher & Global Teacher',
+      domain: 'VEDANTIC ETHOS',
+      quote: '“Arise, awake, and stop not till the goal is reached. Purity, patience, and perseverance are the three essentials to success, and above all: love.”'
+    }
+  ];
+
+  let currentWisdomIdx = 0;
+  const initWisdomReadingRoom = () => {
+    const quoteEl = document.getElementById('active-wisdom-quote');
+    const nameEl = document.getElementById('active-wisdom-name');
+    const titleEl = document.getElementById('active-wisdom-title');
+    const domainEl = document.getElementById('active-wisdom-domain');
+    const monoEl = document.getElementById('active-wisdom-monogram');
+    const shuffleBtn = document.getElementById('btn-shuffle-wisdom');
+    const copyBtn = document.getElementById('btn-copy-wisdom');
+    const copyText = document.getElementById('copy-wisdom-text');
+
+    const renderWisdom = (idx) => {
+      const q = WISDOM_QUOTES[idx];
+      if (!q || !quoteEl) return;
+      quoteEl.style.opacity = '0';
+      quoteEl.style.transform = 'translateY(6px)';
+      quoteEl.style.transition = 'all 0.25s ease';
+      setTimeout(() => {
+        quoteEl.textContent = q.quote;
+        if (nameEl) nameEl.textContent = q.author;
+        if (titleEl) titleEl.textContent = q.title;
+        if (domainEl) domainEl.textContent = q.domain;
+        if (monoEl) monoEl.textContent = q.monogram;
+        quoteEl.style.opacity = '1';
+        quoteEl.style.transform = 'translateY(0)';
+      }, 250);
+    };
+
+    shuffleBtn?.addEventListener('click', () => {
+      let nextIdx;
+      do {
+        nextIdx = Math.floor(Math.random() * WISDOM_QUOTES.length);
+      } while (nextIdx === currentWisdomIdx && WISDOM_QUOTES.length > 1);
+      currentWisdomIdx = nextIdx;
+      renderWisdom(currentWisdomIdx);
+    });
+
+    copyBtn?.addEventListener('click', async () => {
+      const q = WISDOM_QUOTES[currentWisdomIdx];
+      try {
+        await navigator.clipboard.writeText(`${q.quote} — ${q.author}`);
+        if (copyText) copyText.textContent = 'Copied!';
+        showToast('Quote copied to clipboard', '🌿');
+        setTimeout(() => {
+          if (copyText) copyText.textContent = 'Copy Quote';
+        }, 2000);
+      } catch (e) {
+        showToast('Failed to copy', '⚠️');
+      }
+    });
+  };
+
+  // ---------------------------------------------------------------------------
+  // 13. 52-WEEK BOTANICAL ENGINEERING COMMIT HEATMAP
+  // ---------------------------------------------------------------------------
+  const initGitHubActivityHeatmap = () => {
+    const grid = document.getElementById('github-heatmap-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    const totalDays = 52 * 7;
+    const today = new Date();
+
+    const commitSnippets = [
+      "feat: constant-time HMAC signature verify",
+      "perf: 200 FPS canvas telemetry synchronization",
+      "sec: raw socket SYN-flood anomaly audit",
+      "algo: Dijkstra benchmark in C",
+      "data: Bayesian knowledge tracing model",
+      "refactor: botanical theme design tokens"
+    ];
+
+    const fragment = document.createDocumentFragment();
+    for (let i = totalDays - 1; i >= 0; i--) {
+      const cellDate = new Date(today);
+      cellDate.setDate(today.getDate() - i);
+      const dateStr = cellDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+      const cell = document.createElement('div');
+      cell.className = 'heatmap-cell';
+
+      const rand = Math.random();
+      let level = 0;
+      let count = 0;
+      if (rand > 0.45) {
+        if (rand > 0.88) { level = 4; count = Math.floor(Math.random() * 4) + 6; }
+        else if (rand > 0.72) { level = 3; count = Math.floor(Math.random() * 3) + 3; }
+        else if (rand > 0.58) { level = 2; count = 2; }
+        else { level = 1; count = 1; }
+      }
+      cell.classList.add(`lvl-${level}`);
+
+      const snippet = commitSnippets[Math.floor(Math.random() * commitSnippets.length)];
+      cell.title = count > 0 
+        ? `${dateStr}: ${count} verified commit${count > 1 ? 's' : ''} (${snippet})`
+        : `${dateStr}: Rest & deep reading`;
+
+      fragment.appendChild(cell);
+    }
+    grid.appendChild(fragment);
+  };
+
+  // ---------------------------------------------------------------------------
+  // 14. AVAI PREPARATION INTERACTIVE SIMULATOR (CANVAS + DRILL + RADAR)
+  // ---------------------------------------------------------------------------
+  const initAvaiSimulatorEngine = () => {
+    // Tab Switching
+    const simTabBtns = document.querySelectorAll('.sim-tab-btn');
+    const simPanes = document.querySelectorAll('.sim-pane');
+
+    simTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        simTabBtns.forEach(b => b.classList.remove('active'));
+        simPanes.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const target = document.getElementById(`pane-sim-${btn.dataset.tab}`);
+        if (target) target.classList.add('active');
+
+        if (btn.dataset.tab === 'radar') renderRadarChart();
+      });
+    });
+
+    // Tab 1: Neural Canvas
+    const canvas = document.getElementById('avai-neural-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      const nodes = [
+        { x: 80, y: 80, r: 9, label: 'Zero-Trust Protocol', desc: 'Cryptographic token validation verifying mutual authenticity.' },
+        { x: 180, y: 140, r: 7, label: 'Packet Sniffer (C)', desc: 'Raw socket frame inspection parsing IPv4, TCP, and UDP headers.' },
+        { x: 300, y: 70, r: 8, label: 'Bayesian Tracing', desc: 'Continuous probabilistic knowledge estimation from response telemetry.' },
+        { x: 420, y: 130, r: 10, label: '200 FPS Telemetry', desc: 'Hardware-accelerated sub-millisecond timer pipeline.' },
+        { x: 520, y: 80, r: 7, label: 'Graph Pathfinding', desc: 'Dijkstra and A* shortest-path benchmarks in low-level memory.' },
+        { x: 140, y: 230, r: 8, label: 'HMAC-SHA256', desc: 'Constant-time message integrity validation.' },
+        { x: 260, y: 220, r: 7, label: 'EDA Pipeline', desc: 'Statistical outlier and variance distribution analysis.' },
+        { x: 380, y: 240, r: 8, label: 'Anomaly Vector', desc: 'Supervised classification for suspicious port sweeps.' },
+        { x: 490, y: 210, r: 6, label: 'LLM Orchestrator', desc: 'Structured few-shot prompt chaining.' }
+      ];
+
+      let hoveredNode = null;
+      let animAngle = 0;
+
+      const drawGraph = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw connections
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 180) {
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = (hoveredNode === nodes[i] || hoveredNode === nodes[j])
+                ? 'rgba(45, 76, 56, 0.65)'
+                : 'rgba(203, 216, 207, 0.45)';
+              ctx.lineWidth = (hoveredNode === nodes[i] || hoveredNode === nodes[j]) ? 2 : 1;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Draw nodes
+        nodes.forEach((n, idx) => {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r + (hoveredNode === n ? 3 : 0), 0, Math.PI * 2);
+          ctx.fillStyle = hoveredNode === n ? '#2d4c38' : '#62826e';
+          ctx.fill();
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = '#ffffff';
+          ctx.stroke();
+
+          // Subtle pulse around active nodes
+          if (idx % 2 === 0) {
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r + 5 + Math.sin(animAngle + idx) * 3, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(98, 130, 110, 0.25)';
+            ctx.stroke();
+          }
+        });
+
+        animAngle += 0.04;
+        requestAnimationFrame(drawGraph);
+      };
+
+      drawGraph();
+
+      // Mouse Move on Canvas
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const mx = (e.clientX - rect.left) * scaleX;
+        const my = (e.clientY - rect.top) * scaleY;
+
+        hoveredNode = null;
+        for (const n of nodes) {
+          const dx = mx - n.x;
+          const dy = my - n.y;
+          if (Math.sqrt(dx * dx + dy * dy) < n.r + 8) {
+            hoveredNode = n;
+            break;
+          }
+        }
+
+        if (hoveredNode) {
+          const tagEl = document.getElementById('active-node-tag');
+          const descEl = document.getElementById('active-node-desc');
+          if (tagEl) tagEl.textContent = `ACTIVE NODE: ${hoveredNode.label.toUpperCase()}`;
+          if (descEl) descEl.textContent = hoveredNode.desc;
+        }
+      });
+
+      // Topic Seed Buttons
+      document.querySelectorAll('.topic-seed-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.topic-seed-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const topic = btn.dataset.topic;
+          const targetNode = nodes.find(n => n.label.toLowerCase().includes(topic.slice(0, 4))) || nodes[0];
+          hoveredNode = targetNode;
+          const tagEl = document.getElementById('active-node-tag');
+          const descEl = document.getElementById('active-node-desc');
+          if (tagEl) tagEl.textContent = `ACTIVE NODE: ${targetNode.label.toUpperCase()}`;
+          if (descEl) descEl.textContent = targetNode.desc;
+        });
+      });
+    }
+
+    // Tab 2: Speed Drill
+    const timerEl = document.getElementById('drill-timer');
+    const scoreEl = document.getElementById('drill-score');
+    const streakEl = document.getElementById('drill-streak');
+    const feedbackEl = document.getElementById('drill-feedback');
+    let drillInterval = null;
+    let drillSeconds = 0;
+    let drillAnswered = false;
+
+    const startDrillClock = () => {
+      clearInterval(drillInterval);
+      drillSeconds = 0;
+      drillInterval = setInterval(() => {
+        drillSeconds += 0.05;
+        if (timerEl) timerEl.textContent = drillSeconds.toFixed(3) + 's';
+      }, 50);
+    };
+
+    startDrillClock();
+
+    document.querySelectorAll('.drill-opt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (drillAnswered) return;
+        drillAnswered = true;
+        clearInterval(drillInterval);
+
+        const isCorrect = btn.dataset.correct === 'true';
+        if (isCorrect) {
+          btn.classList.add('correct');
+          if (scoreEl) scoreEl.textContent = '1,450 PTS (+200)';
+          if (streakEl) streakEl.textContent = '4x Multiplier (Peak)';
+          if (feedbackEl) feedbackEl.innerHTML = `<span class="text-moss">✓ VALIDATED IN ${drillSeconds.toFixed(3)}s! Constant-time XOR prevents cache timing leaks.</span>`;
+          showToast('Drill question solved with sub-millisecond precision!', '⚡');
+        } else {
+          btn.classList.add('wrong');
+          document.querySelector('.drill-opt-btn[data-correct="true"]')?.classList.add('correct');
+          if (feedbackEl) feedbackEl.innerHTML = `<span class="text-terracotta">✕ Standard string comparison allows side-channel timing leaks. Option B is correct.</span>`;
+        }
+      });
+    });
+
+    // Tab 3: Radar Chart
+    const renderRadarChart = () => {
+      const radarCanvas = document.getElementById('avai-radar-canvas');
+      if (!radarCanvas) return;
+      const ctx = radarCanvas.getContext('2d');
+      const w = radarCanvas.width;
+      const h = radarCanvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const r = 110;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const metrics = [
+        { label: 'Security', val: 0.96 },
+        { label: 'C Logic', val: 0.92 },
+        { label: 'Latency', val: 0.98 },
+        { label: 'Pipelines', val: 0.90 },
+        { label: 'Memory', val: 0.94 }
+      ];
+
+      const total = metrics.length;
+
+      // Draw Concentric Rings
+      for (let level = 1; level <= 4; level++) {
+        ctx.beginPath();
+        const curR = (r / 4) * level;
+        for (let i = 0; i < total; i++) {
+          const angle = (Math.PI * 2 / total) * i - Math.PI / 2;
+          const x = cx + curR * Math.cos(angle);
+          const y = cy + curR * Math.sin(angle);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = 'rgba(203, 216, 207, 0.6)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Draw Spokes
+      for (let i = 0; i < total; i++) {
+        const angle = (Math.PI * 2 / total) * i - Math.PI / 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
+        ctx.strokeStyle = 'rgba(203, 216, 207, 0.7)';
+        ctx.stroke();
+      }
+
+      // Draw Mastery Polygon
+      ctx.beginPath();
+      for (let i = 0; i < total; i++) {
+        const angle = (Math.PI * 2 / total) * i - Math.PI / 2;
+        const curR = r * metrics[i].val;
+        const x = cx + curR * Math.cos(angle);
+        const y = cy + curR * Math.sin(angle);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(45, 76, 56, 0.28)';
+      ctx.fill();
+      ctx.strokeStyle = '#2d4c38';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Vertex dots
+      for (let i = 0; i < total; i++) {
+        const angle = (Math.PI * 2 / total) * i - Math.PI / 2;
+        const curR = r * metrics[i].val;
+        ctx.beginPath();
+        ctx.arc(cx + curR * Math.cos(angle), cy + curR * Math.sin(angle), 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#c86a4b';
+        ctx.fill();
+      }
+    };
+  };
+
+  // ---------------------------------------------------------------------------
+  // 15. BOTANICAL FIELD TERMINAL & INTERACTIVE CLI
+  // ---------------------------------------------------------------------------
+  const initBotanicalTerminal = () => {
+    const termInput = document.getElementById('botanical-terminal-input');
+    const termOutput = document.getElementById('botanical-terminal-output');
+    const termBody = document.getElementById('botanical-terminal-body');
+    const termForm = document.getElementById('botanical-terminal-form');
+    const cmdChips = document.querySelectorAll('.term-cmd-chip');
+
+    if (!termInput || !termOutput) return;
+
+    const commandHistory = [];
+    let historyIndex = -1;
+
+    const commands = {
+      help: () => `
+        <div class="term-line text-moss font-bold">AVAILABLE COMMANDS:</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">about</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Philosophy, reverence (Śraddhā) & first principles</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">academics</span>&nbsp;&nbsp;&nbsp;- Top honors at Bishnupur SKV, Radhamohanpur VHS & FIEM MAKAUT</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">certs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List 12 verified credentials & achievements</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">skills</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Core disciplines: Cybersecurity, Python/C, AI & Web</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">projects</span>&nbsp;&nbsp;&nbsp;&nbsp;- Flagship builds (AVAI, SentinelShield, Constant-Time Lab)</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">quotes</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Wisdom from Newton, Gates, Hawking, Gandhi, Musk</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">avai</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Architecture notes on AVAI Preparation cognitive engine</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">status</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Live lab telemetry, coordinates, and development environment</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">admin</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Prompt for curator PIN to unlock portfolio edit privileges</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">contact</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Display email & social dispatch channels</div>
+        <div class="term-line">&nbsp;&nbsp;<span class="text-terracotta">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Clear the field terminal display</div>
+      `,
+      about: () => `
+        <div class="term-line text-moss font-bold">ABOUT BIBEK BANDHU NAYEK:</div>
+        <div class="term-line">B.Tech undergraduate in Computer Science & Engineering at Future Institute of Engineering and Management (FIEM), affiliated under MAKAUT.</div>
+        <div class="term-line">Rooted in Debra, Paschim Medinipur. Dedicated to foundational sciences, zero-trust cybersecurity, and mathematical precision.</div>
+      `,
+      academics: () => `
+        <div class="term-line text-moss font-bold">ACADEMIC HONORS & DISTINCTIONS:</div>
+        <div class="term-line">1. <span class="text-terracotta">Secondary 2024</span>: Bishnupur Sri Ramkrishna Vidyayatan &bull; <strong>Roll Number 1 Topper</strong></div>
+        <div class="term-line">2. <span class="text-terracotta">Higher Secondary 2026</span>: Radhamohanpur Vivekananda High School &bull; <strong>School Rank 1 & Block Top 5</strong> (PCMB Pure Science)</div>
+        <div class="term-line">3. <span class="text-terracotta">Undergraduate 2024–2028</span>: FIEM Sonarpur, Kolkata &bull; <strong>B.Tech CSE</strong> (MAKAUT)</div>
+      `,
+      certs: () => {
+        const certs = getCertificates();
+        let html = `<div class="term-line text-moss font-bold">VERIFIED ACCREDITATIONS (${certs.length}):</div>`;
+        certs.forEach((c, idx) => {
+          html += `<div class="term-line">${idx + 1}. [${c.category.toUpperCase()}] <strong>${escapeHtml(c.title)}</strong> — ${escapeHtml(c.issuer)} (${c.date})</div>`;
+        });
+        return html;
+      },
+      skills: () => `
+        <div class="term-line text-moss font-bold">BOTANICAL COMPETENCIES:</div>
+        <div class="term-line">&bull; <strong>Security & Systems:</strong> Wireshark, Nmap, Linux Hardening, HMAC-SHA256, Raw Sockets</div>
+        <div class="term-line">&bull; <strong>Data Science:</strong> Python 3, NumPy, Pandas, Scikit-Learn, Statistical Testing, PCMB Math</div>
+        <div class="term-line">&bull; <strong>AI Innovation:</strong> Bayesian Knowledge Tracing, 200 FPS Telemetry, Gemini API, AI Ethics</div>
+        <div class="term-line">&bull; <strong>Core Web:</strong> C Systems, Data Structures, Algorithms, Semantic HTML5, Vanilla CSS3, ES6+ JS</div>
+      `,
+      projects: () => `
+        <div class="term-line text-moss font-bold">FEATURED CULTIVATED WORKS:</div>
+        <div class="term-line">&bull; <strong>AVAI Preparation:</strong> 100% Free Autonomous Vision & AI-driven adaptive exam engine (200 FPS).</div>
+        <div class="term-line">&bull; <strong>SentinelShield:</strong> Socket sniffer and anomaly detector mitigating port sweeps & ARP spoofing.</div>
+        <div class="term-line">&bull; <strong>Constant-Time Cryptography:</strong> Mitigation of side-channel attacks via bitwise fixed-time verification.</div>
+        <div class="term-line">&bull; <strong>EDA Pipeline:</strong> Automated outlier detection & statistical regression generator in Python.</div>
+      `,
+      quotes: () => {
+        const q = WISDOM_QUOTES[Math.floor(Math.random() * WISDOM_QUOTES.length)];
+        return `<div class="term-line font-serif" style="font-size: 1.05rem; color: #a4beae;">${q.quote}</div><div class="term-line text-terracotta font-mono">— ${q.author} (${q.title})</div>`;
+      },
+      avai: () => `
+        <div class="term-line text-moss font-bold">AVAI PREPARATION LAB NOTES:</div>
+        <div class="term-line">Architecture: Pure Client-Side Zero-Dependency Engine &bull; Sub-8.5ms Latency Clocks.</div>
+        <div class="term-line">Repository: <a href="https://github.com/nayekdhananjoy1973-lab/avai_preparation" target="_blank" style="color: #68d391; text-decoration: underline;">github.com/nayekdhananjoy1973-lab/avai_preparation</a></div>
+      `,
+      status: () => `
+        <div class="term-line text-moss font-bold">LIVE TELEMETRY:</div>
+        <div class="term-line">Location: Sonarpur Station Road, Kolkata Metro &bull; Debra, Paschim Medinipur</div>
+        <div class="term-line">Lab: Active in FIEM Department of Computer Science & Engineering</div>
+        <div class="term-line">Environment: Ubuntu / Arch Linux &bull; Neovim &bull; VS Code &bull; C & Python 3</div>
+      `,
+      admin: () => {
+        setTimeout(openPasscodeModal, 200);
+        return `<div class="term-line text-moss">✓ Opening curator passcode authentication dialog... Default PIN is 2026.</div>`;
+      },
+      sudo: () => {
+        setTimeout(openPasscodeModal, 200);
+        return `<div class="term-line text-moss">✓ Elevated privileges requested. Unlocking curator dialog...</div>`;
+      },
+      contact: () => `
+        <div class="term-line text-moss font-bold">DIRECT DISPATCH CHANNELS:</div>
+        <div class="term-line">Email: <a href="mailto:bibekbandhu2007@gmail.com" style="color: #68d391;">bibekbandhu2007@gmail.com</a></div>
+        <div class="term-line">GitHub: <a href="https://github.com/bibekgit2007" target="_blank" style="color: #68d391;">github.com/bibekgit2007</a></div>
+        <div class="term-line">Twitter/X: <a href="https://x.com/bibekbandhunyk" target="_blank" style="color: #68d391;">@bibekbandhunyk</a></div>
+      `,
+      clear: () => {
+        termOutput.innerHTML = '';
+        return null;
+      }
+    };
+
+    const executeCmd = (raw) => {
+      const trimmed = raw.trim().toLowerCase();
+      if (!trimmed) return;
+
+      commandHistory.push(raw);
+      historyIndex = commandHistory.length;
+
+      const echo = document.createElement('div');
+      echo.className = 'term-line';
+      echo.innerHTML = `<span class="text-moss">bibek@flora-fiem:~$</span> <span style="color: #ffffff;">${escapeHtml(raw)}</span>`;
+      termOutput.appendChild(echo);
+
+      if (commands[trimmed]) {
+        const res = commands[trimmed]();
+        if (res) {
+          const resDiv = document.createElement('div');
+          resDiv.innerHTML = res;
+          termOutput.appendChild(resDiv);
+        }
+      } else {
+        const err = document.createElement('div');
+        err.className = 'term-line';
+        err.innerHTML = `<span class="text-terracotta">Command not found: "${escapeHtml(trimmed)}". Type <strong style="color: #68d391;">help</strong> to inspect valid dispatches.</span>`;
+        termOutput.appendChild(err);
+      }
+
+      if (termBody) termBody.scrollTop = termBody.scrollHeight;
+    };
+
+    termForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      executeCmd(termInput.value);
+      termInput.value = '';
+    });
+
+    termInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') {
+        if (historyIndex > 0) {
+          historyIndex--;
+          termInput.value = commandHistory[historyIndex] || '';
+        }
+      } else if (e.key === 'ArrowDown') {
+        if (historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          termInput.value = commandHistory[historyIndex] || '';
+        } else {
+          historyIndex = commandHistory.length;
+          termInput.value = '';
+        }
+      }
+    });
+
+    cmdChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const cmd = chip.dataset.cmd;
+        termInput.value = cmd;
+        executeCmd(cmd);
+        termInput.value = '';
+      });
+    });
+  };
+
+  // ---------------------------------------------------------------------------
+  // 16. WEB AUDIO ACOUSTIC FEEDBACK CLICKS
+  // ---------------------------------------------------------------------------
+  let soundEnabled = true;
+  const initNatureSoundEngine = () => {
+    const audioBtn = document.getElementById('audio-toggle-btn');
+    const audioIcon = document.getElementById('audio-icon');
+
+    let audioCtx = null;
+
+    const playClickTone = (freq = 480) => {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.5, audioCtx.currentTime + 0.04);
+
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.04);
+      } catch (e) {
+        // Audio API not permitted or silent
+      }
+    };
+
+    audioBtn?.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (audioIcon) audioIcon.textContent = soundEnabled ? '🔊' : '🔇';
+      showToast(soundEnabled ? 'Acoustic audio clicks enabled' : 'Audio clicks muted', '🔊');
+    });
+
+    document.querySelectorAll('button, .filter-pill, .nav-item, .hobby-badge').forEach(el => {
+      el.addEventListener('click', () => playClickTone(520));
+    });
+  };
+
+  // ---------------------------------------------------------------------------
+  // 17. CONTACT FIELD NOTE FORM
   // ---------------------------------------------------------------------------
   const contactForm = document.getElementById('contact-note-form');
   contactForm?.addEventListener('submit', (e) => {
@@ -882,7 +1502,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---------------------------------------------------------------------------
-  // 12. MOBILE MENU DRAWER
+  // 18. MOBILE MENU DRAWER
   // ---------------------------------------------------------------------------
   const mobileToggle = document.getElementById('mobile-toggle-btn');
   const mobileDrawer = document.getElementById('mobile-drawer');
@@ -900,7 +1520,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---------------------------------------------------------------------------
-  // 13. ESCAPE HTML HELPER
+  // 19. ESCAPE HTML HELPER
   // ---------------------------------------------------------------------------
   function escapeHtml(str) {
     if (!str) return '';
@@ -910,11 +1530,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------------------------------------------------------------------------
-  // 14. INITIALIZE ALL ENGINES
+  // 20. INITIALIZE ALL ENGINES
   // ---------------------------------------------------------------------------
   updateAdminModeUI();
   initProfilePhoto();
   initJourneyNarrative();
   renderCertificates();
+  initLiveIstClock();
+  initWisdomReadingRoom();
+  initGitHubActivityHeatmap();
+  initAvaiSimulatorEngine();
+  initBotanicalTerminal();
+  initNatureSoundEngine();
 
 });
+
