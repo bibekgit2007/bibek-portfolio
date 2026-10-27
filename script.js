@@ -1371,9 +1371,11 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       contact: () => `
         <div class="term-line text-moss font-bold">DIRECT DISPATCH CHANNELS:</div>
-        <div class="term-line">Email: <a href="mailto:bibekbandhu2007@gmail.com" style="color: #68d391;">bibekbandhu2007@gmail.com</a></div>
+        <div class="term-line">Email: <a href="mailto:bibekbandhu1001@gmail.com" style="color: #68d391;">bibekbandhu1001@gmail.com</a></div>
         <div class="term-line">GitHub: <a href="https://github.com/bibekgit2007" target="_blank" style="color: #68d391;">github.com/bibekgit2007</a></div>
         <div class="term-line">Twitter/X: <a href="https://x.com/Bibektwtx" target="_blank" style="color: #68d391;">@Bibektwtx</a></div>
+        <div class="term-line">Facebook: <a href="https://facebook.com/bibekbandhu19" target="_blank" style="color: #68d391;">bibekbandhu19</a></div>
+        <div class="term-line">Instagram: <a href="https://instagram.com/bibekbandhu19" target="_blank" style="color: #68d391;">@bibekbandhu19</a></div>
       `,
       clear: () => {
         termOutput.innerHTML = '';
