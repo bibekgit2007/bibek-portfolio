@@ -538,16 +538,36 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="output-line text-muted">&nbsp;&nbsp;📍 Paschim Medinipur, WB | 22.4280° N, 87.3200° E</div>
       `,
       certificates: () => `
-        <div class="output-line text-cyan font-bold">PROFESSIONAL TECHNICAL & ARCHITECTURAL CERTIFICATIONS:</div>
-        <div class="output-line">🛡️ <strong>Certified Cyber Defense & Zero-Trust Architect (CCD-ZT)</strong> — <span class="text-emerald">Top 1% Elite Distinction</span></div>
-        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: Global Cyber Defense Alliance | ID: GCDA-CERT-9402-PRO | Hash: 0x8F92A14C</div>
-        <div class="output-line">🧠 <strong>Autonomous AI & Neural Preparation Systems Specialist (AAI-NPS)</strong> — <span class="text-cyan">Grade A++ (Honors Citation)</span></div>
-        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: Cognitive AI Foundation | ID: IAIS-NEURAL-8831-ARCH | Hash: 0x3E71B99D</div>
-        <div class="output-line">⚡ <strong>High-Throughput Real-Time Telemetry & Systems Engineer (HT-RTSE)</strong> — <span class="text-amber" style="color:#fbbf24;">Platinum Distinction (200 FPS Verified)</span></div>
-        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: Open Systems Foundation | ID: OSF-TELEMETRY-2026-X | Hash: 0x9B14FC77</div>
+        <div class="output-line text-cyan font-bold">OFFICIAL VERIFIED CERTIFICATIONS & ACADEMIC CREDENTIALS (8 RECORDS):</div>
+        <div class="output-line">🤖 <strong>IBM SkillsBuild: Large Language Model Basics</strong> — <span class="text-emerald">Verified Completion</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: IBM &amp; Adobe Learning Manager | ID: ALM-COURSE_4058872 | Date: 21 Sep 2026 (GMT)</div>
+        <div class="output-line">🎯 <strong>IBM SkillsBuild: Mastering the Art of Prompting</strong> — <span class="text-emerald">Verified Completion (1 hr)</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: IBM &amp; Adobe Learning Manager | ID: ALM-COURSE_4058858 | Date: 21 Sep 2026 (GMT)</div>
+        <div class="output-line">🧠 <strong>IBM SkillsBuild: Getting Started with Artificial Intelligence</strong> — <span class="text-emerald">Verified Completion</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: IBM &amp; Your Learning Builder | ID: PLAN-E624C2604060 | Date: 21 Sep 2026 (GMT)</div>
+        <div class="output-line">🏆 <strong>Ministry of Education &amp; CirQula: NSPC 2026</strong> — <span class="text-amber" style="color:#fbbf24;">Gold पारिजात Award (UG &amp; PG)</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: Ministry of Education, Govt. of India &amp; CirQula India | ID: NSPC-2026-36d1f8b6</div>
+        <div class="output-line">🚀 <strong>ISRO &amp; Department of Space: National Space Day Quiz 2026</strong> — <span class="text-cyan">National Merit Certificate</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Issuer: ISRO &amp; MyGov (Govt. of India) | Candidate: Bibekbandhunayek</div>
+        <div class="output-line">📜 <strong>WBCHSE: Higher Secondary Examination (Class XII)</strong> — <span class="text-emerald font-bold">Grade A++ (Outstanding Distinction)</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Council: West Bengal Council of Higher Secondary Education | Reg: 3241140595 | Date: 14th May, 2026</div>
+        <div class="output-line">🎓 <strong>WBBSE: Secondary Examination (Madhyamik Class X)</strong> — <span class="text-emerald">First Division Honor</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Board: West Bengal Board of Secondary Education | Bishnupur Sri Ramkrishna Vidyayatan</div>
+        <div class="output-line">🔬 <strong>Class XII English Bonafide Project Certificate</strong> — <span class="text-cyan">"Health and Fitness - A Path to Better Life"</span></div>
+        <div class="output-line text-muted">&nbsp;&nbsp;&nbsp;Institutional Project Record | Reg: 3241140595 | Date: 05/10/2025</div>
       `,
       certs: () => commands.certificates(),
       cert: () => commands.certificates(),
+      admin: () => {
+        if (window.openOwnerPinModal) window.openOwnerPinModal();
+        return `
+          <div class="output-line text-orange font-bold font-mono">[!] LAUNCHING OWNER SECURITY CONSOLE...</div>
+          <div class="output-line text-cyan">• Authentication prompt activated. Enter Master PIN (default: 2026).</div>
+        `;
+      },
+      login: () => commands.admin(),
+      owner: () => commands.admin(),
+      sudo: () => commands.admin(),
       whoami: () => `
         <div class="output-line font-bold text-main">Bibek Bandhu Nayek</div>
         <div class="output-line text-muted">1st Year B.Tech CSE @ Future Institute of Engineering and Management (FIEM) — 2026 Batch</div>
@@ -1600,48 +1620,94 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.getElementById('lightbox-download-btn');
     const zoomToggleBtn = document.getElementById('lightbox-zoom-toggle');
 
+    window.openCertificateLightbox = (dataset) => {
+      if (!modal || !dataset) return;
+
+      const title = dataset.lightboxTitle || dataset.title || 'Official Verified Credential';
+      const inst = dataset.lightboxInst || dataset.issuer || dataset.board || 'Accrediting Institution';
+      const grade = dataset.lightboxGrade || dataset.grade || 'Verified Credential';
+      const certId = dataset.lightboxId || dataset.certId || 'Verification ID';
+      const certImg = dataset.lightboxImg || dataset.img || '';
+      const downloadHref = dataset.lightboxDownload || certImg || '';
+
+      if (titleEl) titleEl.textContent = title;
+      if (subtitleEl) subtitleEl.textContent = inst;
+      if (gradeEl) gradeEl.textContent = grade;
+      if (idEl) idEl.textContent = certId;
+
+      if (certImg && imgEl) {
+        imgEl.src = certImg;
+        imgEl.alt = title;
+        imgEl.style.display = 'block';
+        imgEl.classList.remove('zoomed');
+        if (vectorContainer) vectorContainer.style.display = 'none';
+      } else if (vectorContainer) {
+        vectorContainer.style.display = 'flex';
+        if (imgEl) imgEl.style.display = 'none';
+        const icon = dataset.icon || '🏆';
+        vectorContainer.innerHTML = `
+          <div class="cert-vector-display" style="max-width: 600px; padding: 2.25rem; border: 1px solid rgba(255, 107, 0, 0.4); box-shadow: 0 15px 45px rgba(0,0,0,0.7); background: rgba(8, 13, 26, 0.95); border-radius: var(--radius-md);">
+            <div class="cert-vector-header" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+              <span class="cert-vector-icon" style="font-size: 2.2rem;">${icon}</span>
+              <span class="cert-vector-badge font-mono" style="font-size: 0.75rem; padding: 0.35rem 0.85rem; color: #ff6b00; background: rgba(255,107,0,0.15); border: 1px solid rgba(255,107,0,0.3); border-radius: 9999px;">${inst}</span>
+            </div>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 0.65rem;">${title}</h3>
+            <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1.5rem;">This certifies that <strong>Bibek Bandhu Nayek</strong> has achieved verified completion and institutional accreditation in accordance with official standards.</p>
+            <div class="font-mono" style="font-size: 0.75rem; color: #06b6d4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <span>${certId}</span>
+              <span class="text-emerald">STATUS: OFFICIALLY VERIFIED</span>
+            </div>
+          </div>
+        `;
+      }
+
+      if (downloadBtn) {
+        if (downloadHref) {
+          downloadBtn.href = downloadHref;
+          downloadBtn.setAttribute('download', downloadHref.split('/').pop() || 'certificate.png');
+          const span = downloadBtn.querySelector('span');
+          if (span) span.textContent = 'Download Certificate Document';
+          downloadBtn.style.display = 'inline-flex';
+        } else {
+          downloadBtn.style.display = 'none';
+        }
+      }
+
+      if (zoomToggleBtn) {
+        const span = zoomToggleBtn.querySelector('span');
+        if (span) span.textContent = 'Toggle High-Res Zoom';
+      }
+
+      modal.showModal();
+      if (window.playMechanicalClick) window.playMechanicalClick(950, 0.03);
+    };
+
     const triggers = document.querySelectorAll('.cert-lightbox-trigger, .cert-img-wrapper');
     triggers.forEach((trigger) => {
       trigger.addEventListener('click', (e) => {
         e.stopPropagation();
-        const dataset = trigger.dataset;
-        if (!modal) return;
-
-        const title = dataset.lightboxTitle || 'Professional Accreditation';
-        const inst = dataset.lightboxInst || 'Global Cyber Defense Alliance';
-        const grade = dataset.lightboxGrade || 'Top 1% Elite Distinction';
-        const certId = dataset.lightboxId || 'ID: GCDA-CERT-9402-PRO';
-        const certCode = dataset.certCode || 'cyber';
-
-        if (titleEl) titleEl.textContent = title;
-        if (subtitleEl) subtitleEl.textContent = inst;
-        if (gradeEl) gradeEl.textContent = grade;
-        if (idEl) idEl.textContent = certId;
-
-        if (vectorContainer) {
-          vectorContainer.style.display = 'flex';
-          const icon = certCode === 'cyber' ? '🛡️' : (certCode === 'ai' ? '🧠' : '⚡');
-          vectorContainer.innerHTML = `
-            <div class="cert-vector-display" style="max-width: 600px; padding: 2.25rem; border: 1px solid rgba(255, 107, 0, 0.4); box-shadow: 0 15px 45px rgba(0,0,0,0.7); background: rgba(8, 13, 26, 0.95); border-radius: var(--radius-md);">
-              <div class="cert-vector-header" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-                <span class="cert-vector-icon" style="font-size: 2.2rem;">${icon}</span>
-                <span class="cert-vector-badge font-mono" style="font-size: 0.75rem; padding: 0.35rem 0.85rem; color: #ff6b00; background: rgba(255,107,0,0.15); border: 1px solid rgba(255,107,0,0.3); border-radius: 9999px;">${inst}</span>
-              </div>
-              <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 0.65rem;">${title}</h3>
-              <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1.5rem;">This certifies that <strong>Bibek Bandhu Nayek</strong> has demonstrated elite proficiency, cryptographic rigor, and architectural mastery in accordance with international institutional standards.</p>
-              <div class="font-mono" style="font-size: 0.75rem; color: #06b6d4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-                <span>${certId}</span>
-                <span class="text-emerald">STATUS: CRYPTOGRAPHICALLY VERIFIED</span>
-              </div>
-            </div>
-          `;
-        }
-
-        if (imgEl) imgEl.style.display = 'none';
-
-        modal.showModal();
-        if (window.playMechanicalClick) window.playMechanicalClick(950, 0.03);
+        window.openCertificateLightbox(trigger.dataset);
       });
+    });
+
+    zoomToggleBtn?.addEventListener('click', () => {
+      if (imgEl && imgEl.style.display !== 'none') {
+        imgEl.classList.toggle('zoomed');
+        const span = zoomToggleBtn.querySelector('span');
+        if (span) {
+          span.textContent = imgEl.classList.contains('zoomed') ? 'Reset High-Res Zoom' : 'Toggle High-Res Zoom';
+        }
+        if (window.playMechanicalClick) window.playMechanicalClick(1100, 0.02);
+      }
+    });
+
+    imgEl?.addEventListener('click', () => {
+      imgEl.classList.toggle('zoomed');
+      const span = zoomToggleBtn?.querySelector('span');
+      if (span) {
+        span.textContent = imgEl.classList.contains('zoomed') ? 'Reset High-Res Zoom' : 'Toggle High-Res Zoom';
+      }
+      if (window.playMechanicalClick) window.playMechanicalClick(1100, 0.02);
     });
 
     const closeLightbox = () => {
@@ -2593,6 +2659,1166 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initCommandPalette();
 
+  // ===========================================================================
+  // 18. DYNAMIC CERTIFICATE STORE, 3D CYLINDRICAL ORBIT & OWNER SECURITY ENGINE
+  // ===========================================================================
+  const initOwnerAnd3DOrbitEngine = () => {
+    // -------------------------------------------------------------------------
+    // 18A. CORE DATASETS & PERSISTENCE
+    // -------------------------------------------------------------------------
+    const DEFAULT_CERTIFICATES = [
+      {
+        id: 'cert_ibm_llm',
+        title: 'Large Language Model Basics',
+        issuer: 'IBM SkillsBuild',
+        board: 'IBM SkillsBuild • Adobe Learning Manager System of Record',
+        category: 'ai',
+        grade: 'VERIFIED',
+        certId: 'Course ID: ALM-COURSE_4058872',
+        date: '21 Sep 2026 (GMT)',
+        img: 'assets/ibm-llm-basics-certificate.png',
+        seal: 'ibm',
+        icon: '🤖',
+        status: 'IBM VERIFIED // 100% AUTHENTIC'
+      },
+      {
+        id: 'cert_ibm_prompting',
+        title: 'Mastering the Art of Prompting',
+        issuer: 'IBM SkillsBuild',
+        board: 'IBM SkillsBuild • Adobe Learning Manager System of Record',
+        category: 'ai',
+        grade: 'VERIFIED (1 HR)',
+        certId: 'Course ID: ALM-COURSE_4058858',
+        date: '21 Sep 2026 (GMT)',
+        img: 'assets/ibm-prompting-certificate.png',
+        seal: 'ibm',
+        icon: '🎯',
+        status: 'IBM VERIFIED // 100% AUTHENTIC'
+      },
+      {
+        id: 'cert_ibm_ai_basics',
+        title: 'Getting Started with Artificial Intelligence',
+        issuer: 'IBM SkillsBuild',
+        board: 'IBM SkillsBuild • Your Learning Builder System of Record',
+        category: 'ai',
+        grade: 'VERIFIED',
+        certId: 'Learning Plan: PLAN-E624C2604060',
+        date: '21 Sep 2026 (GMT)',
+        img: 'assets/ibm-ai-basics-certificate.png',
+        seal: 'ibm',
+        icon: '🧠',
+        status: 'IBM VERIFIED // 100% AUTHENTIC'
+      },
+      {
+        id: 'cert_nspc_parijat',
+        title: 'National Student Paryavaran Competition',
+        issuer: 'Ministry of Education & CirQula',
+        board: 'Govt. of India Ministry of Education & CirQula India • NSPC 2026',
+        category: 'national',
+        grade: 'GOLD पारिजात',
+        certId: 'Cert Code: NSPC-2026-36d1f8b6 | EcoMitram',
+        date: '11 September 2026',
+        img: 'assets/nspc-cirqula-certificate.png',
+        seal: 'cirqula',
+        icon: '🌿',
+        status: 'MOE & CIRQULA // GOLD PARIJAT'
+      },
+      {
+        id: 'cert_isro_space_day',
+        title: 'National Space Day Quiz 2026',
+        issuer: 'ISRO & Department of Space',
+        board: 'Indian Space Research Organisation (ISRO) & MyGov India',
+        category: 'national',
+        grade: 'NATIONAL MERIT',
+        certId: 'Candidate: Bibekbandhunayek | ISRO Space Day',
+        date: '23 August 2026',
+        img: 'assets/isro-space-day-certificate.png',
+        seal: 'isro',
+        icon: '🚀',
+        status: 'ISRO & MYGOV // MERIT'
+      },
+      {
+        id: 'cert_wbchse_hs',
+        title: 'Higher Secondary Examination (Class XII)',
+        issuer: 'WBCHSE State Board',
+        board: 'West Bengal Council of Higher Secondary Education',
+        category: 'state',
+        grade: 'RANK 1 • A++',
+        certId: 'Registration: 3241140595 | Roll 1 Distinction',
+        date: '14th May, 2026',
+        img: 'assets/higher-secondary-certificate.jpg',
+        seal: 'wbchse',
+        icon: '📜',
+        status: 'WBCHSE COUNCIL // ACCREDITED'
+      },
+      {
+        id: 'cert_wbbse_madhyamik',
+        title: 'Secondary Examination (Madhyamik Class X)',
+        issuer: 'WBBSE State Board',
+        board: 'West Bengal Board of Secondary Education • Bishnupur SKV',
+        category: 'state',
+        grade: 'ROLL 1 SUMMA',
+        certId: 'Roll 1 Distinction • Attested Record',
+        date: '2024 Examination',
+        img: 'assets/secondary-certificate.jpg',
+        seal: 'wbchse',
+        icon: '🎓',
+        status: 'WBBSE BOARD // VERIFIED'
+      },
+      {
+        id: 'cert_bonafide_project',
+        title: 'Class XII English Bonafide Project Certificate',
+        issuer: 'Department of English',
+        board: '"Health and Fitness - A Path to Better Life" • Supervised Coursework',
+        category: 'academic',
+        grade: 'ROLL 1 HONOR',
+        certId: 'Institutional Project Record | Reg: 3241140595',
+        date: '05/10/2025 (Attested)',
+        img: 'assets/bonafide-project-certificate.jpg',
+        seal: 'cirqula',
+        icon: '📋',
+        status: 'DEPARTMENT ATTESTED // GRADE A'
+      }
+    ];
+
+    const getCertificates = () => {
+      try {
+        const stored = localStorage.getItem('bbn_certificates_v2');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (e) {
+        console.warn('Error reading certificates from localStorage:', e);
+      }
+      localStorage.setItem('bbn_certificates_v2', JSON.stringify(DEFAULT_CERTIFICATES));
+      return DEFAULT_CERTIFICATES;
+    };
+
+    const saveCertificates = (certs) => {
+      localStorage.setItem('bbn_certificates_v2', JSON.stringify(certs));
+      updateCategoryCounts();
+      renderAllViews();
+    };
+
+    // -------------------------------------------------------------------------
+    // 18B. OWNER SECURITY & AUTHENTICATION STATE
+    // -------------------------------------------------------------------------
+    const getOwnerPin = () => localStorage.getItem('bbn_owner_pin') || '2026';
+    const isOwnerActive = () => sessionStorage.getItem('bbn_owner_session') === 'true';
+
+    const updateOwnerUIState = () => {
+      const active = isOwnerActive();
+      const ownerHud = document.getElementById('owner-hud-bar');
+      if (active) {
+        document.body.classList.add('owner-mode-active');
+        if (ownerHud) ownerHud.style.display = 'block';
+      } else {
+        document.body.classList.remove('owner-mode-active');
+        if (ownerHud) ownerHud.style.display = 'none';
+      }
+    };
+
+    // -------------------------------------------------------------------------
+    // 18C. CARD DOM TEMPLATE GENERATOR
+    // -------------------------------------------------------------------------
+    const createCertificateCardDOM = (cert, is3D = false) => {
+      const card = document.createElement('article');
+      card.className = is3D
+        ? 'cert-3d-card'
+        : 'academic-cert-card cert-interactive-card spotlight-card';
+      card.setAttribute('data-category', cert.category || 'ai');
+      card.setAttribute('data-cert-id', cert.id);
+
+      const sealClass = `seal-${cert.seal || 'ibm'}`;
+      const gradeClass = `grade-${cert.seal || 'ibm'}`;
+      const downloadName = (cert.title || 'certificate').toLowerCase().replace(/[^a-z0-9]/g, '_') + '.jpg';
+
+      card.innerHTML = `
+        <div class="academic-cert-card">
+          <div class="cert-holo-glare"></div>
+          <div class="academic-cert-preview">
+            <div class="cert-laser-scanner">
+              <div class="scanner-line"></div>
+              <div class="scanner-glow"></div>
+              <div class="scanner-text font-mono">${escapeHtml(cert.status || 'VERIFIED CREDENTIAL')}</div>
+            </div>
+
+            <div class="corner-bracket corner-tl"></div>
+            <div class="corner-bracket corner-tr"></div>
+            <div class="corner-bracket corner-bl"></div>
+            <div class="corner-bracket corner-br"></div>
+
+            <div class="cert-img-wrapper"
+              data-lightbox-title="${escapeHtml(cert.title)}"
+              data-lightbox-grade="${escapeHtml(cert.grade)}"
+              data-lightbox-inst="${escapeHtml(cert.issuer)}"
+              data-lightbox-id="${escapeHtml(cert.certId)}"
+              data-lightbox-img="${escapeHtml(cert.img)}"
+              data-lightbox-download="${escapeHtml(cert.img)}">
+              <img src="${escapeHtml(cert.img)}" alt="${escapeHtml(cert.title)}" class="cert-document-img" loading="lazy">
+              <div class="cert-hover-overlay">
+                <div class="inspect-circle">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                  <span>Inspect Certificate</span>
+                </div>
+              </div>
+              <div class="cert-seal-badge ${sealClass}">
+                <div class="seal-spin-ring"></div>
+                <span>${escapeHtml(cert.issuer.split(' ')[0] || 'VERIFIED')}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="academic-cert-info">
+            <div class="academic-cert-top">
+              <div class="school-affiliation-row">
+                <span class="cert-org-icon">${cert.icon || '🏆'}</span>
+                <span class="school-name-text">${escapeHtml(cert.issuer)}</span>
+              </div>
+              <div class="grade-pill ${gradeClass}">
+                <span class="grade-icon">⭐</span>
+                <span>${escapeHtml(cert.grade)}</span>
+              </div>
+            </div>
+
+            <h3 class="academic-cert-title">${escapeHtml(cert.title)}</h3>
+            <p class="academic-cert-board">${escapeHtml(cert.board)}</p>
+
+            <div class="cert-meta-grid font-mono">
+              <div class="meta-item">
+                <span class="meta-label">ID / CODE:</span>
+                <span class="meta-val">${escapeHtml(cert.certId)}</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">DATE:</span>
+                <span class="meta-val text-cyan">${escapeHtml(cert.date)}</span>
+              </div>
+            </div>
+
+            <div class="academic-cert-footer">
+              <button type="button" class="btn btn-primary btn-sm cert-btn-inspect" title="Inspect Full Screen">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span>Inspect</span>
+              </button>
+              <a href="${escapeHtml(cert.img)}" download="${downloadName}" class="btn btn-secondary btn-sm" title="Download Document">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Download</span>
+              </a>
+            </div>
+
+            <!-- Owner Action Buttons (Visible only in Owner Mode) -->
+            <div class="cert-owner-actions">
+              <button type="button" class="btn-owner-edit-cert" title="Edit this Certificate">
+                <span>✏️ Edit</span>
+              </button>
+              <button type="button" class="btn-owner-delete-cert" title="Delete this Certificate">
+                <span>🗑️ Delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Event: Inspect button
+      const inspectBtn = card.querySelector('.cert-btn-inspect');
+      const imgWrapper = card.querySelector('.cert-img-wrapper');
+      const openLightboxHandler = (e) => {
+        e.stopPropagation();
+        if (window.openCertificateLightbox) {
+          window.openCertificateLightbox(cert);
+        }
+      };
+      inspectBtn?.addEventListener('click', openLightboxHandler);
+      imgWrapper?.addEventListener('click', openLightboxHandler);
+
+      // Event: Owner Edit
+      const editBtn = card.querySelector('.btn-owner-edit-cert');
+      editBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openEditCertModal(cert);
+      });
+
+      // Event: Owner Delete
+      const deleteBtn = card.querySelector('.btn-owner-delete-cert');
+      deleteBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (confirm(`Delete certificate "${cert.title}"? This cannot be undone.`)) {
+          const current = getCertificates().filter((c) => c.id !== cert.id);
+          saveCertificates(current);
+          window.showToast(`Certificate "${cert.title}" deleted`, 'info');
+        }
+      });
+
+      return card;
+    };
+
+    // -------------------------------------------------------------------------
+    // 18D. 3D MOVABLE CYLINDRICAL ORBIT CAROUSEL ENGINE
+    // -------------------------------------------------------------------------
+    let currentFilter = 'all';
+    let currentView = '3d'; // '3d' | 'grid'
+
+    const viewport = document.getElementById('cert-3d-viewport');
+    const cylinder = document.getElementById('cert-3d-cylinder');
+    const angleDisplay = document.getElementById('orbit-angle-val');
+    const countDisplay = document.getElementById('orbit-card-count');
+    const steerLeftBtn = document.getElementById('orbit-steer-left');
+    const steerRightBtn = document.getElementById('orbit-steer-right');
+    const toggleSpinBtn = document.getElementById('orbit-toggle-spin');
+    const spinIcon = document.getElementById('orbit-spin-icon');
+    const spinText = document.getElementById('orbit-spin-text');
+
+    let currentAngle = 0;
+    let targetAngle = 0;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartAngle = 0;
+    let lastMoveX = 0;
+    let velocity = 0;
+    let autoSpin = true;
+    let isHovered = false;
+    let animFrameId = null;
+    let currentRadius = 520;
+    let currentAngleStep = 45;
+
+    const calculateDynamicRadius = (count) => {
+      const w = window.innerWidth;
+      const safeCount = Math.max(count, 3);
+      if (w <= 600) {
+        return Math.max(220, Math.min(380, 130 / Math.tan(Math.PI / safeCount) + 70));
+      } else if (w <= 900) {
+        return Math.max(300, Math.min(500, 150 / Math.tan(Math.PI / safeCount) + 90));
+      } else {
+        return Math.max(400, Math.min(680, 170 / Math.tan(Math.PI / safeCount) + 120));
+      }
+    };
+
+    const render3DCylinder = () => {
+      if (!cylinder) return;
+      cylinder.innerHTML = '';
+
+      const certs = getCertificates();
+      const filtered = currentFilter === 'all'
+        ? certs
+        : certs.filter((c) => (c.category || '').toLowerCase() === currentFilter.toLowerCase());
+
+      const count = filtered.length;
+      if (countDisplay) {
+        countDisplay.textContent = `${count} ${count === 1 ? 'Credential' : 'Credentials'}`;
+      }
+
+      if (count === 0) {
+        cylinder.innerHTML = `
+          <div style="color: #94a3b8; font-family: var(--font-mono); font-size: 0.95rem; text-align: center; padding: 3rem 1rem;">
+            No certificates found in this category. Click "+ Add Achievement" to create one.
+          </div>
+        `;
+        return;
+      }
+
+      currentAngleStep = 360 / count;
+      currentRadius = calculateDynamicRadius(count);
+
+      filtered.forEach((cert, i) => {
+        const baseAngle = i * currentAngleStep;
+        const cardDOM = createCertificateCardDOM(cert, true);
+        cardDOM.setAttribute('data-base-angle', baseAngle);
+        cardDOM.style.transform = `rotateY(${baseAngle}deg) translateZ(${currentRadius}px)`;
+
+        // Clicking a non-front card smoothly rotates cylinder to bring it front
+        cardDOM.addEventListener('click', (e) => {
+          if (e.target.closest('.cert-btn-inspect') || e.target.closest('.cert-img-wrapper') || e.target.closest('.cert-owner-actions')) {
+            return;
+          }
+          const cardAngle = parseFloat(cardDOM.getAttribute('data-base-angle') || 0);
+          const worldAngle = ((cardAngle + currentAngle) % 360 + 360) % 360;
+          let diff = worldAngle > 180 ? 360 - worldAngle : -worldAngle;
+          targetAngle += diff;
+          if (window.playMechanicalClick) window.playMechanicalClick(850, 0.02);
+        });
+
+        cylinder.appendChild(cardDOM);
+      });
+    };
+
+    const update3DAnimation = () => {
+      if (currentView === '3d' && cylinder) {
+        // Auto-spin momentum
+        if (autoSpin && !isDragging && !isHovered) {
+          targetAngle -= 0.16;
+        }
+
+        // Inertia decay
+        if (Math.abs(velocity) > 0.02) {
+          targetAngle += velocity;
+          velocity *= 0.93;
+        } else {
+          velocity = 0;
+        }
+
+        // Interpolation
+        currentAngle += (targetAngle - currentAngle) * 0.12;
+        cylinder.style.transform = `rotateY(${currentAngle}deg) rotateX(-3.5deg)`;
+
+        // Calculate card facing front for lighting & interactive depth
+        const cards = cylinder.querySelectorAll('.cert-3d-card');
+        cards.forEach((card) => {
+          const baseAngle = parseFloat(card.getAttribute('data-base-angle') || 0);
+          const worldAngle = ((baseAngle + currentAngle) % 360 + 360) % 360;
+          const diff = worldAngle > 180 ? 360 - worldAngle : worldAngle; // 0 = direct front, 180 = back
+          const cosVal = Math.cos((diff * Math.PI) / 180);
+
+          if (cosVal > 0.35) {
+            card.classList.add('facing-front');
+            card.classList.remove('facing-back');
+            card.style.opacity = '1';
+            card.style.filter = 'none';
+            card.style.pointerEvents = 'auto';
+          } else {
+            card.classList.remove('facing-front');
+            card.classList.add('facing-back');
+            const depthFade = Math.max(0.3, (cosVal + 1) / 2);
+            card.style.opacity = depthFade.toFixed(2);
+            card.style.filter = 'blur(1px) brightness(0.75)';
+          }
+        });
+
+        if (angleDisplay) {
+          const normAngle = ((Math.abs(currentAngle) % 360)).toFixed(1);
+          angleDisplay.textContent = `${normAngle}°`;
+        }
+      }
+
+      animFrameId = requestAnimationFrame(update3DAnimation);
+    };
+
+    // -------------------------------------------------------------------------
+    // 18E. INTERACTIVE POINTER DRAG & WHEEL PHYSICS
+    // -------------------------------------------------------------------------
+    if (viewport) {
+      viewport.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        dragStartX = e.clientX;
+        dragStartAngle = targetAngle;
+        lastMoveX = e.clientX;
+        velocity = 0;
+        viewport.setPointerCapture(e.pointerId);
+      });
+
+      viewport.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - dragStartX;
+        velocity = (e.clientX - lastMoveX) * 0.28;
+        lastMoveX = e.clientX;
+        targetAngle = dragStartAngle + deltaX * 0.32;
+      });
+
+      const endDrag = (e) => {
+        if (isDragging) {
+          isDragging = false;
+          try {
+            viewport.releasePointerCapture(e.pointerId);
+          } catch (err) {}
+        }
+      };
+
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+
+      viewport.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaX !== 0 ? e.deltaX : e.deltaY;
+        targetAngle += delta * 0.22;
+      }, { passive: false });
+
+      viewport.addEventListener('mouseenter', () => { isHovered = true; });
+      viewport.addEventListener('mouseleave', () => { isHovered = false; });
+    }
+
+    // Steering buttons
+    steerLeftBtn?.addEventListener('click', () => {
+      targetAngle += currentAngleStep;
+      if (window.playMechanicalClick) window.playMechanicalClick(900, 0.025);
+    });
+
+    steerRightBtn?.addEventListener('click', () => {
+      targetAngle -= currentAngleStep;
+      if (window.playMechanicalClick) window.playMechanicalClick(900, 0.025);
+    });
+
+    toggleSpinBtn?.addEventListener('click', () => {
+      autoSpin = !autoSpin;
+      if (spinIcon) spinIcon.textContent = autoSpin ? '⏸️' : '▶️';
+      if (spinText) spinText.textContent = autoSpin ? 'Pause Spin' : 'Auto Spin';
+      if (window.playMechanicalClick) window.playMechanicalClick(1050, 0.02);
+    });
+
+    // -------------------------------------------------------------------------
+    // 18F. GRID VIEW RENDERING
+    // -------------------------------------------------------------------------
+    const renderGridView = () => {
+      const grid = document.getElementById('academic-certificates-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const certs = getCertificates();
+      const filtered = currentFilter === 'all'
+        ? certs
+        : certs.filter((c) => (c.category || '').toLowerCase() === currentFilter.toLowerCase());
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; color: #94a3b8; font-family: var(--font-mono); font-size: 0.95rem; text-align: center; padding: 3rem 1rem;">
+            No certificates found in this category. Click "+ Add Achievement" to create one.
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((cert) => {
+        const cardDOM = createCertificateCardDOM(cert, false);
+        grid.appendChild(cardDOM);
+      });
+    };
+
+    // -------------------------------------------------------------------------
+    // 18G. CATEGORY FILTER & VIEW SWITCHER HANDLERS
+    // -------------------------------------------------------------------------
+    const updateCategoryCounts = () => {
+      const certs = getCertificates();
+      const countAll = certs.length;
+      const countAi = certs.filter((c) => c.category === 'ai').length;
+      const countNat = certs.filter((c) => c.category === 'national').length;
+      const countState = certs.filter((c) => c.category === 'state').length;
+
+      const elAll = document.getElementById('cert-count-all');
+      const elAi = document.getElementById('cert-count-ai');
+      const elNat = document.getElementById('cert-count-national');
+      const elState = document.getElementById('cert-count-state');
+
+      if (elAll) elAll.textContent = countAll;
+      if (elAi) elAi.textContent = countAi;
+      if (elNat) elNat.textContent = countNat;
+      if (elState) elState.textContent = countState;
+    };
+
+    const renderAllViews = () => {
+      render3DCylinder();
+      renderGridView();
+    };
+
+    // Filter Buttons
+    const filterBtns = document.querySelectorAll('.cert-filter-btn');
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.getAttribute('data-cert-filter') || 'all';
+
+        filterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        targetAngle = 0; // reset to first card
+        currentAngle = 0;
+        renderAllViews();
+        if (window.playMechanicalClick) window.playMechanicalClick(1000, 0.02);
+      });
+    });
+
+    // View Switcher Buttons
+    const btnView3D = document.getElementById('btn-view-3d-orbit');
+    const btnViewGrid = document.getElementById('btn-view-grid');
+    const container3D = document.getElementById('cert-3d-showcase-container');
+    const containerGrid = document.getElementById('cert-grid-view-container');
+    const statusText = document.getElementById('cert-engine-status-text');
+
+    btnView3D?.addEventListener('click', () => {
+      currentView = '3d';
+      btnView3D.classList.add('active');
+      btnViewGrid?.classList.remove('active');
+      if (container3D) container3D.style.display = 'block';
+      if (containerGrid) containerGrid.style.display = 'none';
+      if (statusText) statusText.textContent = '3D ORBIT: ACTIVE';
+      render3DCylinder();
+      if (window.playMechanicalClick) window.playMechanicalClick(1150, 0.02);
+    });
+
+    btnViewGrid?.addEventListener('click', () => {
+      currentView = 'grid';
+      btnViewGrid.classList.add('active');
+      btnView3D?.classList.remove('active');
+      if (container3D) container3D.style.display = 'none';
+      if (containerGrid) containerGrid.style.display = 'block';
+      if (statusText) statusText.textContent = 'GRID MATRIX: ACTIVE';
+      renderGridView();
+      if (window.playMechanicalClick) window.playMechanicalClick(1150, 0.02);
+    });
+
+    // Resize recalculates radius
+    window.addEventListener('resize', () => {
+      if (currentView === '3d') render3DCylinder();
+    }, { passive: true });
+
+    // -------------------------------------------------------------------------
+    // 18H. OWNER AVATAR (PROFILE PICTURE) ENGINE
+    // -------------------------------------------------------------------------
+    const initAvatarManager = () => {
+      const savedPhoto = localStorage.getItem('bbn_portfolio_profile_photo');
+      if (savedPhoto) {
+        document.querySelectorAll('.profile-img').forEach((img) => {
+          img.src = savedPhoto;
+        });
+      }
+
+      const avatarModal = document.getElementById('avatar-manager-modal');
+      const avatarCloseBtn = document.getElementById('avatar-close-btn');
+      const avatarTriggerBtn = document.getElementById('owner-avatar-edit-trigger');
+      const ownerBarAvatarBtn = document.getElementById('owner-bar-avatar-btn');
+      const avatarForm = document.getElementById('avatar-upload-form');
+      const avatarFileInput = document.getElementById('avatar-file-input');
+      const avatarUrlInput = document.getElementById('avatar-url-input');
+      const avatarPreviewImg = document.getElementById('avatar-preview-img');
+      const avatarResetBtn = document.getElementById('avatar-btn-reset-default');
+      const avatarDropzone = document.getElementById('avatar-dropzone');
+
+      const openAvatarModal = () => {
+        if (!avatarModal) return;
+        const currentSrc = localStorage.getItem('bbn_portfolio_profile_photo') || 'assets/profile.jpg';
+        if (avatarPreviewImg) avatarPreviewImg.src = currentSrc;
+        if (avatarUrlInput) avatarUrlInput.value = currentSrc.startsWith('data:') ? '' : currentSrc;
+        avatarModal.showModal();
+        if (window.playMechanicalClick) window.playMechanicalClick(950, 0.02);
+      };
+
+      avatarTriggerBtn?.addEventListener('click', openAvatarModal);
+      ownerBarAvatarBtn?.addEventListener('click', openAvatarModal);
+      avatarCloseBtn?.addEventListener('click', () => avatarModal?.close());
+
+      // File upload handler
+      avatarFileInput?.addEventListener('change', (e) => {
+        const file = e.target.files?.[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            if (avatarPreviewImg && event.target?.result) {
+              avatarPreviewImg.src = event.target.result;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Dropzone drag/drop
+      avatarDropzone?.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        avatarDropzone.classList.add('dragover');
+      });
+      avatarDropzone?.addEventListener('dragleave', () => {
+        avatarDropzone.classList.remove('dragover');
+      });
+      avatarDropzone?.addEventListener('drop', (e) => {
+        e.preventDefault();
+        avatarDropzone.classList.remove('dragover');
+        const file = e.dataTransfer.files?.[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            if (avatarPreviewImg && event.target?.result) {
+              avatarPreviewImg.src = event.target.result;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // URL input change
+      avatarUrlInput?.addEventListener('input', () => {
+        const val = avatarUrlInput.value.trim();
+        if (val && avatarPreviewImg) avatarPreviewImg.src = val;
+      });
+
+      // Form Submit
+      avatarForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newSrc = avatarPreviewImg?.src;
+        if (newSrc) {
+          localStorage.setItem('bbn_portfolio_profile_photo', newSrc);
+          document.querySelectorAll('.profile-img').forEach((img) => {
+            img.src = newSrc;
+          });
+          avatarModal?.close();
+          window.showToast('✓ Profile photo successfully updated & saved!', 'success');
+          if (window.playMechanicalClick) window.playMechanicalClick(1200, 0.03);
+        }
+      });
+
+      // Reset to default
+      avatarResetBtn?.addEventListener('click', () => {
+        localStorage.removeItem('bbn_portfolio_profile_photo');
+        document.querySelectorAll('.profile-img').forEach((img) => {
+          img.src = 'assets/profile.jpg';
+        });
+        if (avatarPreviewImg) avatarPreviewImg.src = 'assets/profile.jpg';
+        avatarModal?.close();
+        window.showToast('✓ Profile photo restored to default', 'info');
+      });
+    };
+
+    // -------------------------------------------------------------------------
+    // 18I. OWNER PIN SECURITY & AUTHENTICATION MODAL
+    // -------------------------------------------------------------------------
+    const initOwnerSecurityAuth = () => {
+      const pinModal = document.getElementById('owner-pin-modal');
+      const pinCloseBtn = document.getElementById('owner-pin-close-btn');
+      const pinCancelBtn = document.getElementById('pin-btn-cancel');
+      const pinSubmitBtn = document.getElementById('pin-btn-submit');
+      const pinHiddenInput = document.getElementById('owner-pin-hidden-input');
+      const pinDots = document.querySelectorAll('.pin-dot');
+      const feedbackMsg = document.getElementById('pin-feedback-msg');
+      const dockAdminBtn = document.getElementById('dock-admin-btn');
+      const profileCard = document.getElementById('profile-card');
+      const ownerBarLockBtn = document.getElementById('owner-bar-lock-btn');
+
+      let enteredPin = '';
+
+      const updatePinDots = () => {
+        pinDots.forEach((dot, idx) => {
+          if (idx < enteredPin.length) {
+            dot.classList.add('filled');
+          } else {
+            dot.classList.remove('filled', 'success');
+          }
+        });
+      };
+
+      const openPinModal = () => {
+        if (!pinModal) return;
+        enteredPin = '';
+        updatePinDots();
+        if (feedbackMsg) {
+          feedbackMsg.textContent = 'Default Master PIN: 2026';
+          feedbackMsg.className = 'pin-feedback-msg font-mono';
+        }
+        pinModal.showModal();
+        pinHiddenInput?.focus();
+        if (window.playMechanicalClick) window.playMechanicalClick(950, 0.02);
+      };
+
+      window.openOwnerPinModal = openPinModal;
+
+      const submitPin = () => {
+        const correctPin = getOwnerPin();
+        if (enteredPin === correctPin) {
+          pinDots.forEach((d) => d.classList.add('success'));
+          if (feedbackMsg) {
+            feedbackMsg.textContent = 'ACCESS GRANTED // WELCOME BIBEK';
+            feedbackMsg.className = 'pin-feedback-msg font-mono success';
+          }
+          sessionStorage.setItem('bbn_owner_session', 'true');
+          setTimeout(() => {
+            updateOwnerUIState();
+            pinModal?.close();
+            window.showToast('🛡️ OWNER ACCESS UNLOCKED // EDIT PRIVILEGES ACTIVE', 'success');
+            if (window.playMechanicalClick) window.playMechanicalClick(1300, 0.04);
+          }, 350);
+        } else {
+          if (feedbackMsg) {
+            feedbackMsg.textContent = 'ACCESS DENIED // INCORRECT PIN';
+            feedbackMsg.className = 'pin-feedback-msg font-mono error';
+          }
+          enteredPin = '';
+          setTimeout(updatePinDots, 200);
+          if (window.playMechanicalClick) window.playMechanicalClick(300, 0.08);
+        }
+      };
+
+      // Numpad clicks
+      document.querySelectorAll('.numpad-btn[data-val]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-val');
+          if (enteredPin.length < 8 && val) {
+            enteredPin += val;
+            updatePinDots();
+            if (window.playMechanicalClick) window.playMechanicalClick(1100, 0.015);
+            if (enteredPin.length === 4 && enteredPin === getOwnerPin()) {
+              submitPin();
+            }
+          }
+        });
+      });
+
+      document.getElementById('pin-btn-backspace')?.addEventListener('click', () => {
+        enteredPin = enteredPin.slice(0, -1);
+        updatePinDots();
+        if (window.playMechanicalClick) window.playMechanicalClick(800, 0.015);
+      });
+
+      document.getElementById('pin-btn-clear')?.addEventListener('click', () => {
+        enteredPin = '';
+        updatePinDots();
+      });
+
+      pinSubmitBtn?.addEventListener('click', submitPin);
+      pinCloseBtn?.addEventListener('click', () => pinModal?.close());
+      pinCancelBtn?.addEventListener('click', () => pinModal?.close());
+
+      // Physical keyboard typing inside PIN modal
+      pinModal?.addEventListener('keydown', (e) => {
+        if (/^[0-9]$/.test(e.key)) {
+          if (enteredPin.length < 8) {
+            enteredPin += e.key;
+            updatePinDots();
+            if (enteredPin.length === 4 && enteredPin === getOwnerPin()) {
+              submitPin();
+            }
+          }
+        } else if (e.key === 'Backspace') {
+          enteredPin = enteredPin.slice(0, -1);
+          updatePinDots();
+        } else if (e.key === 'Enter') {
+          submitPin();
+        }
+      });
+
+      // Triggers:
+      // 1. Dock admin lock button
+      dockAdminBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (isOwnerActive()) {
+          window.showToast('🛡️ Owner Mode is already active!', 'info');
+        } else {
+          openPinModal();
+        }
+      });
+
+      // 2. Double-click on profile card in Hero
+      profileCard?.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        if (!isOwnerActive()) {
+          openPinModal();
+        } else {
+          document.getElementById('avatar-manager-modal')?.showModal();
+        }
+      });
+
+      // 3. Global keyboard shortcut Ctrl+Shift+A or Alt+A
+      window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') || (e.altKey && e.key.toLowerCase() === 'a')) {
+          e.preventDefault();
+          if (isOwnerActive()) {
+            lockOwnerMode();
+          } else {
+            openPinModal();
+          }
+        }
+      });
+
+      // 4. Lock & exit owner mode
+      const lockOwnerMode = () => {
+        sessionStorage.removeItem('bbn_owner_session');
+        updateOwnerUIState();
+        window.showToast('🔒 Owner Mode Locked // Viewer Safe Mode Active', 'info');
+        if (window.playMechanicalClick) window.playMechanicalClick(700, 0.02);
+      };
+
+      ownerBarLockBtn?.addEventListener('click', lockOwnerMode);
+    };
+
+    // -------------------------------------------------------------------------
+    // 18J. ADD & EDIT CERTIFICATE MODAL LOGIC
+    // -------------------------------------------------------------------------
+    const addCertModal = document.getElementById('add-cert-modal');
+    const addCertCloseBtn = document.getElementById('add-cert-close-btn');
+    const addCertCancelBtn = document.getElementById('add-cert-btn-cancel');
+    const openAddCertModalBtn = document.getElementById('btn-open-add-cert-modal');
+    const ownerBarAddCertBtn = document.getElementById('owner-bar-add-cert-btn');
+    const addCertForm = document.getElementById('add-cert-form');
+    const certFileInput = document.getElementById('cert-file-input');
+    const certUrlInput = document.getElementById('cert-url-input');
+    const certPreviewImg = document.getElementById('cert-form-preview-img');
+    const certPreviewPlaceholder = document.getElementById('cert-form-preview-placeholder');
+
+    const openAddCertModal = () => {
+      if (!addCertModal) return;
+      document.getElementById('edit-cert-id').value = '';
+      document.getElementById('add-cert-badge-label').textContent = '// CREDENTIAL REGISTRATION';
+      document.getElementById('add-cert-title').textContent = 'Add Official Certificate / Achievement';
+      document.getElementById('add-cert-submit-text').textContent = 'Deploy to 3D Orbit';
+      addCertForm?.reset();
+      if (certPreviewImg) {
+        certPreviewImg.src = '';
+        certPreviewImg.style.display = 'none';
+      }
+      if (certPreviewPlaceholder) certPreviewPlaceholder.style.display = 'block';
+      addCertModal.showModal();
+      if (window.playMechanicalClick) window.playMechanicalClick(950, 0.02);
+    };
+
+    const openEditCertModal = (cert) => {
+      if (!addCertModal || !cert) return;
+      document.getElementById('edit-cert-id').value = cert.id;
+      document.getElementById('add-cert-badge-label').textContent = '// EDIT CREDENTIAL';
+      document.getElementById('add-cert-title').textContent = 'Edit Credential Details';
+      document.getElementById('add-cert-submit-text').textContent = 'Update & Re-Deploy';
+
+      document.getElementById('cert-input-title').value = cert.title || '';
+      document.getElementById('cert-input-issuer').value = cert.issuer || '';
+      document.getElementById('cert-input-category').value = cert.category || 'ai';
+      document.getElementById('cert-input-grade').value = cert.grade || '';
+      document.getElementById('cert-input-id').value = cert.certId || '';
+      document.getElementById('cert-input-date').value = cert.date || '';
+      document.getElementById('cert-input-icon').value = cert.icon || '🏆';
+      document.getElementById('cert-input-seal').value = cert.seal || 'ibm';
+      certUrlInput.value = cert.img || '';
+
+      if (cert.img && certPreviewImg) {
+        certPreviewImg.src = cert.img;
+        certPreviewImg.style.display = 'block';
+        if (certPreviewPlaceholder) certPreviewPlaceholder.style.display = 'none';
+      }
+
+      addCertModal.showModal();
+      if (window.playMechanicalClick) window.playMechanicalClick(950, 0.02);
+    };
+
+    openAddCertModalBtn?.addEventListener('click', openAddCertModal);
+    ownerBarAddCertBtn?.addEventListener('click', openAddCertModal);
+    addCertCloseBtn?.addEventListener('click', () => addCertModal?.close());
+    addCertCancelBtn?.addEventListener('click', () => addCertModal?.close());
+
+    certFileInput?.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          if (certPreviewImg && event.target?.result) {
+            certPreviewImg.src = event.target.result;
+            certPreviewImg.style.display = 'block';
+            if (certPreviewPlaceholder) certPreviewPlaceholder.style.display = 'none';
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    certUrlInput?.addEventListener('input', () => {
+      const val = certUrlInput.value.trim();
+      if (val && certPreviewImg) {
+        certPreviewImg.src = val;
+        certPreviewImg.style.display = 'block';
+        if (certPreviewPlaceholder) certPreviewPlaceholder.style.display = 'none';
+      }
+    });
+
+    addCertForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const editId = document.getElementById('edit-cert-id')?.value;
+      const title = document.getElementById('cert-input-title')?.value.trim();
+      const issuer = document.getElementById('cert-input-issuer')?.value.trim();
+      const category = document.getElementById('cert-input-category')?.value || 'ai';
+      const grade = document.getElementById('cert-input-grade')?.value.trim() || 'VERIFIED';
+      const certId = document.getElementById('cert-input-id')?.value.trim() || 'ID: UNVERIFIED';
+      const date = document.getElementById('cert-input-date')?.value.trim() || new Date().toLocaleDateString('en-GB');
+      const icon = document.getElementById('cert-input-icon')?.value.trim() || '🏆';
+      const seal = document.getElementById('cert-input-seal')?.value || 'ibm';
+      const img = certPreviewImg?.src || certUrlInput?.value.trim() || 'assets/ibm-ai-basics-certificate.png';
+
+      if (!title || !issuer) {
+        alert('Please fill in title and issuer.');
+        return;
+      }
+
+      const allCerts = getCertificates();
+      if (editId) {
+        // Edit existing
+        const idx = allCerts.findIndex((c) => c.id === editId);
+        if (idx !== -1) {
+          allCerts[idx] = {
+            ...allCerts[idx],
+            title,
+            issuer,
+            board: `${issuer} • System of Record`,
+            category,
+            grade,
+            certId,
+            date,
+            icon,
+            seal,
+            img,
+            status: `${issuer.toUpperCase()} // VERIFIED`
+          };
+          saveCertificates(allCerts);
+          window.showToast(`✓ Certificate "${title}" updated!`, 'success');
+        }
+      } else {
+        // Add new
+        const newCert = {
+          id: `cert_custom_${Date.now()}`,
+          title,
+          issuer,
+          board: `${issuer} • System of Record`,
+          category,
+          grade,
+          certId,
+          date,
+          icon,
+          seal,
+          img,
+          status: `${issuer.toUpperCase()} // 100% VERIFIED`
+        };
+        allCerts.unshift(newCert); // Place in front
+        saveCertificates(allCerts);
+        window.showToast(`✓ New certificate "${title}" deployed to 3D Orbit!`, 'success');
+      }
+
+      addCertModal?.close();
+      if (window.playMechanicalClick) window.playMechanicalClick(1200, 0.03);
+    });
+
+    // -------------------------------------------------------------------------
+    // 18K. CHANGE SECURITY PIN MODAL
+    // -------------------------------------------------------------------------
+    const changePinModal = document.getElementById('change-pin-modal');
+    const changePinCloseBtn = document.getElementById('change-pin-close-btn');
+    const changePinCancelBtn = document.getElementById('change-pin-btn-cancel');
+    const ownerBarPinBtn = document.getElementById('owner-bar-pin-btn');
+    const changePinForm = document.getElementById('change-pin-form');
+
+    ownerBarPinBtn?.addEventListener('click', () => {
+      changePinForm?.reset();
+      changePinModal?.showModal();
+    });
+
+    changePinCloseBtn?.addEventListener('click', () => changePinModal?.close());
+    changePinCancelBtn?.addEventListener('click', () => changePinModal?.close());
+
+    changePinForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const oldPin = document.getElementById('old-pin-input')?.value.trim();
+      const newPin = document.getElementById('new-pin-input')?.value.trim();
+      const confirmPin = document.getElementById('confirm-pin-input')?.value.trim();
+
+      if (oldPin !== getOwnerPin()) {
+        alert('Current PIN is incorrect.');
+        return;
+      }
+      if (!newPin || newPin.length < 4 || newPin.length > 8) {
+        alert('New PIN must be 4 to 8 digits.');
+        return;
+      }
+      if (newPin !== confirmPin) {
+        alert('New PIN and confirmation do not match.');
+        return;
+      }
+
+      localStorage.setItem('bbn_owner_pin', newPin);
+      changePinModal?.close();
+      window.showToast('✓ Security Master PIN updated successfully!', 'success');
+    });
+
+    // -------------------------------------------------------------------------
+    // 18L. BACKUP & SYNC MODAL
+    // -------------------------------------------------------------------------
+    const backupModal = document.getElementById('backup-data-modal');
+    const backupCloseBtn = document.getElementById('backup-close-btn');
+    const ownerBarBackupBtn = document.getElementById('owner-bar-backup-btn');
+    const downloadBackupBtn = document.getElementById('btn-download-backup-json');
+    const copyBackupBtn = document.getElementById('btn-copy-backup-json');
+    const backupFileInput = document.getElementById('backup-file-input');
+    const restoreDefaultsBtn = document.getElementById('btn-restore-defaults');
+
+    ownerBarBackupBtn?.addEventListener('click', () => backupModal?.showModal());
+    backupCloseBtn?.addEventListener('click', () => backupModal?.close());
+
+    const buildBackupPayload = () => {
+      return JSON.stringify({
+        certificates: getCertificates(),
+        profilePhoto: localStorage.getItem('bbn_portfolio_profile_photo') || null,
+        ownerPin: getOwnerPin(),
+        exportedAt: new Date().toISOString()
+      }, null, 2);
+    };
+
+    downloadBackupBtn?.addEventListener('click', () => {
+      const payload = buildBackupPayload();
+      const blob = new Blob([payload], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `bibek-portfolio-backup-${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      window.showToast('✓ Backup JSON file downloaded!', 'success');
+    });
+
+    copyBackupBtn?.addEventListener('click', async () => {
+      const payload = buildBackupPayload();
+      try {
+        await navigator.clipboard.writeText(payload);
+        window.showToast('✓ Backup JSON copied to clipboard!', 'success');
+      } catch (err) {
+        window.showToast('Failed to copy JSON automatically', 'info');
+      }
+    });
+
+    backupFileInput?.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const data = JSON.parse(event.target.result);
+            if (Array.isArray(data.certificates)) {
+              localStorage.setItem('bbn_certificates_v2', JSON.stringify(data.certificates));
+            }
+            if (data.profilePhoto) {
+              localStorage.setItem('bbn_portfolio_profile_photo', data.profilePhoto);
+              document.querySelectorAll('.profile-img').forEach((img) => img.src = data.profilePhoto);
+            }
+            if (data.ownerPin) {
+              localStorage.setItem('bbn_owner_pin', data.ownerPin);
+            }
+            updateCategoryCounts();
+            renderAllViews();
+            backupModal?.close();
+            window.showToast('✓ Portfolio data restored from backup file!', 'success');
+          } catch (err) {
+            alert('Invalid backup JSON file.');
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    restoreDefaultsBtn?.addEventListener('click', () => {
+      if (confirm('Restore factory defaults? This resets added certificates to the original 8 core certifications.')) {
+        localStorage.removeItem('bbn_certificates_v2');
+        localStorage.removeItem('bbn_portfolio_profile_photo');
+        localStorage.removeItem('bbn_owner_pin');
+        document.querySelectorAll('.profile-img').forEach((img) => img.src = 'assets/profile.jpg');
+        updateCategoryCounts();
+        renderAllViews();
+        backupModal?.close();
+        window.showToast('✓ Factory defaults restored', 'info');
+      }
+    });
+
+    // -------------------------------------------------------------------------
+    // 18M. INITIALIZE ALL
+    // -------------------------------------------------------------------------
+    updateOwnerUIState();
+    initAvatarManager();
+    initOwnerSecurityAuth();
+    updateCategoryCounts();
+    renderAllViews();
+    update3DAnimation();
+  };
+
+  initOwnerAnd3DOrbitEngine();
+
   function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
@@ -2600,3 +3826,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
