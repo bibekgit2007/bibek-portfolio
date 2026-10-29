@@ -25,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Custom Nature Design System -->
-  <link rel="stylesheet" href="style.css?v=20261030c">
+  <link rel="stylesheet" href="style.css?v=20261030d">
 </head>
 <body class="nature-theme">
 
@@ -1711,10 +1711,15 @@
             <input type="password" id="gh-token-input" class="nature-input" placeholder="github_pat_... or ghp_..." required style="padding-right: 2.75rem;">
             <button type="button" id="gh-token-toggle-btn" style="position: absolute; right: 0.75rem; background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted);" title="Show or hide token">👁️</button>
           </div>
-          <p class="github-token-hint font-mono">
-            Key is stored locally in your browser. Needs <strong>Contents (Read &amp; Write)</strong> on <code>bibek-portfolio</code>.
+          <p class="github-token-hint font-mono" style="line-height: 1.6; font-size: 0.77rem; margin-top: 0.5rem;">
+            Token is saved strictly in your private local browser storage.
             <br>
-            <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener noreferrer">↗ Generate Token in GitHub Settings</a>
+            <strong style="color: #2ea043;">Recommended:</strong>
+            <a href="https://github.com/settings/tokens/new?scopes=repo&description=Bibek+Portfolio+Live+Publisher" target="_blank" rel="noopener noreferrer" style="color: #2ea043; text-decoration: underline; font-weight: 700;">
+              ↗ Generate Classic Token (1-Click 'repo' scope pre-selected)
+            </a>
+            <br>
+            <span style="color: var(--text-muted); font-size: 0.72rem;">Or Fine-Grained Token: must set <em>Repository access: bibek-portfolio</em> and <em>Contents: Read and write</em>.</span>
           </p>
         </div>
 
@@ -1800,6 +1805,6 @@
   <div id="nature-toast-container" class="toast-container" aria-live="polite"></div>
 
   <!-- Custom Nature Vanilla JavaScript Engine -->
-  <script src="script.js?v=20261030c"></script>
+  <script src="script.js?v=20261030d"></script>
 </body>
 </html>

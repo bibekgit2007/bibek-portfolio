@@ -1046,18 +1046,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const filePath = 'data/portfolio-data.json';
       const fileUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
 
+      const authHeader = token.startsWith('ghp_') ? `token ${token}` : `Bearer ${token}`;
+
       // 1. Fetch current SHA if exists
       let existingSha = null;
       try {
         const getRes = await fetch(fileUrl, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': authHeader,
             'Accept': 'application/vnd.github.v3+json'
           }
         });
 
         if (getRes.status === 401) {
-          throw new Error('Unauthorized: Invalid GitHub Personal Access Token. Verify token is active with Contents (Read & Write) permission.');
+          throw new Error('TOKEN_UNAUTHORIZED');
         }
 
         if (getRes.ok) {
@@ -1065,7 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
           existingSha = fileInfo.sha;
         }
       } catch (err) {
-        if (err.message.includes('Unauthorized')) throw err;
+        if (err.message.includes('TOKEN_UNAUTHORIZED')) throw err;
       }
 
       setStatus('📦 Compiling latest portfolio achievements and text...', 'info');
@@ -1118,7 +1120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const putRes = await fetch(fileUrl, {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': authHeader,
           'Accept': 'application/vnd.github.v3+json',
           'Content-Type': 'application/json'
         },
@@ -1126,8 +1128,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (!putRes.ok) {
-        const errData = await putRes.json();
-        throw new Error(errData.message || 'GitHub API rejected commit');
+        let errData = {};
+        try { errData = await putRes.json(); } catch(e){}
+        const apiMsg = errData.message || `HTTP ${putRes.status} Error`;
+
+        if (putRes.status === 403 || apiMsg.toLowerCase().includes('resource not accessible')) {
+          throw new Error('TOKEN_PERMISSION_ERROR');
+        }
+        if (putRes.status === 401) {
+          throw new Error('TOKEN_UNAUTHORIZED');
+        }
+        throw new Error(apiMsg);
       }
 
       const result = await putRes.json();
@@ -1140,8 +1151,29 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('bbn_gh_token', token);
 
     } catch (err) {
-      setStatus(`❌ <strong>Publish Failed:</strong> ${escapeHtml(err.message)}`, 'error');
-      showToast('Publish failed. Check token.', '⚠️');
+      if (err.message === 'TOKEN_PERMISSION_ERROR' || err.message.toLowerCase().includes('resource not accessible')) {
+        setStatus(`
+          ❌ <strong>Token Permission Error (403):</strong><br>
+          GitHub rejected the push because this token does not have write access to <code>bibekgit2007/bibek-portfolio</code>.<br><br>
+          <div style="background: rgba(0,0,0,0.06); border: 1px dashed rgba(46,160,67,0.4); border-radius: 6px; padding: 0.75rem; text-align: left;">
+            <strong style="color: #2ea043;">💡 Fastest Fix (1-Click Pre-Selected):</strong><br>
+            Generate a <strong>Classic Token</strong> with 'repo' scope pre-selected:<br>
+            <a href="https://github.com/settings/tokens/new?scopes=repo&description=Bibek+Portfolio+Live+Publisher" target="_blank" rel="noopener noreferrer" style="color: #2ea043; font-weight: 700; text-decoration: underline;">
+              👉 Click here to generate Token with 'repo' scope pre-checked
+            </a><br>
+            1. Click green <strong>"Generate token"</strong> at the bottom of that page.<br>
+            2. Copy the token (starts with <code>ghp_...</code>) and paste it into the box above.<br>
+            3. Click <strong>"Commit &amp; Push Live"</strong> again!
+          </div>
+        `, 'error');
+        showToast('Token lacks repository write permission', '⚠️');
+      } else if (err.message === 'TOKEN_UNAUTHORIZED') {
+        setStatus(`❌ <strong>Invalid Token (401):</strong><br>GitHub rejected the token. Make sure you copied the entire token without extra spaces.`, 'error');
+        showToast('Invalid token. Check and retry.', '⚠️');
+      } else {
+        setStatus(`❌ <strong>Publish Failed:</strong> ${escapeHtml(err.message)}`, 'error');
+        showToast('Publish failed. Check token.', '⚠️');
+      }
     } finally {
       if (githubSyncSubmitBtn) githubSyncSubmitBtn.disabled = false;
       if (githubSyncBtnText) githubSyncBtnText.textContent = '🚀 Commit & Push Live';
