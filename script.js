@@ -21,36 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------------------------------------------------------------------------
   const DEFAULT_CERTIFICATES = [
     {
-      id: 'cert-secondary-2024',
-      title: 'Secondary Education Distinction (Roll 1 Topper)',
-      issuer: 'Bishnupur Sri Ramkrishna Vidyayatan • WBBSE',
-      date: 'May 2024',
-      category: 'academic',
-      image: 'assets/secondary-certificate.jpg',
-      badge: 'Academic Distinction',
-      description: 'Maintained Roll Number 1 standing with honors in mathematics, physical sciences, and life sciences in Debra, Paschim Medinipur.'
-    },
-    {
-      id: 'cert-hs-2026',
-      title: 'Higher Secondary (School Rank 1 & Block Top 5)',
-      issuer: 'Radhamohanpur Vivekananda High School • WBCHSE',
-      date: 'May 2026',
-      category: 'academic',
-      image: 'assets/higher-secondary-certificate.jpg',
-      badge: 'PCMB Top 5 Block',
-      description: 'Graduated as Rank 1 Topper in school and secured Top 5 standing across the educational block in Pure Science (Physics, Chemistry, Math, Biology).'
-    },
-    {
-      id: 'cert-bonafide-fiem',
-      title: 'B.Tech CSE Bonafide Scholar & Project Credential',
-      issuer: 'Future Institute of Engineering and Management (FIEM)',
-      date: '2024 — Present',
-      category: 'academic',
-      image: 'assets/bonafide-project-certificate.jpg',
-      badge: 'MAKAUT Affiliated',
-      description: 'Undergraduate verification and exploratory project accreditation in computer systems and network programming.'
-    },
-    {
       id: 'cert-ibm-ai',
       title: 'Artificial Intelligence Foundations & Machine Learning',
       issuer: 'IBM SkillsBuild',
@@ -101,42 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'Recognized for algorithmic software design and practical computer science innovation at the national level.'
     },
     {
-      id: 'cert-nspc-merit',
-      title: 'NSPC National Certificate of Merit & Technology',
-      issuer: 'Ministry of Youth Affairs & Sports / NSPC',
-      date: '2024',
-      category: 'national',
-      image: 'assets/nspc-cirqula-certificate.png',
-      badge: 'Merit Credential',
-      description: 'Exemplary project presentation and technical execution across computing disciplines.'
-    },
-    {
-      id: 'cert-first-commit',
-      title: 'First Open Source Engineering Commit & Repository Award',
-      issuer: 'GitHub & Global Open Source Community',
-      date: '2024',
-      category: 'technical',
-      image: 'assets/1st-commit-certificate.pdf',
-      badge: 'Open Source',
-      description: 'Commemorating the first validated open-source code commit and dedication to transparent developer collaboration.'
-    },
-    {
-      id: 'cert-bridge-fiem',
-      title: 'Foundational Computer Science Bridge Course Distinction',
-      issuer: 'Department of Computer Science & Engineering, FIEM',
-      date: '2024',
-      category: 'technical',
-      image: 'assets/bridge-course-certificate.pdf',
-      badge: 'Departmental Honor',
-      description: 'Advanced distinction in C programming, Boolean algebra, memory allocation, and algorithmic design.'
-    },
-    {
       id: 'cert-gi-tag',
       title: 'National Intellectual Heritage & GI Tag Distinction',
       issuer: 'Ministry of Commerce & Industry, Govt. of India',
       date: '2024',
       category: 'national',
-      image: 'assets/gi-tag-quiz-certificate.pdf',
+      image: 'assets/gi-tag-quiz-certificate.png',
       badge: 'Government Award',
       description: 'National certification in regional intellectual property, cultural geography, and heritage preservation.'
     },
@@ -152,14 +92,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
+  const DELETED_CERTIFICATE_IDS = [
+    'cert-secondary-2024',
+    'cert-hs-2026',
+    'cert-bonafide-fiem',
+    'cert-nspc-merit',
+    'cert-first-commit',
+    'cert-bridge-fiem'
+  ];
+
   // Helper functions for storage
   const getCertificates = () => {
     try {
       const stored = localStorage.getItem('bbn_nature_certificates');
       if (stored) {
-        const parsed = JSON.parse(stored);
+        let parsed = JSON.parse(stored);
         let updated = false;
         
+        // Auto-purge explicitly deleted certificates from client storage
+        const initialCount = parsed.length;
+        parsed = parsed.filter(c => !DELETED_CERTIFICATE_IDS.includes(c.id));
+        if (parsed.length !== initialCount) {
+          updated = true;
+        }
+
         // Auto-migrate: If user uploaded base64 Canva cert locally, replace with clean asset path
         parsed.forEach((c, idx) => {
           if (c.title && c.title.toLowerCase().includes('canva') && c.image && c.image.startsWith('data:')) {
@@ -259,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Display image or placeholder if PDF
     const isPdf = cert.image.endsWith('.pdf');
-    const imageSrc = isPdf ? 'assets/bonafide-project-certificate.jpg' : cert.image;
+    const imageSrc = isPdf ? 'assets/coursera-canva-certificate.png' : cert.image;
 
     article.innerHTML = `
       <div class="cert-card-media">
@@ -372,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const openLightbox = (cert) => {
     if (!lightboxDialog) return;
     const isPdf = cert.image.endsWith('.pdf');
-    lightboxImg.src = isPdf ? 'assets/bonafide-project-certificate.jpg' : cert.image;
+    lightboxImg.src = isPdf ? 'assets/coursera-canva-certificate.png' : cert.image;
     lightboxImg.alt = cert.title;
     lightboxTitle.textContent = cert.title;
     lightboxIssuer.textContent = `${cert.issuer} • ${cert.date}`;
