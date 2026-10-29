@@ -25,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Custom Nature Design System -->
-  <link rel="stylesheet" href="style.css?v=20261030a">
+  <link rel="stylesheet" href="style.css?v=20261030c">
 </head>
 <body class="nature-theme">
 
@@ -1620,6 +1620,18 @@
       </div>
 
       <div class="backup-actions-grid">
+        <div class="backup-card" style="grid-column: 1 / -1; border-color: rgba(46, 160, 67, 0.45); background: rgba(46, 160, 67, 0.07);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h4 class="backup-title font-mono" style="color: #2ea043; margin-bottom: 0.25rem;">🚀 PUBLISH LIVE TO GITHUB</h4>
+              <p class="backup-desc" style="margin-bottom: 0;">Push all your active certificates and edited content directly to <code>bibekgit2007/bibek-portfolio</code>.</p>
+            </div>
+            <button type="button" class="btn btn-moss btn-sm" id="btn-backup-open-gh" style="background: #2ea043; border-color: #2ea043;">
+              <span>Open GitHub Publisher</span>
+            </button>
+          </div>
+        </div>
+
         <div class="backup-card">
           <h4 class="backup-title font-mono">EXPORT SNAPSHOT</h4>
           <p class="backup-desc">Export your current portfolio data into a portable JSON snapshot.</p>
@@ -1676,6 +1688,8 @@
         </div>
       </form>
     </div>
+  </dialog>
+
   <!-- ==========================================================================
        18. GITHUB CLOUD SYNCHRONIZER DIALOG (Publish Live to GitHub)
        ========================================================================== -->
@@ -1786,6 +1800,6 @@
   <div id="nature-toast-container" class="toast-container" aria-live="polite"></div>
 
   <!-- Custom Nature Vanilla JavaScript Engine -->
-  <script src="script.js?v=20261030a"></script>
+  <script src="script.js?v=20261030c"></script>
 </body>
 </html>

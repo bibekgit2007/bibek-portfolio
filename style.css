@@ -1935,6 +1935,19 @@ body.admin-mode-active .admin-only {
   max-width: 95vw;
 }
 
+.nature-dialog:not(:modal)[open] {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(19, 34, 24, 0.7);
+  backdrop-filter: blur(8px);
+}
+
 .nature-dialog::backdrop {
   background: rgba(19, 34, 24, 0.65);
   backdrop-filter: blur(8px);

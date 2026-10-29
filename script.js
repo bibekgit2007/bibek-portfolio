@@ -951,7 +951,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const githubSyncBtnText = document.getElementById('github-sync-btn-text');
 
   // Open GitHub Publish Modal
-  hudGithubPublishBtn?.addEventListener('click', () => {
+  const openGithubSyncDialog = () => {
     if (!githubSyncDialog) return;
     
     // Pre-fill token from localStorage if saved
@@ -970,11 +970,47 @@ document.addEventListener('DOMContentLoaded', () => {
       githubSyncStatusBox.innerHTML = '';
     }
 
-    githubSyncDialog.showModal();
+    try {
+      if (typeof githubSyncDialog.showModal === 'function') {
+        githubSyncDialog.showModal();
+      } else {
+        githubSyncDialog.setAttribute('open', '');
+      }
+    } catch (err) {
+      console.warn('showModal fallback:', err);
+      githubSyncDialog.setAttribute('open', '');
+      githubSyncDialog.style.display = 'flex';
+    }
+  };
+
+  const closeGithubSyncDialog = () => {
+    if (!githubSyncDialog) return;
+    try {
+      if (typeof githubSyncDialog.close === 'function') {
+        githubSyncDialog.close();
+      }
+    } catch (e) {}
+    githubSyncDialog.removeAttribute('open');
+    githubSyncDialog.style.display = '';
+  };
+
+  hudGithubPublishBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openGithubSyncDialog();
   });
 
-  githubSyncCloseBtn?.addEventListener('click', () => githubSyncDialog?.close());
-  githubSyncCancelBtn?.addEventListener('click', () => githubSyncDialog?.close());
+  document.getElementById('btn-backup-open-gh')?.addEventListener('click', () => {
+    const backupDlg = document.getElementById('backup-dialog');
+    try { backupDlg?.close(); } catch(e){}
+    backupDlg?.removeAttribute('open');
+    openGithubSyncDialog();
+  });
+
+  githubSyncCloseBtn?.addEventListener('click', closeGithubSyncDialog);
+  githubSyncCancelBtn?.addEventListener('click', closeGithubSyncDialog);
+  githubSyncDialog?.addEventListener('click', (e) => {
+    if (e.target === githubSyncDialog) closeGithubSyncDialog();
+  });
 
   // Show/Hide token password toggle
   ghTokenToggleBtn?.addEventListener('click', () => {
@@ -1152,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  hudEditSectionsBtn?.addEventListener('click', () => {
+  const openEditSectionsDialog = () => {
     if (!editSectionsDialog) return;
     const pill = document.querySelector('.botanical-pill .pill-text');
     if (secHeroKicker) secHeroKicker.value = pill?.textContent.trim() || '';
@@ -1161,11 +1197,39 @@ document.addEventListener('DOMContentLoaded', () => {
     if (secHeroQuote) secHeroQuote.value = heroQuoteDisplay?.textContent.trim() || '';
     if (secAboutLocation) secAboutLocation.value = 'Debra, Paschim Medinipur, West Bengal';
 
-    editSectionsDialog.showModal();
+    try {
+      if (typeof editSectionsDialog.showModal === 'function') {
+        editSectionsDialog.showModal();
+      } else {
+        editSectionsDialog.setAttribute('open', '');
+      }
+    } catch (e) {
+      editSectionsDialog.setAttribute('open', '');
+      editSectionsDialog.style.display = 'flex';
+    }
+  };
+
+  const closeEditSectionsDialog = () => {
+    if (!editSectionsDialog) return;
+    try {
+      if (typeof editSectionsDialog.close === 'function') {
+        editSectionsDialog.close();
+      }
+    } catch (e) {}
+    editSectionsDialog.removeAttribute('open');
+    editSectionsDialog.style.display = '';
+  };
+
+  hudEditSectionsBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openEditSectionsDialog();
   });
 
-  editSectionsCloseBtn?.addEventListener('click', () => editSectionsDialog?.close());
-  editSectionsCancelBtn?.addEventListener('click', () => editSectionsDialog?.close());
+  editSectionsCloseBtn?.addEventListener('click', closeEditSectionsDialog);
+  editSectionsCancelBtn?.addEventListener('click', closeEditSectionsDialog);
+  editSectionsDialog?.addEventListener('click', (e) => {
+    if (e.target === editSectionsDialog) closeEditSectionsDialog();
+  });
 
   editSectionsForm?.addEventListener('submit', (e) => {
     e.preventDefault();
