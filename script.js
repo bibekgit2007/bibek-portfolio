@@ -935,7 +935,267 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---------------------------------------------------------------------------
-  // 10. CHANGE PASSCODE ENGINE
+  // 10. GITHUB CLOUD SYNCHRONIZER (DIRECT REPOSITORY PUBLISHER)
+  // ---------------------------------------------------------------------------
+  const githubSyncDialog = document.getElementById('github-sync-dialog');
+  const githubSyncCloseBtn = document.getElementById('github-sync-close-btn');
+  const githubSyncCancelBtn = document.getElementById('github-sync-cancel-btn');
+  const githubSyncForm = document.getElementById('github-sync-form');
+  const hudGithubPublishBtn = document.getElementById('hud-github-publish-btn');
+  const ghTokenInput = document.getElementById('gh-token-input');
+  const ghTokenToggleBtn = document.getElementById('gh-token-toggle-btn');
+  const ghCommitMsgInput = document.getElementById('gh-commit-msg-input');
+  const ghSyncCertCount = document.getElementById('gh-sync-cert-count');
+  const githubSyncStatusBox = document.getElementById('github-sync-status-box');
+  const githubSyncSubmitBtn = document.getElementById('github-sync-submit-btn');
+  const githubSyncBtnText = document.getElementById('github-sync-btn-text');
+
+  // Open GitHub Publish Modal
+  hudGithubPublishBtn?.addEventListener('click', () => {
+    if (!githubSyncDialog) return;
+    
+    // Pre-fill token from localStorage if saved
+    const savedToken = localStorage.getItem('bbn_gh_token');
+    if (savedToken && ghTokenInput) {
+      ghTokenInput.value = savedToken;
+    }
+
+    // Update cert count
+    if (ghSyncCertCount) {
+      ghSyncCertCount.textContent = getCertificates().length;
+    }
+
+    if (githubSyncStatusBox) {
+      githubSyncStatusBox.style.display = 'none';
+      githubSyncStatusBox.innerHTML = '';
+    }
+
+    githubSyncDialog.showModal();
+  });
+
+  githubSyncCloseBtn?.addEventListener('click', () => githubSyncDialog?.close());
+  githubSyncCancelBtn?.addEventListener('click', () => githubSyncDialog?.close());
+
+  // Show/Hide token password toggle
+  ghTokenToggleBtn?.addEventListener('click', () => {
+    if (!ghTokenInput) return;
+    const isPass = ghTokenInput.type === 'password';
+    ghTokenInput.type = isPass ? 'text' : 'password';
+    ghTokenToggleBtn.textContent = isPass ? '🙈' : '👁️';
+  });
+
+  // Handle GitHub Sync Form Submit
+  githubSyncForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const token = ghTokenInput?.value.trim();
+    if (!token) {
+      alert('Please enter your GitHub Personal Access Token.');
+      return;
+    }
+
+    const customMsg = ghCommitMsgInput?.value.trim();
+    const setStatus = (msg, type = 'info') => {
+      if (!githubSyncStatusBox) return;
+      githubSyncStatusBox.style.display = 'block';
+      githubSyncStatusBox.className = `github-status-box ${type}`;
+      githubSyncStatusBox.innerHTML = msg;
+    };
+
+    try {
+      if (githubSyncSubmitBtn) githubSyncSubmitBtn.disabled = true;
+      if (githubSyncBtnText) githubSyncBtnText.textContent = '⏳ Publishing...';
+      setStatus('🔍 Authenticating with GitHub API...', 'info');
+
+      const repo = 'bibekgit2007/bibek-portfolio';
+      const filePath = 'data/portfolio-data.json';
+      const fileUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+
+      // 1. Fetch current SHA if exists
+      let existingSha = null;
+      try {
+        const getRes = await fetch(fileUrl, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (getRes.status === 401) {
+          throw new Error('Unauthorized: Invalid GitHub Personal Access Token. Verify token is active with Contents (Read & Write) permission.');
+        }
+
+        if (getRes.ok) {
+          const fileInfo = await getRes.json();
+          existingSha = fileInfo.sha;
+        }
+      } catch (err) {
+        if (err.message.includes('Unauthorized')) throw err;
+      }
+
+      setStatus('📦 Compiling latest portfolio achievements and text...', 'info');
+
+      // 2. Prepare payload
+      const currentJourney = localStorage.getItem('bbn_nature_journey');
+      let journeyData = {};
+      if (currentJourney) {
+        try { journeyData = JSON.parse(currentJourney); } catch(e){}
+      }
+
+      const currentSections = localStorage.getItem('bbn_nature_sections');
+      let sectionData = {};
+      if (currentSections) {
+        try { sectionData = JSON.parse(currentSections); } catch(e){}
+      }
+
+      const payloadData = {
+        lastUpdated: new Date().toISOString(),
+        version: '1.0.0',
+        hero: {
+          kicker: sectionData.kicker || document.querySelector('.botanical-pill .pill-text')?.textContent.trim() || 'NATURE JOURNAL • VOL. 2026 // CSE EDITION',
+          name: sectionData.name || heroHeadingDisplay?.textContent.trim() || 'Bibek Bandhu Nayek',
+          tagline: journeyData.tagline || heroTaglineDisplay?.innerHTML.trim() || '',
+          quote: journeyData.quote || heroQuoteDisplay?.textContent.trim() || ''
+        },
+        about: {
+          location: sectionData.location || 'Debra, Paschim Medinipur, West Bengal'
+        },
+        certificates: getCertificates()
+      };
+
+      const jsonString = JSON.stringify(payloadData, null, 2);
+      // UTF-8 safe base64 encoding
+      const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+
+      setStatus('🚀 Pushing commit to GitHub repository...', 'info');
+
+      const commitMessage = customMsg || `chore: update portfolio content from Gardener Mode (${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })})`;
+
+      const putBody = {
+        message: commitMessage,
+        content: base64Content,
+        branch: 'main'
+      };
+      if (existingSha) {
+        putBody.sha = existingSha;
+      }
+
+      const putRes = await fetch(fileUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(putBody)
+      });
+
+      if (!putRes.ok) {
+        const errData = await putRes.json();
+        throw new Error(errData.message || 'GitHub API rejected commit');
+      }
+
+      const result = await putRes.json();
+      const commitSha = result.commit?.sha ? result.commit.sha.substring(0, 7) : 'main';
+
+      setStatus(`🎉 <strong>Published Successfully!</strong><br>Commit <code>${commitSha}</code> created on <code>main</code>.<br>GitHub Pages &amp; Vercel are rebuilding your live website now! (Takes ~30 seconds)`, 'success');
+      showToast('Published live to GitHub! 🎉', '🚀');
+
+      // Save token securely for future one-click publishing
+      localStorage.setItem('bbn_gh_token', token);
+
+    } catch (err) {
+      setStatus(`❌ <strong>Publish Failed:</strong> ${escapeHtml(err.message)}`, 'error');
+      showToast('Publish failed. Check token.', '⚠️');
+    } finally {
+      if (githubSyncSubmitBtn) githubSyncSubmitBtn.disabled = false;
+      if (githubSyncBtnText) githubSyncBtnText.textContent = '🚀 Commit & Push Live';
+    }
+  });
+
+  // ---------------------------------------------------------------------------
+  // 11. SECTION CONTENT & DETAILS LIVE EDITOR
+  // ---------------------------------------------------------------------------
+  const editSectionsDialog = document.getElementById('edit-sections-dialog');
+  const editSectionsCloseBtn = document.getElementById('edit-sections-close-btn');
+  const editSectionsCancelBtn = document.getElementById('edit-sections-cancel-btn');
+  const editSectionsForm = document.getElementById('edit-sections-form');
+  const hudEditSectionsBtn = document.getElementById('hud-edit-sections-btn');
+
+  const secHeroKicker = document.getElementById('sec-hero-kicker');
+  const secHeroName = document.getElementById('sec-hero-name');
+  const secAboutLocation = document.getElementById('sec-about-location');
+  const secHeroTagline = document.getElementById('sec-hero-tagline');
+  const secHeroQuote = document.getElementById('sec-hero-quote');
+
+  const initSectionContent = () => {
+    try {
+      const saved = localStorage.getItem('bbn_nature_sections');
+      if (saved) {
+        const data = JSON.parse(saved);
+        if (data.kicker) {
+          const pill = document.querySelector('.botanical-pill .pill-text');
+          if (pill) pill.textContent = data.kicker;
+        }
+        if (data.name && heroHeadingDisplay) {
+          heroHeadingDisplay.textContent = data.name;
+        }
+        if (data.location) {
+          document.querySelectorAll('.specimen-coordinates span, .journey-quote-footer span').forEach(el => {
+            if (el.textContent.includes('Debra') || el.textContent.includes('Medinipur')) {
+              el.textContent = `📍 ${data.location}`;
+            }
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('Could not read section contents:', e);
+    }
+  };
+
+  hudEditSectionsBtn?.addEventListener('click', () => {
+    if (!editSectionsDialog) return;
+    const pill = document.querySelector('.botanical-pill .pill-text');
+    if (secHeroKicker) secHeroKicker.value = pill?.textContent.trim() || '';
+    if (secHeroName) secHeroName.value = heroHeadingDisplay?.textContent.trim() || '';
+    if (secHeroTagline) secHeroTagline.value = heroTaglineDisplay?.textContent.trim() || '';
+    if (secHeroQuote) secHeroQuote.value = heroQuoteDisplay?.textContent.trim() || '';
+    if (secAboutLocation) secAboutLocation.value = 'Debra, Paschim Medinipur, West Bengal';
+
+    editSectionsDialog.showModal();
+  });
+
+  editSectionsCloseBtn?.addEventListener('click', () => editSectionsDialog?.close());
+  editSectionsCancelBtn?.addEventListener('click', () => editSectionsDialog?.close());
+
+  editSectionsForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const kicker = secHeroKicker?.value.trim();
+    const name = secHeroName?.value.trim();
+    const tagline = secHeroTagline?.value.trim();
+    const quote = secHeroQuote?.value.trim();
+    const location = secAboutLocation?.value.trim();
+
+    if (kicker) {
+      const pill = document.querySelector('.botanical-pill .pill-text');
+      if (pill) pill.textContent = kicker;
+    }
+    if (name && heroHeadingDisplay) {
+      heroHeadingDisplay.textContent = name;
+    }
+    if (tagline && heroTaglineDisplay) {
+      heroTaglineDisplay.innerHTML = tagline;
+    }
+    if (quote && heroQuoteDisplay) {
+      heroQuoteDisplay.textContent = quote;
+    }
+
+    localStorage.setItem('bbn_nature_sections', JSON.stringify({ kicker, name, tagline, quote, location }));
+    editSectionsDialog?.close();
+    showToast('Content updated! Click "🚀 Publish to GitHub" to go live.', '✏️');
+  });
+
+  // ---------------------------------------------------------------------------
+  // 12. CHANGE PASSCODE ENGINE
   // ---------------------------------------------------------------------------
   const changePinDialog = document.getElementById('change-pin-dialog');
   const changePinCloseBtn = document.getElementById('change-pin-close-btn');
@@ -1633,11 +1893,55 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------------------------------------------------------------------------
-  // 20. INITIALIZE ALL ENGINES
+  // 21. PUBLISHED PORTFOLIO DATA INITIALIZER (Loads from data/portfolio-data.json)
+  // ---------------------------------------------------------------------------
+  const initPublishedPortfolioData = async () => {
+    try {
+      const res = await fetch('data/portfolio-data.json?v=' + Date.now());
+      if (!res.ok) return;
+      const data = await res.json();
+
+      // Synchronize certificates
+      if (Array.isArray(data.certificates) && data.certificates.length > 0) {
+        data.certificates.forEach(pubCert => {
+          const idx = DEFAULT_CERTIFICATES.findIndex(c => c.id === pubCert.id);
+          if (idx !== -1) {
+            DEFAULT_CERTIFICATES[idx] = pubCert;
+          } else if (!DELETED_CERTIFICATE_IDS.includes(pubCert.id)) {
+            DEFAULT_CERTIFICATES.push(pubCert);
+          }
+        });
+        renderCertificates();
+      }
+
+      // Synchronize hero
+      if (data.hero) {
+        if (data.hero.kicker) {
+          const pill = document.querySelector('.botanical-pill .pill-text');
+          if (pill) pill.textContent = data.hero.kicker;
+        }
+        if (data.hero.name && heroHeadingDisplay) {
+          heroHeadingDisplay.textContent = data.hero.name;
+        }
+        if (data.hero.tagline && heroTaglineDisplay) {
+          heroTaglineDisplay.innerHTML = data.hero.tagline;
+        }
+        if (data.hero.quote && heroQuoteDisplay) {
+          heroQuoteDisplay.textContent = data.hero.quote;
+        }
+      }
+    } catch (e) {
+      // Offline or local bundled fallback
+    }
+  };
+
+  // ---------------------------------------------------------------------------
+  // 22. INITIALIZE ALL ENGINES
   // ---------------------------------------------------------------------------
   updateAdminModeUI();
   initProfilePhoto();
   initJourneyNarrative();
+  initSectionContent();
   renderCertificates();
   initLiveIstClock();
   initWisdomReadingRoom();
@@ -1645,6 +1949,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAvaiSimulatorEngine();
   initBotanicalTerminal();
   initNatureSoundEngine();
+  initPublishedPortfolioData();
 
 });
 

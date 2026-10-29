@@ -25,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Custom Nature Design System -->
-  <link rel="stylesheet" href="style.css?v=20261029e">
+  <link rel="stylesheet" href="style.css?v=20261030a">
 </head>
 <body class="nature-theme">
 
@@ -39,6 +39,12 @@
         <span class="admin-hud-label font-mono">GARDENER MODE // VERIFIED OWNER</span>
       </div>
       <div class="admin-hud-actions">
+        <button type="button" class="admin-chip-btn btn-github-publish" id="hud-github-publish-btn" title="Push all changes directly to GitHub repository">
+          <span>🚀 Publish to GitHub</span>
+        </button>
+        <button type="button" class="admin-chip-btn" id="hud-edit-sections-btn" title="Edit Site Content &amp; Text Details">
+          <span>✏️ Edit Content</span>
+        </button>
         <button type="button" class="admin-chip-btn" id="hud-add-cert-btn" title="Add a new certificate or achievement">
           <span>➕ Add Achievement</span>
         </button>
@@ -1670,12 +1676,116 @@
         </div>
       </form>
     </div>
+  <!-- ==========================================================================
+       18. GITHUB CLOUD SYNCHRONIZER DIALOG (Publish Live to GitHub)
+       ========================================================================== -->
+  <dialog id="github-sync-dialog" class="nature-dialog form-dialog" aria-labelledby="github-sync-title">
+    <div class="form-dialog-card" style="max-width: 580px;">
+      <button type="button" class="dialog-close-btn" id="github-sync-close-btn" aria-label="Close dialog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="dialog-header">
+        <span class="dialog-kicker font-mono text-terracotta">// CLOUD REPOSITORY PUBLISHER</span>
+        <h3 class="dialog-heading" id="github-sync-title">🚀 Publish Live to GitHub</h3>
+        <p class="dialog-subtext">Commit and push your changes directly to <code>bibekgit2007/bibek-portfolio</code> so they appear live on all devices.</p>
+      </div>
+
+      <form id="github-sync-form" class="nature-form">
+        <div class="form-group">
+          <label for="gh-token-input" class="font-mono">GITHUB PERSONAL ACCESS TOKEN (PAT):</label>
+          <div style="position: relative; display: flex; align-items: center;">
+            <input type="password" id="gh-token-input" class="nature-input" placeholder="github_pat_... or ghp_..." required style="padding-right: 2.75rem;">
+            <button type="button" id="gh-token-toggle-btn" style="position: absolute; right: 0.75rem; background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--text-muted);" title="Show or hide token">👁️</button>
+          </div>
+          <p class="github-token-hint font-mono">
+            Key is stored locally in your browser. Needs <strong>Contents (Read &amp; Write)</strong> on <code>bibek-portfolio</code>.
+            <br>
+            <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener noreferrer">↗ Generate Token in GitHub Settings</a>
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label for="gh-commit-msg-input" class="font-mono">COMMIT MESSAGE (OPTIONAL):</label>
+          <input type="text" id="gh-commit-msg-input" class="nature-input" placeholder="chore: update portfolio content from Gardener Mode">
+        </div>
+
+        <!-- Sync Preview Details -->
+        <div class="github-sync-summary font-mono" style="background: rgba(46, 160, 67, 0.06); border: 1px solid rgba(46, 160, 67, 0.25); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; margin: 1rem 0; font-size: 0.78rem;">
+          <div style="font-weight: 600; color: var(--forest-dark); margin-bottom: 0.35rem;">📦 Package Includes:</div>
+          <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-dark); line-height: 1.6;">
+            <li>Active Certificates (<span id="gh-sync-cert-count">8</span> items)</li>
+            <li>Hero Headline, Tagline &amp; Philosophy Quote</li>
+            <li>Profile Avatar &amp; Section Updates</li>
+            <li>Synced directly to <code>data/portfolio-data.json</code> &amp; repository</li>
+          </ul>
+        </div>
+
+        <!-- Status & Log Box -->
+        <div id="github-sync-status-box" class="github-status-box" style="display: none;"></div>
+
+        <div class="form-actions-row">
+          <button type="button" class="btn btn-outline" id="github-sync-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-moss" id="github-sync-submit-btn" style="background: #2ea043; border-color: #2ea043;">
+            <span id="github-sync-btn-text">🚀 Commit &amp; Push Live</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ==========================================================================
+       19. SECTION CONTENT EDITOR DIALOG (Owner Only)
+       ========================================================================== -->
+  <dialog id="edit-sections-dialog" class="nature-dialog form-dialog" aria-labelledby="edit-sections-title">
+    <div class="form-dialog-card" style="max-width: 650px;">
+      <button type="button" class="dialog-close-btn" id="edit-sections-close-btn" aria-label="Close dialog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="dialog-header">
+        <span class="dialog-kicker font-mono text-terracotta">// CONTENT CURATION</span>
+        <h3 class="dialog-heading" id="edit-sections-title">✏️ Quick Edit Site Content</h3>
+        <p class="dialog-subtext">Correct typos or update details across Hero, About, and Contact sections.</p>
+      </div>
+
+      <form id="edit-sections-form" class="nature-form">
+        <div class="form-group">
+          <label for="sec-hero-kicker" class="font-mono">HERO BADGE KICKER:</label>
+          <input type="text" id="sec-hero-kicker" class="nature-input" placeholder="e.g. 🌱 B.Tech CSE Student &amp; Technology Practitioner">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sec-hero-name" class="font-mono">HERO NAME:</label>
+            <input type="text" id="sec-hero-name" class="nature-input" placeholder="Bibek Bandhu Nayek">
+          </div>
+          <div class="form-group">
+            <label for="sec-about-location" class="font-mono">LOCATION / HOMETOWN:</label>
+            <input type="text" id="sec-about-location" class="nature-input" placeholder="Debra, Paschim Medinipur, West Bengal">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sec-hero-tagline" class="font-mono">HERO TAGLINE / BIO SUMMARY:</label>
+          <textarea id="sec-hero-tagline" rows="3" class="nature-textarea" placeholder="First-year Computer Science &amp; Engineering scholar..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="sec-hero-quote" class="font-mono">PHILOSOPHY QUOTE:</label>
+          <input type="text" id="sec-hero-quote" class="nature-input" placeholder="Every line of code is a seedling planted for the future.">
+        </div>
+
+        <div class="form-actions-row">
+          <button type="button" class="btn btn-outline" id="edit-sections-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-moss">Apply &amp; Preview</button>
+        </div>
+      </form>
+    </div>
   </dialog>
 
   <!-- Toast Notification Container -->
   <div id="nature-toast-container" class="toast-container" aria-live="polite"></div>
 
   <!-- Custom Nature Vanilla JavaScript Engine -->
-  <script src="script.js?v=20261029e"></script>
+  <script src="script.js?v=20261030a"></script>
 </body>
 </html>

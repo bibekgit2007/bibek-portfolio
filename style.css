@@ -418,6 +418,19 @@ body.admin-mode-active .admin-only {
   transform: translateY(-1px);
 }
 
+.admin-chip-btn.btn-github-publish {
+  background: linear-gradient(135deg, #2ea043 0%, #238636 100%);
+  border-color: #3fb950;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(46, 160, 67, 0.45);
+}
+
+.admin-chip-btn.btn-github-publish:hover {
+  background: linear-gradient(135deg, #3fb950 0%, #2ea043 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(46, 160, 67, 0.65);
+}
+
 .admin-chip-btn.btn-exit {
   background: rgba(200, 106, 75, 0.35);
   border-color: rgba(200, 106, 75, 0.5);
@@ -426,6 +439,42 @@ body.admin-mode-active .admin-only {
 
 .admin-chip-btn.btn-exit:hover {
   background: var(--terracotta);
+}
+
+.github-status-box {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(35, 60, 44, 0.05);
+  border: 1px solid var(--border-organic);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.github-status-box.success {
+  background: rgba(46, 160, 67, 0.1);
+  border-color: #2ea043;
+  color: #1a7f37;
+}
+
+.github-status-box.error {
+  background: rgba(200, 106, 75, 0.1);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+
+.github-token-hint {
+  font-size: 0.76rem;
+  color: var(--text-light);
+  line-height: 1.4;
+  margin-top: 0.35rem;
+}
+
+.github-token-hint a {
+  color: var(--moss-primary);
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 /* -----------------------------------------------------------------------------

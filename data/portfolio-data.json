@@ -1,0 +1,98 @@
+{
+  "lastUpdated": "2026-10-30T00:15:00.000Z",
+  "version": "1.0.0",
+  "hero": {
+    "kicker": "🌱 B.Tech CSE Student & Technology Practitioner",
+    "name": "Bibek Bandhu Nayek",
+    "tagline": "First-year Computer Science & Engineering scholar at Future Institute of Engineering and Management (FIEM), MAKAUT. Nurturing code from fundamental roots to algorithmic scale.",
+    "quote": "Every line of code is a seedling planted for the future."
+  },
+  "about": {
+    "location": "Debra, Paschim Medinipur, West Bengal",
+    "institution": "Future Institute of Engineering and Management (FIEM), Kolkata",
+    "affiliation": "MAKAUT Affiliated",
+    "degree": "B.Tech in Computer Science and Engineering (2024 — 2028)"
+  },
+  "certificates": [
+    {
+      "id": "cert-ibm-ai",
+      "title": "Artificial Intelligence Foundations & Machine Learning",
+      "issuer": "IBM SkillsBuild",
+      "date": "September 2024",
+      "category": "ai",
+      "image": "assets/ibm-ai-basics-certificate.png",
+      "badge": "Verified Credential",
+      "description": "Comprehensive mastery of machine learning workflows, classification models, neural fundamentals, and AI ethics."
+    },
+    {
+      "id": "cert-ibm-llm",
+      "title": "Large Language Models & Generative AI Systems",
+      "issuer": "IBM SkillsBuild",
+      "date": "October 2024",
+      "category": "ai",
+      "image": "assets/ibm-llm-basics-certificate.png",
+      "badge": "Advanced LLM",
+      "description": "Architecting generative AI pipelines, transformer attention mechanics, prompt tuning, and grounding techniques."
+    },
+    {
+      "id": "cert-ibm-prompt",
+      "title": "Prompt Engineering & Autonomous Agent Architectures",
+      "issuer": "IBM SkillsBuild",
+      "date": "October 2024",
+      "category": "ai",
+      "image": "assets/ibm-prompting-certificate.png",
+      "badge": "Agent Engineering",
+      "description": "Structured prompt design, chain-of-thought orchestration, few-shot conditioning, and LLM tool utilization."
+    },
+    {
+      "id": "cert-isro-space",
+      "title": "National Space Day Certificate of Excellence",
+      "issuer": "Indian Space Research Organisation (ISRO)",
+      "date": "August 2024",
+      "category": "national",
+      "image": "assets/isro-space-day-certificate.png",
+      "badge": "National Honor",
+      "description": "Awarded by ISRO for high distinction in nationwide space science, astrophysics, and orbital calculation drills."
+    },
+    {
+      "id": "cert-cirqula-nspc",
+      "title": "National Student Projects Innovation Award (Cirqula)",
+      "issuer": "National Student Projects Competition (NSPC)",
+      "date": "2024",
+      "category": "national",
+      "image": "assets/cirqula-certificate.jpeg",
+      "badge": "National Innovation",
+      "description": "Recognized for algorithmic software design and practical computer science innovation at the national level."
+    },
+    {
+      "id": "cert-gi-tag",
+      "title": "National Intellectual Heritage & GI Tag Distinction",
+      "issuer": "Ministry of Commerce & Industry, Govt. of India",
+      "date": "2024",
+      "category": "national",
+      "image": "assets/gi-tag-quiz-certificate.png",
+      "badge": "Government Award",
+      "description": "National certification in regional intellectual property, cultural geography, and heritage preservation."
+    },
+    {
+      "id": "cert-first-commit",
+      "title": "FIRST COMMIT Seminar Certificate of Participation",
+      "issuer": "Department of Computer Science & Engineering, FIEM",
+      "date": "August 2026",
+      "category": "technical",
+      "image": "assets/first-commit-certificate.png",
+      "badge": "CSE Department Honor",
+      "description": "Awarded for active participation in the \"FIRST COMMIT\" seminar organized by the Department of CSE at Future Institute of Engineering and Management (MoE Innovation Cell)."
+    },
+    {
+      "id": "cert-coursera-canva",
+      "title": "Use CANVA to Design Digital Course Collateral",
+      "issuer": "COURSERA",
+      "date": "October 2026",
+      "category": "technical",
+      "image": "assets/coursera-canva-certificate.png",
+      "badge": "Coursera Certified",
+      "description": "Happy to learn so many things of Art , Designing, create any type of Resume, CV, PPTs, etc. Project authorized by Coursera."
+    }
+  ]
+}
