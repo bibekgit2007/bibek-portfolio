@@ -139,6 +139,16 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'assets/gi-tag-quiz-certificate.pdf',
       badge: 'Government Award',
       description: 'National certification in regional intellectual property, cultural geography, and heritage preservation.'
+    },
+    {
+      id: 'cert-coursera-canva',
+      title: 'Use CANVA to Design Digital Course Collateral',
+      issuer: 'COURSERA',
+      date: 'October 2026',
+      category: 'technical',
+      image: 'assets/coursera-canva-certificate.png',
+      badge: 'Coursera Certified',
+      description: 'Happy to learn so many things of Art , Designing, create any type of Resume, CV, PPTs, etc. Project authorized by Coursera.'
     }
   ];
 
@@ -146,7 +156,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const getCertificates = () => {
     try {
       const stored = localStorage.getItem('bbn_nature_certificates');
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        let updated = false;
+        
+        // Auto-migrate: If user uploaded base64 Canva cert locally, replace with clean asset path
+        parsed.forEach((c, idx) => {
+          if (c.title && c.title.toLowerCase().includes('canva') && c.image && c.image.startsWith('data:')) {
+            parsed[idx].image = 'assets/coursera-canva-certificate.png';
+            updated = true;
+          }
+        });
+
+        // Ensure all DEFAULT_CERTIFICATES are present
+        const existingTitles = new Set(parsed.map(c => (c.title || '').trim().toLowerCase()));
+        DEFAULT_CERTIFICATES.forEach(defCert => {
+          if (!existingTitles.has((defCert.title || '').trim().toLowerCase())) {
+            parsed.push(defCert);
+            updated = true;
+          }
+        });
+
+        if (updated) {
+          saveCertificates(parsed);
+        }
+        return parsed;
+      }
     } catch (e) {
       console.warn('Could not read certificates from localStorage:', e);
     }
