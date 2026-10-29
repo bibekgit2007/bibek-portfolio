@@ -81,6 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
       description: 'National certification in regional intellectual property, cultural geography, and heritage preservation.'
     },
     {
+      id: 'cert-first-commit',
+      title: 'FIRST COMMIT Seminar Certificate of Participation',
+      issuer: 'Department of Computer Science & Engineering, FIEM',
+      date: 'August 2026',
+      category: 'technical',
+      image: 'assets/first-commit-certificate.png',
+      badge: 'CSE Department Honor',
+      description: 'Awarded for active participation in the "FIRST COMMIT" seminar organized by the Department of CSE at Future Institute of Engineering and Management (MoE Innovation Cell).'
+    },
+    {
       id: 'cert-coursera-canva',
       title: 'Use CANVA to Design Digital Course Collateral',
       issuer: 'COURSERA',
@@ -97,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'cert-hs-2026',
     'cert-bonafide-fiem',
     'cert-nspc-merit',
-    'cert-first-commit',
     'cert-bridge-fiem'
   ];
 
