@@ -25,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <!-- Custom Nature Design System -->
-  <link rel="stylesheet" href="style.css?v=20261029d">
+  <link rel="stylesheet" href="style.css?v=20261029e">
 </head>
 <body class="nature-theme">
 
@@ -793,13 +793,42 @@
             <button class="filter-pill" data-filter="national">National Honors (<span id="count-national">3</span>)</button>
             <button class="filter-pill" data-filter="technical">Technical Foundations (<span id="count-technical">2</span>)</button>
           </div>
-          <div class="gallery-hint font-mono">
-            <span>💡 Click any card to inspect high-resolution certificate</span>
+          
+          <!-- Marquee Action Controls -->
+          <div class="marquee-action-group">
+            <button type="button" class="marquee-chip-btn" id="marquee-toggle-play" title="Pause or Resume continuous loop">
+              <span class="marquee-btn-icon" id="marquee-play-icon">⏸️</span>
+              <span class="marquee-btn-label" id="marquee-play-label">Pause Flow</span>
+            </button>
+            <button type="button" class="marquee-chip-btn" id="marquee-toggle-dir" title="Reverse bi-directional loop directions">
+              <span class="marquee-btn-icon">⇄</span>
+              <span class="marquee-btn-label">Reverse Flow</span>
+            </button>
+            <button type="button" class="marquee-chip-btn" id="marquee-toggle-view" title="Toggle between Infinite Marquee and Static Grid">
+              <span class="marquee-btn-icon" id="marquee-view-icon">🔲</span>
+              <span class="marquee-btn-label" id="marquee-view-label">Grid View</span>
+            </button>
           </div>
         </div>
 
-        <!-- 3D Interactive Exhibition Grid -->
-        <div class="cert-gallery-grid" id="cert-gallery-grid">
+        <div class="marquee-status-banner font-mono">
+          <span>🌿 <strong>Bi-Directional Infinite Loop:</strong> Top row streams Left ⟵ • Bottom row streams Right ⟶ • Hover to inspect</span>
+        </div>
+
+        <!-- Bi-Directional Infinite Marquee Showroom Container -->
+        <div class="cert-marquee-showroom" id="cert-marquee-showroom">
+          <!-- Row 1: Flowing Leftward -->
+          <div class="cert-marquee-row" data-direction="left">
+            <div class="cert-marquee-track" id="cert-marquee-track-1"></div>
+          </div>
+          <!-- Row 2: Flowing Rightward -->
+          <div class="cert-marquee-row" data-direction="right">
+            <div class="cert-marquee-track" id="cert-marquee-track-2"></div>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Exhibition Grid (Shown when user toggles Grid View) -->
+        <div class="cert-gallery-grid" id="cert-gallery-grid" style="display: none;">
           <!-- Dynamic cards injected via JavaScript from DEFAULT_CERTIFICATES + localStorage -->
         </div>
 
@@ -1647,6 +1676,6 @@
   <div id="nature-toast-container" class="toast-container" aria-live="polite"></div>
 
   <!-- Custom Nature Vanilla JavaScript Engine -->
-  <script src="script.js?v=20261029d"></script>
+  <script src="script.js?v=20261029e"></script>
 </body>
 </html>

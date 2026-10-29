@@ -184,34 +184,95 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ---------------------------------------------------------------------------
-  // 03. 3D NATURAL GALLERY & SHOWROOM ENGINE
+  // 03. 3D NATURAL GALLERY & BI-DIRECTIONAL INFINITE MARQUEE ENGINE
   // ---------------------------------------------------------------------------
   const galleryGrid = document.getElementById('cert-gallery-grid');
+  const marqueeShowroom = document.getElementById('cert-marquee-showroom');
+  const marqueeTrack1 = document.getElementById('cert-marquee-track-1');
+  const marqueeTrack2 = document.getElementById('cert-marquee-track-2');
+  const marqueeTogglePlay = document.getElementById('marquee-toggle-play');
+  const marqueePlayIcon = document.getElementById('marquee-play-icon');
+  const marqueePlayLabel = document.getElementById('marquee-play-label');
+  const marqueeToggleDir = document.getElementById('marquee-toggle-dir');
+  const marqueeToggleView = document.getElementById('marquee-toggle-view');
+  const marqueeViewIcon = document.getElementById('marquee-view-icon');
+  const marqueeViewLabel = document.getElementById('marquee-view-label');
+
   let currentFilter = 'all';
+  let currentViewMode = 'marquee'; // 'marquee' or 'grid'
+  let isMarqueePaused = false;
+  let isDirectionReversed = false;
+
+  const populateMarqueeTrack = (trackElement, certList) => {
+    if (!trackElement) return;
+    trackElement.innerHTML = '';
+    if (!certList || certList.length === 0) return;
+
+    // Minimum 8 items per track to comfortably span ultrawide viewports
+    const repeatTimes = Math.max(2, Math.ceil(8 / certList.length));
+
+    // Set A (original set)
+    for (let r = 0; r < repeatTimes; r++) {
+      certList.forEach(cert => {
+        const card = createCertificateCardDOM(cert);
+        trackElement.appendChild(card);
+      });
+    }
+
+    // Set B (exact seamless loop clone set for continuous loop at -50% translateX)
+    for (let r = 0; r < repeatTimes; r++) {
+      certList.forEach(cert => {
+        const card = createCertificateCardDOM(cert);
+        trackElement.appendChild(card);
+      });
+    }
+  };
 
   const renderCertificates = () => {
-    if (!galleryGrid) return;
-    galleryGrid.innerHTML = '';
-
     const certs = getCertificates();
     const filtered = currentFilter === 'all' 
       ? certs 
       : certs.filter(c => c.category === currentFilter);
 
-    if (filtered.length === 0) {
-      galleryGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
-          <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🌱</span>
-          <p class="font-serif" style="font-size: 1.25rem;">No certificates found in this category.</p>
-        </div>
-      `;
-      return;
+    // 1. Populate Bi-Directional Infinite Marquee Showroom
+    if (marqueeShowroom && marqueeTrack1 && marqueeTrack2) {
+      if (filtered.length === 0) {
+        marqueeTrack1.innerHTML = `
+          <div style="padding: 3rem 1rem; color: var(--text-muted); text-align: center; width: 100vw;">
+            <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🌱</span>
+            <p class="font-serif" style="font-size: 1.25rem;">No certificates found in this category.</p>
+          </div>
+        `;
+        marqueeTrack2.innerHTML = '';
+      } else if (filtered.length === 1) {
+        populateMarqueeTrack(marqueeTrack1, filtered);
+        populateMarqueeTrack(marqueeTrack2, filtered);
+      } else {
+        // Distribute alternating items across Row 1 (Left) and Row 2 (Right)
+        const row1Certs = filtered.filter((_, idx) => idx % 2 === 0);
+        const row2Certs = filtered.filter((_, idx) => idx % 2 === 1);
+        populateMarqueeTrack(marqueeTrack1, row1Certs.length > 0 ? row1Certs : filtered);
+        populateMarqueeTrack(marqueeTrack2, row2Certs.length > 0 ? row2Certs : filtered);
+      }
     }
 
-    filtered.forEach((cert) => {
-      const card = createCertificateCardDOM(cert);
-      galleryGrid.appendChild(card);
-    });
+    // 2. Populate Classic Exhibition Grid
+    if (galleryGrid) {
+      galleryGrid.innerHTML = '';
+      if (filtered.length === 0) {
+        galleryGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+            <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🌱</span>
+            <p class="font-serif" style="font-size: 1.25rem;">No certificates found in this category.</p>
+          </div>
+        `;
+      } else {
+        filtered.forEach((cert) => {
+          const card = createCertificateCardDOM(cert);
+          galleryGrid.appendChild(card);
+        });
+      }
+    }
 
     updateCategoryCounts();
   };
@@ -321,6 +382,46 @@ document.addEventListener('DOMContentLoaded', () => {
       currentFilter = pill.dataset.filter;
       renderCertificates();
     });
+  });
+
+  // Marquee Controls: Play/Pause Toggle
+  marqueeTogglePlay?.addEventListener('click', () => {
+    isMarqueePaused = !isMarqueePaused;
+    if (marqueeShowroom) {
+      marqueeShowroom.classList.toggle('is-paused', isMarqueePaused);
+    }
+    if (marqueePlayIcon) marqueePlayIcon.textContent = isMarqueePaused ? '▶️' : '⏸️';
+    if (marqueePlayLabel) marqueePlayLabel.textContent = isMarqueePaused ? 'Resume Flow' : 'Pause Flow';
+    showToast(isMarqueePaused ? 'Marquee stream paused' : 'Marquee stream resumed', isMarqueePaused ? '⏸️' : '▶️');
+  });
+
+  // Marquee Controls: Direction Reverse Toggle (Bi-Directional Flip)
+  marqueeToggleDir?.addEventListener('click', () => {
+    isDirectionReversed = !isDirectionReversed;
+    if (marqueeShowroom) {
+      marqueeShowroom.classList.toggle('direction-reversed', isDirectionReversed);
+    }
+    showToast(isDirectionReversed ? 'Marquee directions reversed ⇄' : 'Marquee directions normalized ⇄', '🔄');
+  });
+
+  // Marquee Controls: View Toggle (Marquee Flow vs Classic Grid)
+  marqueeToggleView?.addEventListener('click', () => {
+    currentViewMode = currentViewMode === 'marquee' ? 'grid' : 'marquee';
+    if (currentViewMode === 'grid') {
+      if (marqueeShowroom) marqueeShowroom.style.display = 'none';
+      if (galleryGrid) galleryGrid.style.display = 'grid';
+      if (marqueeViewIcon) marqueeViewIcon.textContent = '📜';
+      if (marqueeViewLabel) marqueeViewLabel.textContent = 'Marquee View';
+      marqueeToggleView.classList.add('active');
+      showToast('Switched to Grid View', '🔲');
+    } else {
+      if (marqueeShowroom) marqueeShowroom.style.display = 'flex';
+      if (galleryGrid) galleryGrid.style.display = 'none';
+      if (marqueeViewIcon) marqueeViewIcon.textContent = '🔲';
+      if (marqueeViewLabel) marqueeViewLabel.textContent = 'Grid View';
+      marqueeToggleView.classList.remove('active');
+      showToast('Switched to Bi-Directional Infinite Marquee', '🌿');
+    }
   });
 
   // ---------------------------------------------------------------------------

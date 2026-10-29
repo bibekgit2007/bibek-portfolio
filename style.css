@@ -1170,6 +1170,159 @@ body.admin-mode-active .admin-only {
   color: var(--text-light);
 }
 
+/* ==========================================================================
+   BI-DIRECTIONAL INFINITE MARQUEE SHOWROOM
+   ========================================================================== */
+.marquee-action-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.marquee-chip-btn {
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-organic);
+  color: var(--text-dark);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-organic);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.marquee-chip-btn:hover {
+  background: var(--sage-light);
+  border-color: var(--sage-primary);
+  color: var(--forest-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 74, 57, 0.12);
+}
+
+.marquee-chip-btn.active {
+  background: var(--forest-dark);
+  color: #ffffff;
+  border-color: var(--forest-dark);
+}
+
+.marquee-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--moss-primary);
+  background: rgba(226, 237, 230, 0.65);
+  border: 1px dashed var(--border-organic);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cert-marquee-showroom {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  padding: 1.5rem 0 3rem;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.cert-marquee-row {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+  position: relative;
+  padding: 0.75rem 0;
+}
+
+.cert-marquee-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Row 1 flows Leftward */
+.cert-marquee-row[data-direction="left"] .cert-marquee-track {
+  animation: marqueeScrollLeft 45s linear infinite;
+}
+
+/* Row 2 flows Rightward */
+.cert-marquee-row[data-direction="right"] .cert-marquee-track {
+  animation: marqueeScrollRight 45s linear infinite;
+}
+
+/* Reversed states */
+.cert-marquee-showroom.direction-reversed .cert-marquee-row[data-direction="left"] .cert-marquee-track {
+  animation-name: marqueeScrollRight;
+}
+.cert-marquee-showroom.direction-reversed .cert-marquee-row[data-direction="right"] .cert-marquee-track {
+  animation-name: marqueeScrollLeft;
+}
+
+/* Pause on hover or when toggled */
+.cert-marquee-showroom.is-paused .cert-marquee-track,
+.cert-marquee-row:hover .cert-marquee-track {
+  animation-play-state: paused !important;
+}
+
+@keyframes marqueeScrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeScrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.cert-marquee-track .cert-3d-card {
+  flex: 0 0 360px;
+  width: 360px;
+  max-width: 360px;
+}
+
+@media (max-width: 768px) {
+  .cert-marquee-showroom {
+    gap: 1.5rem;
+    padding: 1rem 0 2rem;
+    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  }
+  .cert-marquee-track {
+    gap: 1.25rem;
+  }
+  .cert-marquee-track .cert-3d-card {
+    flex: 0 0 295px;
+    width: 295px;
+    max-width: 295px;
+  }
+}
+
 /* 3D Natural Gallery Grid */
 .cert-gallery-grid {
   display: grid;
